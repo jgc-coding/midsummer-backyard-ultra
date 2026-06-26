@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Midsummer Backyard Ultra Freiburg — Lauf, bis die Sonne wiederkommt</title>
+  <meta name="description" content="Last Runner Standing an der Dreisam. 6,706 km jede Stunde, durch Tag und Nacht, bis nur eine Person übrig ist. 20. Juni 2026, Freiburg." />
+  <meta name="theme-color" content="#15100A" />
+  <meta property="og:title" content="Midsummer Backyard Ultra Freiburg" />
+  <meta property="og:description" content="Lauf, bis die Sonne wiederkommt. Last Runner Standing an der Dreisam." />
+  <meta property="og:image" content="../assets/logo.jpg" />
+  <link rel="icon" type="image/jpeg" href="../assets/logo.jpg" />
+  <link rel="stylesheet" href="../assets/fonts/fonts.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-variant="02">
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav" id="nav">
+    <a class="nav__brand" href="#top" aria-label="Start">
+      <img src="../assets/logo.jpg" alt="Midsummer Backyard Logo" width="44" height="44" />
+      <span>Midsummer Backyard</span>
+    </a>
+    <nav class="nav__links" aria-label="Navigation">
+      <a href="#regeln">Regeln</a>
+      <a href="#tag">Der Tag</a>
+      <a href="#strecke">Strecke</a>
+      <a class="nav__cta" href="https://freiburg.run/event/midsummer-backyard-ultra/" target="_blank" rel="noopener">Anmelden</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero__grid">
+        <div class="hero__copy">
+          <p class="kicker">Freiburg · 20. Juni 2026 · 06:00 Uhr</p>
+          <h1 class="hero__title">
+            <span class="ln"><span>Lauf, bis die</span></span>
+            <span class="ln"><span>Sonne <i>wieder</i></span></span>
+            <span class="ln"><span>aufgeht.</span></span>
+          </h1>
+          <div class="hero__bottom">
+            <p class="hero__lead">Ein Last-Runner-Standing-Lauf an der Dreisam. Eine Runde jede Stunde, durch Tag und Nacht, bis nur eine Person übrig bleibt.</p>
+            <a class="btn" href="https://freiburg.run/event/midsummer-backyard-ultra/" target="_blank" rel="noopener">
+              Anmelden <span class="btn__i" aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+        <div class="hero__side" aria-hidden="true">
+          <div class="bigclock"><span id="bigHour">06</span><b>:</b><span id="bigMin">00</span></div>
+          <div class="bigclock__label">Start. Und dann jede Stunde neu.</div>
+        </div>
+      </div>
+      <div class="ticker" aria-hidden="true">
+        <div class="ticker__track" id="ticker"></div>
+      </div>
+    </section>
+
+    <!-- REGELN -->
+    <section class="rules" id="regeln">
+      <h2 class="rules__head">Vier Sätze.<br />Das ganze Rennen.</h2>
+      <ol class="rules__list">
+        <li><span class="rules__n">6,706&nbsp;km</span><p>Die Runde, der „Yard". Jede Stunde dieselbe Schleife. 24 davon ergeben genau 100 Meilen.</p></li>
+        <li><span class="rules__n">Zur vollen Stunde</span><p>Jeder Yard startet gemeinsam, immer zur vollen Stunde. Wer den Start verpasst, ist raus.</p></li>
+        <li><span class="rules__n">Keine Hilfe</span><p>Auf der Strecke zählst nur du und die Uhr. Keine Begleitung, keine Stöcke.</p></li>
+        <li><span class="rules__n">Einer bleibt</span><p>Das Rennen endet erst, wenn nur eine Person eine weitere Runde antritt. Sie gewinnt, alle anderen bekommen ein DNF.</p></li>
+      </ol>
+    </section>
+
+    <!-- TIMELINE (horizontaler Scroll, gepinnt) -->
+    <section class="tl" id="tag">
+      <div class="tl__pin" id="tlPin">
+        <div class="tl__head">
+          <p class="kicker">Ein Tag, eine Nacht, ein Tag</p>
+          <h2>Wie sich 24&nbsp;Stunden anfühlen</h2>
+        </div>
+        <div class="tl__track" id="tlTrack">
+          <!-- Panels werden per JS befüllt -->
+        </div>
+        <div class="tl__progress"><span id="tlBar"></span></div>
+      </div>
+    </section>
+
+    <!-- STRECKE -->
+    <section class="route" id="strecke">
+      <div class="route__head">
+        <h2>Immer an der Dreisam entlang</h2>
+        <p>Eine flache Schleife zwischen Hirzbergsteg und Schlosssteg Ebnet. Der Verlauf unten stammt aus echten GPS-Daten des Laufs.</p>
+      </div>
+      <figure class="route__fig">
+        <svg id="routeSvg" viewBox="0 0 1000 360" preserveAspectRatio="xMidYMid meet" aria-label="Streckenverlauf an der Dreisam">
+          <path id="routeGhost" class="route__ghost" />
+          <path id="routePath" class="route__line" />
+          <g id="routeMarkers"></g>
+        </svg>
+      </figure>
+      <div class="route__stats">
+        <div><b>6,706</b><span>km pro Runde</span></div>
+        <div><b>2</b><span>Wendepunkte</span></div>
+        <div><b>100</b><span>Meilen nach 24 Runden</span></div>
+        <div><b>+1</b><span>Tag, wenn du durchhältst</span></div>
+      </div>
+    </section>
+
+    <!-- COUNTDOWN -->
+    <section class="cd" id="countdown">
+      <p class="kicker">Countdown bis zum Start</p>
+      <p class="cd__target" id="cdTarget">—</p>
+      <div class="cd__row" aria-live="polite">
+        <div><span id="cdD">00</span><small>Tage</small></div>
+        <div><span id="cdH">00</span><small>Stunden</small></div>
+        <div><span id="cdM">00</span><small>Minuten</small></div>
+        <div><span id="cdS">00</span><small>Sekunden</small></div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+      <h2>Wie lange<br />läufst du?</h2>
+      <a class="btn btn--lg" href="https://freiburg.run/event/midsummer-backyard-ultra/" target="_blank" rel="noopener">
+        Anmelden <span class="btn__i" aria-hidden="true">→</span>
+      </a>
+      <p class="cta__sub">Mehr Bilder und Updates auf <a href="https://www.instagram.com/midsummerbackyard/" target="_blank" rel="noopener">@midsummerbackyard</a>.</p>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="foot__row">
+      <img src="../assets/logo.jpg" alt="" width="40" height="40" />
+      <span>Midsummer Backyard Ultra · Freiburg</span>
+    </div>
+    <nav class="foot__links" aria-label="Kanäle">
+      <a href="https://freiburg.run/event/midsummer-backyard-ultra/" target="_blank" rel="noopener">freiburg.run</a>
+      <a href="https://www.instagram.com/midsummerbackyard/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.strava.com/clubs/1389603" target="_blank" rel="noopener">Strava</a>
+    </nav>
+    <p class="foot__meta">Variante 02 · gebaut mit dem design-taste-frontend Skill · <span id="ver">v1.0.0</span></p>
+  </footer>
+
+  <script src="../assets/vendor/gsap.min.js" defer></script>
+  <script src="../assets/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="main.js" defer></script>
+</body>
+</html>
