@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Midsummer Backyard Ultra Freiburg — Eine Runde. Jede Stunde.</title>
+  <meta name="description" content="Midsummer Backyard Ultra Freiburg: 2. Auflage am 20. Juni 2026, Start 06:00 Uhr. Eine 6,706-km-Runde jede Stunde, bis nur eine Person übrig ist. Rund um die Dreisam." />
+  <meta name="theme-color" content="#F4E9D3" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Midsummer Backyard Ultra Freiburg" />
+  <meta property="og:description" content="Eine Runde. Jede Stunde. Bis nur eine Person übrig ist. 20. Juni 2026, Dreisam Freiburg." />
+  <meta property="og:image" content="../assets/logo.jpg" />
+
+  <link rel="icon" type="image/jpeg" href="../assets/logo.jpg" />
+  <link rel="preconnect" href="" />
+  <link rel="stylesheet" href="../assets/fonts/fonts.css" />
+  <link rel="stylesheet" href="style.css" />
+
+  <script type="importmap">
+    { "imports": { "three": "../assets/vendor/three/three.module.min.js" } }
+  </script>
+</head>
+<body data-variant="01">
+
+  <!-- Lebendiger Himmel + Sonne (Three.js), fix hinter dem Hero -->
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div id="grain" aria-hidden="true"></div>
+
+  <!-- Navigation -->
+  <header class="nav" id="nav">
+    <a class="nav__brand" href="#top" aria-label="Midsummer Backyard Ultra — Start">
+      <img src="../assets/logo.jpg" alt="Midsummer Backyard Logo" width="92" height="92" />
+    </a>
+    <nav class="nav__links" aria-label="Hauptnavigation">
+      <a href="#format">Format</a>
+      <a href="#strecke">Strecke</a>
+      <a href="#countdown">Countdown</a>
+      <a class="nav__cta" href="https://freiburg.run/event/midsummer-backyard-ultra/" target="_blank" rel="noopener">Anmelden</a>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero__inner">
+        <p class="eyebrow reveal">Freiburg · Dreisam · Sommersonnenwende</p>
+        <h1 class="hero__title">
+          <span class="reveal-line"><span>Midsummer</span></span>
+          <span class="reveal-line"><span class="hero__accent">Backyard Ultra</span></span>
+        </h1>
+        <p class="hero__lead reveal">Eine Runde. Jede Stunde.<br />Bis nur eine Person übrig ist.</p>
+        <div class="hero__meta reveal">
+          <span class="hero__chip">2. Auflage</span>
+          <span>Samstag, 20. Juni 2026</span>
+          <span class="hero__dot">·</span>
+          <span>Start 06:00 Uhr</span>
+        </div>
+        <div class="hero__actions reveal">
+          <a class="btn btn--solid" href="https://freiburg.run/event/midsummer-backyard-ultra/" target="_blank" rel="noopener">Jetzt anmelden</a>
+          <a class="btn btn--ghost" href="#format">Wie funktioniert das?</a>
+        </div>
+      </div>
+      <a class="hero__scroll" href="#manifest" aria-label="Weiter scrollen">
+        <span></span>scroll
+      </a>
+    </section>
+
+    <!-- MANIFEST -->
+    <section class="manifest" id="manifest">
+      <p class="manifest__text">
+        <span class="reveal-word">Kein</span> <span class="reveal-word">Ziel.</span>
+        <span class="reveal-word">Nur</span> <span class="reveal-word">die</span>
+        <span class="reveal-word">nächste</span> <span class="reveal-word">Runde.</span>
+      </p>
+    </section>
+
+    <!-- FORMAT / REGELN + YARD-CLOCK -->
+    <section class="format" id="format">
+      <div class="section-head">
+        <h2 class="section-title">Was ist ein <em>Backyard&nbsp;Ultra?</em></h2>
+        <p class="section-sub">
+          Das wohl ehrlichste Laufformat der Welt: Alle starten gemeinsam, alle laufen dieselbe Runde —
+          und das Rennen endet erst, wenn nur noch eine Person weitermachen kann.
+        </p>
+      </div>
+
+      <div class="clockwrap">
+        <!-- Yard-Clock: scrollt durch die Stunden -->
+        <div class="clock" id="clock" role="img" aria-label="Animierte Uhr: mit fortschreitender Stunde dreht ein Läufer seine Runde und das Feld wird kleiner.">
+          <svg viewBox="0 0 400 400" class="clock__svg">
+            <defs>
+              <radialGradient id="coreGrad" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#FFF2CE" />
+                <stop offset="55%" stop-color="#F7C24B" />
+                <stop offset="100%" stop-color="#E5722A" />
+              </radialGradient>
+            </defs>
+            <circle cx="200" cy="200" r="150" class="clock__track" />
+            <g id="clockTicks"></g>
+            <circle cx="200" cy="200" r="150" class="clock__progress" id="clockProgress"
+              pathLength="100" />
+            <line x1="200" y1="200" x2="200" y2="70" class="clock__hand" id="clockHand" />
+            <circle cx="200" cy="200" r="9" fill="url(#coreGrad)" />
+            <!-- Läufer-Punkt -->
+            <g id="runner">
+              <circle cx="200" cy="50" r="11" class="clock__runner" />
+            </g>
+          </svg>
+          <div class="clock__readout">
+            <div class="clock__hour"><span id="hourNum">1</span><small>. Stunde</small></div>
+            <div class="clock__stats">
+              <span><b id="kmNum">6,7</b> km gelaufen</span>
+              <span><b id="aliveNum">38</b> im Rennen</span>
+            </div>
+          </div>
+        </div>
+
+        <ol class="rules">
+          <li class="rule reveal">
+            <span class="rule__big">6,706 km</span>
+            <h3>Die Runde — der „Yard"</h3>
+            <p>Exakt 4,167 Meilen. 24 Runden in 24 Stunden ergeben genau 100 Meilen (160 km).</p>
+          </li>
+          <li class="rule reveal">
+            <span class="rule__big">:00</span>
+            <h3>Zur vollen Stunde</h3>
+            <p>Jede Runde startet zur selben Zeit — jede Stunde aufs Neue. Drei Signale (3, 2, 1 Minute) rufen ins Startgatter.</p>
+          </li>
+          <li class="rule reveal">
+            <span class="rule__big">DNF</span>
+            <h3>Schaffst du sie nicht, bist du raus</h3>
+            <p>Wer die Runde nicht innerhalb der Stunde beendet oder den Start verpasst, scheidet aus. Keine fremde Hilfe, keine Stöcke.</p>
+          </li>
+          <li class="rule reveal">
+            <span class="rule__big">1</span>
+            <h3>Last Runner Standing</h3>
+            <p>Es läuft, bis nur eine Person eine weitere Runde antreten kann. Sie gewinnt. Alle anderen bekommen ein DNF — auch Platz zwei, der „Assist".</p>
+          </li>
+        </ol>
+      </div>
+
+      <p class="format__credit reveal">
+        Erfunden 2011 von Gary „Lazarus Lake" Cantrell · „Big's Backyard Ultra", Tennessee
+      </p>
+    </section>
+
+    <!-- STRECKE -->
+    <section class="route" id="strecke">
+      <div class="section-head">
+        <h2 class="section-title">Die Strecke</h2>
+        <p class="section-sub">
+          Eine flache Schleife entlang der <strong>Dreisam</strong> — gewendet zwischen
+          <strong>Hirzbergsteg</strong> und <strong>Schlosssteg Ebnet</strong>. Gezeichnet aus echten GPS-Daten des Laufs.
+        </p>
+      </div>
+
+      <div class="route__grid">
+        <figure class="route__map">
+          <svg id="routeSvg" viewBox="0 0 1000 420" preserveAspectRatio="xMidYMid meet" aria-label="Streckenverlauf entlang der Dreisam">
+            <path id="routePath" class="route__line" />
+            <g id="routeMarkers"></g>
+          </svg>
+          <figcaption>Routenverlauf · Dreisam-Uferweg, Freiburg</figcaption>
+        </figure>
+        <dl class="route__facts">
+          <div class="reveal"><dt>Runde</dt><dd>6,706 km</dd></div>
+          <div class="reveal"><dt>Profil</dt><dd>flach · Uferweg</dd></div>
+          <div class="reveal"><dt>Wende</dt><dd>2 Stege</dd></div>
+          <div class="reveal"><dt>100 Meilen</dt><dd>nach 24 Runden</dd></div>
+        </dl>
+      </div>
+      <p class="route__hint">Du willst die offizielle Route 2026? Sag dem Veranstalter Bescheid — hier liegt der echte Verlauf des Laufs zugrunde.</p>
+    </section>
+
+    <!-- COUNTDOWN -->
+    <section class="countdown" id="countdown">
+      <h2 class="section-title section-title--center">Countdown bis zum Start</h2>
+      <p class="countdown__target" id="cdTarget">—</p>
+      <div class="cd" id="cd" aria-live="polite">
+        <div class="cd__cell"><span id="cdD">00</span><small>Tage</small></div>
+        <div class="cd__cell"><span id="cdH">00</span><small>Std</small></div>
+        <div class="cd__cell"><span id="cdM">00</span><small>Min</small></div>
+        <div class="cd__cell"><span id="cdS">00</span><small>Sek</small></div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" id="anmelden">
+      <h2 class="cta__title">Bist du dabei,<br />wenn die Sonne nicht untergeht?</h2>
+      <p class="cta__sub">Sommersonnenwende in Freiburg. Sieh, wie lange du laufen kannst.</p>
+      <div class="hero__actions">
+        <a class="btn btn--solid" href="https://freiburg.run/event/midsummer-backyard-ultra/" target="_blank" rel="noopener">Zur Anmeldung</a>
+        <a class="btn btn--ghost" href="https://www.instagram.com/midsummerbackyard/" target="_blank" rel="noopener">@midsummerbackyard</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="foot">
+    <div class="foot__brand">
+      <img src="../assets/logo.jpg" alt="" width="64" height="64" />
+      <span>Midsummer Backyard Ultra · Freiburg</span>
+    </div>
+    <nav class="foot__links" aria-label="Kanäle">
+      <a href="https://freiburg.run/event/midsummer-backyard-ultra/" target="_blank" rel="noopener">freiburg.run</a>
+      <a href="https://www.instagram.com/midsummerbackyard/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.strava.com/clubs/1389603" target="_blank" rel="noopener">Strava</a>
+    </nav>
+    <p class="foot__meta">Variante 01 — „Solstice Sun" · <span id="ver">v1.0.0</span> · Konzept-Landingpage</p>
+  </footer>
+
+  <!-- GSAP (vendored, UMD -> window.gsap) -->
+  <script src="../assets/vendor/gsap.min.js" defer></script>
+  <script src="../assets/vendor/ScrollTrigger.min.js" defer></script>
+  <script type="module" src="main.js"></script>
+</body>
+</html>
