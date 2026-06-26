@@ -1,0 +1,10 @@
+* text=auto eol=lf
+
+# Binär: nicht als Text behandeln
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.webp binary
+*.fit binary
+*.woff binary
+*.woff2 binary

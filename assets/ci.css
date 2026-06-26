@@ -1,0 +1,24 @@
+/*
+  Midsummer Backyard Ultra — gemeinsame CI-Tokens (Single Source of Truth)
+  Farben exakt aus Bildmaterial/Logo.jpg gesampelt.
+  Jede Variante bettet ihre eigene CSS ein, referenziert aber dieselbe Palette.
+*/
+:root {
+  /* Kern-Palette (Logo) */
+  --c-cream:      #F4E9D3; /* Hintergrund / Papier */
+  --c-orange:     #E5722A; /* Primär — "BACKYARD" + äußere Strahlen */
+  --c-amber:      #F2A03A; /* Sekundär — "MIDSUMMER" + innere Sonne */
+
+  /* Abgeleitete Töne */
+  --c-sun-core:   #F7C24B; /* hellste Sonnenmitte */
+  --c-orange-deep:#C8551B; /* tiefes Orange für Tiefe/Schatten */
+  --c-ink:        #1A1208; /* warmes Fast-Schwarz (Text / Dark-BG) */
+  --c-ink-soft:   #3A2A18; /* warmes Braun für Fließtext auf Creme */
+  --c-cream-2:    #EADBBE; /* zweite Creme-Stufe */
+  --c-line:       rgba(26,18,8,.14);
+
+  /* Event-Fakten als Tokens (wiederverwendbar) */
+  --event-date: "20. Juni 2026";
+  --event-time: "06:00 Uhr";
+  --lap-km: "6,706";
+}

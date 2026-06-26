@@ -1,0 +1,15 @@
+# Abhängigkeiten / Build
+node_modules/
+package-lock.json
+
+# Tooling & lokale Skills (nicht veröffentlichen)
+.claude/
+
+# Quell-Rohdaten (personenbezogene Garmin-Aufzeichnung — nicht veröffentlichen)
+Tracking Daten Backyard.fit
+Bildmaterial/
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+*.log
