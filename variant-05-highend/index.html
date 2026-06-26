@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Midsummer Backyard Ultra Freiburg — Renn die Schleife</title>
+  <meta name="description" content="Ein cinematisches Erlebnis: die echte Dreisam-Runde als leuchtender Pfad. Jede Stunde 6,706 km, bis nur eine Person übrig ist. 20. Juni 2026, Freiburg." />
+  <meta name="theme-color" content="#0c0907" />
+  <meta property="og:title" content="Midsummer Backyard Ultra Freiburg" />
+  <meta property="og:description" content="Renn die Schleife, bis nur einer übrig ist." />
+  <meta property="og:image" content="../assets/logo.jpg" />
+  <link rel="icon" type="image/jpeg" href="../assets/logo.jpg" />
+  <link rel="stylesheet" href="../assets/fonts/fonts.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script type="importmap">
+    { "imports": { "three": "../assets/vendor/three/three.module.min.js" } }
+  </script>
+</head>
+<body data-variant="05">
+  <canvas id="scene" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <!-- Fluid-Island Nav -->
+  <header class="nav" id="nav">
+    <a class="nav__brand" href="#top" aria-label="Start">
+      <img src="../assets/logo.jpg" alt="Midsummer Backyard Logo" width="34" height="34" />
+      <span>Midsummer Backyard</span>
+    </a>
+    <nav class="nav__links" aria-label="Navigation">
+      <a href="#format">Format</a>
+      <a href="#strecke">Strecke</a>
+      <a href="#start">Start</a>
+    </nav>
+    <a class="nav__cta magnetic" href="https://freiburg.run/event/midsummer-backyard-ultra/" target="_blank" rel="noopener">
+      <span>Anmelden</span>
+      <i class="nav__cta-i" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 17 17 7M9 7h8v8"/></svg>
+      </i>
+    </a>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero__inner">
+        <span class="pill reveal">Sommersonnenwende · 20. Juni 2026</span>
+        <h1 class="hero__title">
+          <span class="reveal">Renn</span>
+          <span class="reveal">die</span>
+          <span class="reveal accent">Schleife.</span>
+        </h1>
+        <p class="hero__lead reveal">Jede Stunde 6,706 km an der Dreisam, immer dieselbe Runde, bis nur eine Person übrig ist. Der leuchtende Pfad ist die echte Strecke.</p>
+        <div class="hero__actions reveal">
+          <a class="btn magnetic" href="https://freiburg.run/event/midsummer-backyard-ultra/" target="_blank" rel="noopener">
+            <span>Jetzt anmelden</span>
+            <i class="btn__i" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 17 17 7M9 7h8v8"/></svg>
+            </i>
+          </a>
+          <a class="btn btn--ghost" href="#format"><span>Das Format</span></a>
+        </div>
+      </div>
+      <div class="hero__cue reveal" aria-hidden="true"><span></span></div>
+    </section>
+
+    <!-- FORMAT (Bento aus Double-Bezel-Cards) -->
+    <section class="sec format" id="format">
+      <div class="sec__head">
+        <span class="pill">Das Format</span>
+        <h2>Das wohl ehrlichste Laufformat der Welt.</h2>
+      </div>
+      <div class="bento">
+        <article class="bezel bento__a io">
+          <div class="bezel__core">
+            <span class="bezel__big">6,706<small>km</small></span>
+            <h3>Eine Runde, der „Yard"</h3>
+            <p>Exakt 4,167 Meilen. 24 Runden ergeben genau 100 Meilen.</p>
+          </div>
+        </article>
+        <article class="bezel bento__b io">
+          <div class="bezel__core">
+            <h3>Zur vollen Stunde</h3>
+            <p>Jeder Yard startet gemeinsam, immer zur vollen Stunde. Wer den Start verpasst, ist raus.</p>
+          </div>
+        </article>
+        <article class="bezel bento__c io">
+          <div class="bezel__core">
+            <h3>Schaffst du sie nicht, bist du raus</h3>
+            <p>Keine fremde Hilfe, keine Stöcke. Nur du und die Uhr.</p>
+          </div>
+        </article>
+        <article class="bezel bento__d io">
+          <div class="bezel__core">
+            <span class="bezel__big">1</span>
+            <h3>Last Runner Standing</h3>
+            <p>Es läuft, bis nur eine Person eine weitere Runde antritt. Sie gewinnt, alle anderen bekommen ein DNF.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- STRECKE -->
+    <section class="sec strecke" id="strecke">
+      <div class="strecke__grid">
+        <div class="strecke__copy io">
+          <span class="pill">Die Strecke</span>
+          <h2>Der leuchtende Pfad ist echt.</h2>
+          <p>Eine flache Schleife an der Dreisam, gewendet zwischen Hirzbergsteg und Schlosssteg Ebnet. Gezeichnet aus echten GPS-Daten des Laufs, oben in 3D nachgebildet.</p>
+        </div>
+        <div class="bezel strecke__stats io">
+          <div class="bezel__core">
+            <dl>
+              <div><dt>Runde</dt><dd>6,706 km</dd></div>
+              <div><dt>Wende</dt><dd>2 Stege</dd></div>
+              <div><dt>Profil</dt><dd>flach</dd></div>
+              <div><dt>100 Meilen</dt><dd>24 Runden</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COUNTDOWN -->
+    <section class="sec start" id="start">
+      <div class="sec__head sec__head--center">
+        <span class="pill">Countdown</span>
+        <h2>Bis der erste Yard beginnt</h2>
+        <p class="start__target" id="cdTarget">—</p>
+      </div>
+      <div class="bezel start__bezel io">
+        <div class="bezel__core cd" aria-live="polite">
+          <div><span id="cdD">00</span><small>Tage</small></div>
+          <div class="cd__sep" aria-hidden="true"></div>
+          <div><span id="cdH">00</span><small>Stunden</small></div>
+          <div class="cd__sep" aria-hidden="true"></div>
+          <div><span id="cdM">00</span><small>Minuten</small></div>
+          <div class="cd__sep" aria-hidden="true"></div>
+          <div><span id="cdS">00</span><small>Sekunden</small></div>
+        </div>
+      </div>
+      <div class="start__cta io">
+        <a class="btn btn--lg magnetic" href="https://freiburg.run/event/midsummer-backyard-ultra/" target="_blank" rel="noopener">
+          <span>Sei dabei</span>
+          <i class="btn__i" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </i>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="foot__inner">
+      <div class="foot__brand">
+        <img src="../assets/logo.jpg" alt="" width="36" height="36" />
+        <span>Midsummer Backyard Ultra · Freiburg</span>
+      </div>
+      <nav class="foot__links" aria-label="Kanäle">
+        <a href="https://freiburg.run/event/midsummer-backyard-ultra/" target="_blank" rel="noopener">freiburg.run</a>
+        <a href="https://www.instagram.com/midsummerbackyard/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.strava.com/clubs/1389603" target="_blank" rel="noopener">Strava</a>
+      </nav>
+    </div>
+    <p class="foot__meta">Variante 05 · gebaut mit dem high-end-visual-design Skill · <span id="ver">v1.0.0</span></p>
+  </footer>
+
+  <script src="../assets/vendor/gsap.min.js" defer></script>
+  <script src="../assets/vendor/ScrollTrigger.min.js" defer></script>
+  <script type="module" src="main.js"></script>
+</body>
+</html>
