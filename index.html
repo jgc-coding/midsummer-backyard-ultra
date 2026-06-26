@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Midsummer Backyard Ultra Freiburg — 5 Landingpage-Varianten</title>
+  <meta name="description" content="Fünf unabhängige, award-orientierte Landingpage-Varianten für den Midsummer Backyard Ultra Freiburg. Jede mit eigener Handschrift, demselben Logo und denselben CI-Farben." />
+  <meta name="theme-color" content="#f4e9d3" />
+  <meta property="og:title" content="Midsummer Backyard Ultra — 5 Landingpage-Varianten" />
+  <meta property="og:description" content="Fünf Varianten, eine Marke. Wähle deinen Favoriten." />
+  <meta property="og:image" content="assets/logo.jpg" />
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
+  <link rel="stylesheet" href="assets/fonts/fonts.css" />
+  <style>
+    :root {
+      --cream: #f4e9d3; --cream-2: #ece0c2; --orange: #e5722a; --orange-deep: #c8551b;
+      --amber: #f2a03a; --ink: #221603; --muted: #6c5836; --line: rgba(34, 22, 3, 0.14);
+      --d: "Bricolage Grotesque", system-ui, sans-serif; --b: "Hanken Grotesk", system-ui, sans-serif;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--b); background: var(--cream); color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 40px); }
+
+    .top { padding: clamp(48px, 8vw, 96px) 0 clamp(28px, 4vw, 48px); text-align: center; }
+    .top__logo { width: 92px; height: 92px; border-radius: 20px; box-shadow: 0 20px 50px -28px rgba(200, 85, 27, 0.6); }
+    .top__tag { margin-top: 26px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; font-size: 0.78rem; color: var(--orange-deep); }
+    .top__title { font-family: var(--d); font-weight: 800; font-size: clamp(2.4rem, 6.5vw, 5rem); line-height: 1; letter-spacing: -0.03em; margin: 16px auto 0; max-width: 16ch; }
+    .top__title em { font-style: normal; color: var(--orange); }
+    .top__lead { margin: 22px auto 0; max-width: 60ch; color: var(--muted); font-size: clamp(1.05rem, 2vw, 1.25rem); }
+    .top__facts { margin-top: 26px; display: inline-flex; flex-wrap: wrap; gap: 10px 18px; justify-content: center; font-size: 0.96rem; color: var(--ink); }
+    .top__facts b { color: var(--orange-deep); }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: clamp(18px, 2.4vw, 30px); padding-bottom: clamp(60px, 9vw, 110px); }
+    .card { display: flex; flex-direction: column; background: #fff7e9; border: 1px solid var(--line); border-radius: 20px; overflow: hidden; text-decoration: none; transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease); }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 30px 60px -36px rgba(200, 85, 27, 0.55); }
+    .card:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
+    .card__preview { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: var(--ink); border-bottom: 1px solid var(--line); }
+    .card__preview iframe { position: absolute; top: 0; left: 0; width: 1400px; height: 875px; border: 0; transform: scale(0.286); transform-origin: top left; pointer-events: none; }
+    .card__num { position: absolute; top: 12px; left: 14px; z-index: 2; font-family: var(--d); font-weight: 800; font-size: 1.1rem; color: #fff; background: rgba(34, 22, 3, 0.55); backdrop-filter: blur(6px); padding: 4px 12px; border-radius: 999px; }
+    .card__body { padding: 22px 24px 26px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+    .card__name { font-family: var(--d); font-weight: 700; font-size: 1.4rem; letter-spacing: -0.01em; }
+    .card__skill { align-self: flex-start; font-size: 0.74rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--orange-deep); background: rgba(229, 114, 42, 0.12); padding: 4px 10px; border-radius: 999px; }
+    .card__desc { color: var(--muted); font-size: 1rem; }
+    .card__go { margin-top: auto; font-weight: 700; color: var(--orange-deep); display: inline-flex; align-items: center; gap: 7px; }
+    .card:hover .card__go { gap: 11px; }
+
+    .foot { border-top: 1px solid var(--line); padding: 40px 0 64px; color: var(--muted); font-size: 0.92rem; text-align: center; }
+    .foot a { color: var(--orange-deep); font-weight: 600; text-decoration: none; }
+    .foot a:hover { text-decoration: underline; }
+    .foot__links { display: flex; gap: 20px; justify-content: center; margin-bottom: 16px; flex-wrap: wrap; }
+
+    @media (prefers-reduced-motion: reduce) { .card { transition: none; } }
+  </style>
+</head>
+<body>
+  <header class="top wrap">
+    <img class="top__logo" src="assets/logo.jpg" alt="Midsummer Backyard Logo" width="92" height="92" />
+    <p class="top__tag">Freiburg · Dreisam · Sommersonnenwende</p>
+    <h1 class="top__title">Midsummer Backyard Ultra — <em>fünf</em> Varianten</h1>
+    <p class="top__lead">Fünf unabhängige Landingpages für dasselbe Lauf-Event. Gleiches Logo, gleiche CI-Farben, jede mit komplett eigener gestalterischer Handschrift. Wähle deinen Favoriten.</p>
+    <p class="top__facts"><span><b>2. Auflage</b></span><span>·</span><span>Samstag, <b>20. Juni 2026</b></span><span>·</span><span>Start <b>06:00 Uhr</b></span><span>·</span><span>Last Runner Standing</span></p>
+  </header>
+
+  <main class="wrap">
+    <div class="grid" id="grid"></div>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <div class="foot__links">
+        <a href="https://freiburg.run/event/midsummer-backyard-ultra/" target="_blank" rel="noopener">freiburg.run</a>
+        <a href="https://www.instagram.com/midsummerbackyard/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.strava.com/clubs/1389603" target="_blank" rel="noopener">Strava</a>
+      </div>
+      <p>Konzept-Landingpages für den Midsummer Backyard Ultra Freiburg · <span id="ver">v1.0.0</span></p>
+    </div>
+  </footer>
+
+  <script>
+    var VARIANTS = [
+      { n: '01', dir: 'variant-01-solstice/', name: 'Solstice Sun', skill: 'ohne Skill', desc: 'Editorial-warm in Creme. Eine lebendige Three.js-Sonne wandert über den längsten Tag, eine Yard-Clock zählt die Stunden.' },
+      { n: '02', dir: 'variant-02-taste/', name: 'Durch die Nacht', skill: 'design-taste-frontend', desc: 'Kinetisches Dunkel-Theme. Eine horizontale Stunden-Timeline führt durch Tag und Nacht bis zum Last Runner Standing.' },
+      { n: '03', dir: 'variant-03-emil/', name: 'Stunde um Stunde', skill: 'emil-design-eng', desc: 'Helles, präzises „engineered" Theme mit einem interaktiven Last-Runner-Standing-Simulator zum Durchspielen.' },
+      { n: '04', dir: 'variant-04-impeccable/', name: 'Drenched Orange', skill: 'impeccable', desc: 'Kompromisslos in Orange getaucht. Kernstück ist eine echte, geo-korrekte Leaflet-Karte der Dreisam-Runde.' },
+      { n: '05', dir: 'variant-05-highend/', name: 'Glow Ribbon', skill: 'high-end-visual-design', desc: 'Cinematischer WebGL-Showstopper: die echte Route als glühendes 3D-Ribbon mit Partikel-Läufern und Kamerafahrt.' },
+    ];
+    var grid = document.getElementById('grid');
+    VARIANTS.forEach(function (v) {
+      var a = document.createElement('a');
+      a.className = 'card'; a.href = v.dir;
+      a.setAttribute('aria-label', 'Variante ' + v.n + ': ' + v.name + ' ansehen');
+      a.innerHTML =
+        '<div class="card__preview"><span class="card__num">' + v.n + '</span>' +
+        '<iframe loading="lazy" tabindex="-1" aria-hidden="true" title="Vorschau ' + v.name + '" src="' + v.dir + '"></iframe></div>' +
+        '<div class="card__body">' +
+        '<span class="card__skill">' + v.skill + '</span>' +
+        '<h2 class="card__name">' + v.name + '</h2>' +
+        '<p class="card__desc">' + v.desc + '</p>' +
+        '<span class="card__go">Variante ansehen <span aria-hidden="true">&rarr;</span></span>' +
+        '</div>';
+      grid.appendChild(a);
+    });
+    fetch('VERSION').then(function (r) { return r.ok ? r.text() : ''; }).then(function (t) { if (t) document.getElementById('ver').textContent = 'v' + t.trim(); }).catch(function () {});
+  </script>
+</body>
+</html>
