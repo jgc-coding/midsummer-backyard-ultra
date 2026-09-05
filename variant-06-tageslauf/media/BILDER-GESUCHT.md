@@ -1,0 +1,84 @@
+# Gesuchte Fotos — Variante 06 „Tageslauf"
+
+Alle Dateien kommen **genau in diesen Ordner** und **genau unter diesen Namen**. Die Seite lädt sie
+automatisch. Solange eine Datei fehlt, zeigt die Seite an der Stelle einen beschrifteten Platzhalter
+im Seitenlayout — sie bleibt also jederzeit vollständig ansehbar.
+
+Format überall: JPG oder WebP, Farbraum sRGB, nach dem Export **unter 500 KB pro Datei**.
+
+---
+
+## Wenn du nur drei Bilder besorgen kannst
+
+Diese drei tragen die Seite. In dieser Reihenfolge:
+
+1. `stunde-23.jpg` — Nacht mit Stirnlampen
+2. `regel-yard.jpg` — jemand läuft an der Dreisam
+3. `stunde-06.jpg` — der Massenstart um 06:00 Uhr
+
+---
+
+## A · Hero-Himmel (1 Bild, optional)
+
+| Datei | Größe | Motiv |
+|---|---|---|
+| `hero-daemmerung.jpg` | 2400 × 1350 (16:9), quer | Das Dreisamtal Richtung Osten, kurz vor Sonnenaufgang. |
+
+Wichtig: **viel ruhiger Himmel im oberen Drittel**, der Horizont gehört ins untere Drittel. Über der
+oberen Bildhälfte liegt später die Überschrift, dort darf nichts Unruhiges sein. Wenn kein passendes
+Bild existiert, bleibt der gezeichnete Himmelverlauf stehen — der funktioniert auch allein.
+
+## B · Die Stunden (4 Bilder)
+
+Format: **3:2 quer, 1800 × 1200**. Diese vier laufen im Karussell durch und erzählen den Tagesverlauf.
+
+| Datei | Motiv |
+|---|---|
+| `stunde-06.jpg` | Der Massenstart um 06:00 Uhr. Läuferfeld von vorn oder leicht schräg, Morgenlicht. |
+| `stunde-14.jpg` | Mittag. Einzelne Läufer auf dem Dreisamweg, harte Schatten, sichtbare Hitze. |
+| `stunde-23.jpg` | Nacht. Stirnlampen am Fluss. **Das wichtigste Bild der ganzen Seite.** |
+| `stunde-06-2.jpg` | Sonnenaufgang am zweiten Morgen. Wenige Läufer, leere Strecke. |
+
+## C · Die vier Regeln (4 Bilder)
+
+Format: **4:5 hochkant, 1400 × 1750**. Jedes Bild steht neben einer Regel, deshalb soll es die Regel
+zeigen und nicht nur schön sein.
+
+| Datei | Motiv |
+|---|---|
+| `regel-yard.jpg` | Jemand läuft an der Dreisam, seitlich, in Bewegung. Wasser oder Uferweg erkennbar. |
+| `regel-stunde.jpg` | Der Moment vor dem Gong: Läufer stehen im Startbereich, Uhr oder Startbogen im Bild. |
+| `regel-aus.jpg` | Jemand sitzt am Rand, Schuhe aus, erschöpft. Ehrlich, nicht als Niederlage inszeniert. |
+| `regel-sieger.jpg` | Die letzte Person allein auf der Runde, oder der Zieleinlauf. |
+
+## D · Eindrücke (6 Bilder)
+
+Format gemischt: **1800 × 1200 quer** oder **1200 × 1500 hochkant**, beides geht. Hier darf es
+ungeordnet und echt sein.
+
+| Datei | Motiv |
+|---|---|
+| `eindruck-1.jpg` | Das Camp: Zelte, Campingstühle, Taschen. |
+| `eindruck-2.jpg` | Der Verpflegungstisch aus der Nähe. |
+| `eindruck-3.jpg` | Helferinnen und Helfer bei der Arbeit. |
+| `eindruck-4.jpg` | Ein Detail: Füße, Schuhe, Untergrund. |
+| `eindruck-5.jpg` | Warten zwischen zwei Runden, Gruppe. |
+| `eindruck-6.jpg` | Stimmung: Zuschauer, Applaus, Begegnung. |
+
+## E · Die Wendepunkte (2 Bilder)
+
+Format: **3:2 quer, 1200 × 800**. Sie stehen neben der Karte und geben den beiden Umkehrpunkten
+ein Gesicht.
+
+| Datei | Motiv |
+|---|---|
+| `steg-hirzberg.jpg` | Der Hirzbergsteg. |
+| `steg-ebnet.jpg` | Der Schlosssteg in Ebnet. |
+
+---
+
+## Rechte
+
+Sobald Personen erkennbar sind, braucht es die Einwilligung der abgebildeten Personen **und** das
+Nutzungsrecht der Fotografin oder des Fotografen für die Veröffentlichung auf der Event-Seite.
+Bitte nur Bilder liefern, bei denen beides geklärt ist.

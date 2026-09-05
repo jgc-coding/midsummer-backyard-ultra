@@ -6,8 +6,9 @@ Freiburg. Statische Sites, Hosting über GitHub Pages.
 
 ## Tech-Stack
 - Vanilla HTML/CSS/JS, **kein Build-Schritt** (direkt von GitHub Pages servierbar).
-- GSAP 3.12.5 + ScrollTrigger, Three.js 0.160.1, Leaflet 1.9.4 — **lokal vendored** in `assets/vendor/`.
-  Three.js wird per `<script type="importmap">` als ES-Modul eingebunden.
+- GSAP 3.12.5 + ScrollTrigger, Three.js 0.160.1, Leaflet 1.9.4, Lenis 1.3.26 — **lokal vendored**
+  in `assets/vendor/`. Three.js wird per `<script type="importmap">` als ES-Modul eingebunden,
+  Lenis als klassisches Skript (setzt `globalThis.Lenis`).
 - Node nur als Tooling (`.fit`-Parser, Dev-Server). `package.json type:module`.
 
 ## Befehle
@@ -37,7 +38,21 @@ Freiburg. Statische Sites, Hosting über GitHub Pages.
 - GitHub Pages = Unterordner-Pfad: alles relativ halten, auch in JS (`fetch('../data/...')`).
 - Three.js nur als `three.module.min.js` vendored — keine Addons (Bloom etc. selbst lösen, z. B. additives Blending + CSS-Glow).
 - Roh-`.fit` ist personenbezogen → `.gitignore`; nur abgeleitete GeoJSON veröffentlichen.
-- Leaflet braucht OSM-Tiles zur Laufzeit (nur Variante 04) — Netzabhängigkeit, Fallback einplanen.
+- Leaflet braucht Kartenkacheln zur Laufzeit — Netzabhängigkeit, Fallback einplanen.
+- **CARTO-Kacheln (`basemaps.cartocdn.com`) verlangen inzwischen einen API-Schlüssel** und liefern
+  ohne ihn eine Hinweiskachel mit HTTP 200. Der Fehler ist also nicht am Statuscode erkennbar,
+  sondern nur an der Dateigröße (~2 KB statt ~7 KB). Stattdessen `tile.openstreetmap.org`;
+  für ein dunkles Layout nur die Kachelebene per CSS-Filter einfärben, damit Route, Marker und
+  Quellenangabe unverändert lesbar bleiben.
+- **Bei scroll-getriebenen Seiten kein `backdrop-filter` auf mitlaufenden Leisten.** Zeichnet die
+  Seite permanent neu, muss der Compositor den Hintergrund in jedem Frame erneut lesen; Chrome
+  friert dann ein (nachgewiesen an Variante 06). Deckende Fläche statt Weichzeichner.
+- **Große Flächen nie per `filter` animieren** (etwa `brightness()` auf Karten eines Stapels) —
+  jede Änderung rastert die ganze Ebene neu. Stattdessen eine Deckschicht, deren `opacity` sich
+  ändert: das bleibt im Compositor.
+- **Ein Schreibvorgang auf `:root` macht die Stilangaben des ganzen Dokuments ungültig.** Steht er
+  in einer Scroll-Schleife vor `getBoundingClientRect()`, erzwingt jede Messung eine komplette
+  Neuberechnung. Solche Schreibvorgänge ans Ende der Render-Funktion und in Stufen quantisieren.
 
 ## Veröffentlichung
 - Repo: `jgc-coding/midsummer-backyard-ultra` (public). Pages: Branch `main`, Root.

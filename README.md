@@ -1,6 +1,6 @@
-# Midsummer Backyard Ultra Freiburg — 5 Landingpage-Varianten
+# Midsummer Backyard Ultra Freiburg — 6 Landingpage-Varianten
 
-Fünf unabhängige, award-orientierte Landingpages für den **Midsummer Backyard Ultra Freiburg**
+Sechs unabhängige, award-orientierte Landingpages für den **Midsummer Backyard Ultra Freiburg**
 (2. Auflage: **Sa 20.06.2026, Start 06:00 Uhr**, Schleife entlang der Dreisam zwischen
 Hirzbergsteg und Schlosssteg Ebnet).
 
@@ -16,8 +16,12 @@ Projekt-Logo sowie dessen Farben als Corporate Identity.
 | 03 | [`variant-03-emil/`](variant-03-emil/) | Skill `emil-design-eng` — Design-Engineering, interaktive Yard-Clock |
 | 04 | [`variant-04-impeccable/`](variant-04-impeccable/) | Skill `impeccable` — production-grade, echte Dreisam-Karte (Leaflet) |
 | 05 | [`variant-05-highend/`](variant-05-highend/) | Skill `high-end-visual-design` — Three.js-Showstopper, 3D-Route |
+| 06 | [`variant-06-tageslauf/`](variant-06-tageslauf/) | „Tageslauf" — durchgehende Scroll-Erzählung, Hintergrund wandert durch die 24 Stunden |
 
-Die Galerie-Startseite (`index.html`) verlinkt alle fünf.
+Die Galerie-Startseite (`index.html`) verlinkt alle sechs.
+
+Variante 06 zeigt an Stellen ohne Foto einen beschrifteten Platzhalter. Welche Bilder gesucht
+werden, steht in [`variant-06-tageslauf/media/BILDER-GESUCHT.md`](variant-06-tageslauf/media/BILDER-GESUCHT.md).
 
 ## CI-Farben (aus dem Logo gesampelt)
 
@@ -38,5 +42,5 @@ Die Roh-`.fit` (personenbezogen) wird **nicht** veröffentlicht.
 
 ## Tech
 
-Vanilla HTML/CSS/JS · GSAP + ScrollTrigger · Three.js · Leaflet — alle lokal unter
+Vanilla HTML/CSS/JS · GSAP + ScrollTrigger · Three.js · Leaflet · Lenis — alle lokal unter
 `assets/vendor/` (gepinnt, keine CDN-Laufzeitabhängigkeit).
