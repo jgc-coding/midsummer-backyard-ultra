@@ -1,7 +1,7 @@
 # Projekt-CLAUDE.md — Midsummer Backyard Ultra Website
 
 ## Was ist das
-Fünf eigenständige, award-orientierte Landingpage-Varianten für den Midsummer Backyard Ultra
+Sechs eigenständige, award-orientierte Landingpage-Varianten für den Midsummer Backyard Ultra
 Freiburg. Statische Sites, Hosting über GitHub Pages.
 
 ## Tech-Stack
@@ -15,7 +15,12 @@ Freiburg. Statische Sites, Hosting über GitHub Pages.
 - `npm install` — installiert `fit-file-parser` (nur fürs Daten-Tooling).
 - `npm run parse-fit` — `Tracking Daten Backyard.fit` → `data/route-*`.
 - `npm run serve` / `node scripts/serve.mjs 4178` — lokaler Server auf Port 4178.
-- Verifikation: Preview-MCP (`launch.json` → `midsummer`) ODER Chrome-MCP gegen `localhost:4178`.
+- Verifikation: Chrome-MCP gegen `localhost:4178`, für Vollseiten-Bilder headless Chrome
+  (`--headless=new --window-size=<b>,<h> --virtual-time-budget=20000 --screenshot=<datei> <url>`).
+  Der Preview-MCP taugt hier nur für DOM-Abfragen: bei den dunklen, scroll-getriebenen Varianten
+  liefert er schwarze Aufnahmen, solange sein Bereich ausgeblendet ist. Headless-Chrome macht
+  Fenster nicht schmaler als etwa 500 px — schmaler angeforderte Bilder sind rechts beschnitten,
+  obwohl das Layout stimmt.
 
 ## CI / Single Source of Truth
 - Farben aus `Bildmaterial/Logo.jpg` gesampelt: Creme `#F4E9D3`, Orange `#E5722A`, Amber `#F2A03A`.
