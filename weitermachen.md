@@ -1,6 +1,10 @@
 # Weitermachen
 
-Stand: 08.09.2026 · Version 1.3.0 · Tag `v1.3.0` · `main` = `b3f7b8a`, gepusht und live
+Stand: 08.09.2026 · Version 1.3.0 · Tag `v1.3.0` · alles gepusht, Seite live
+
+<!-- Hier steht bewusst keine Commit-Nummer: save-state schreibt diese Datei und committet sie
+     danach, jede notierte Nummer waere also sofort eine zu alt. Der aktuelle Stand ist `git log`. -->
+
 
 ## Stand
 
