@@ -1,6 +1,6 @@
 # Weitermachen
 
-Stand: 08.09.2026 · Version 1.3.0 · Termin auf die 3. Auflage umgestellt, Hero neu gebaut
+Stand: 08.09.2026 · Version 1.3.0 · Tag `v1.3.0` · `main` = `b3f7b8a`, gepusht und live
 
 ## Stand
 
@@ -22,6 +22,9 @@ Anmelde-Karte nebeneinander statt einer halb leeren Reihe.
 
 Nebenbei gefunden und behoben: In `render()` standen Schreibvorgänge vor den Messungen — dieselbe
 Falle wie beim `:root`-Schreiben, nur eine Ebene höher. Steht jetzt als Regel in der `CLAUDE.md`.
+
+Der Stand ist veröffentlicht. GitHub Pages hat nach etwa 30 Sekunden neu gebaut; live geprüft sind
+Version, Datum, Auflagen-Nummer, die Ausrüstungsliste in den Fragen und der zentrierte Hero.
 
 ## Offen
 
