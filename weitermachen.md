@@ -1,6 +1,6 @@
 # Weitermachen
 
-Stand: 08.09.2026 · Version 1.2.0 · Variante 06 inhaltlich gestrafft und auf dem Handy repariert
+Stand: 08.09.2026 · Version 1.2.0 · Tag `v1.2.0` · `main` = `96ac4af`, gepusht und live
 
 ## Stand
 
@@ -9,19 +9,23 @@ Effekte kaum, und der Inhalt war doppelt erzählt.
 
 Auf dem Handy waren drei der vier Kerneffekte hart abgeschaltet und der vierte lief in einem
 Achtel der Auflösung — übrig blieben Einblendungen. Jetzt laufen dieselben Effekte auf beiden
-Geräten, auf schmalen Bildschirmen nur mit kleinerem Ausschlag. Der Kartenstapel klebt und dimmt
-auch am Handy; seine Karten sind so hoch wie ihr Text und auf 78 % der Fensterhöhe gedeckelt.
-Der Bergketten-Drift im Schluss ist gestrichen.
+Geräten, auf schmalen Bildschirmen nur mit kleinerem Ausschlag (zweite Rate `data-rate-s`).
+Der Kartenstapel klebt und dimmt auch am Handy; seine Karten sind so hoch wie ihr Text und auf
+78 % der Fensterhöhe gedeckelt. Der Bergketten-Drift im Schluss ist gestrichen.
 
-Inhaltlich sind es statt neun jetzt sieben Abschnitte. Die Kernregel stand an sieben Stellen und
-steht jetzt an einer: in den vier Regelkarten. Der Prosa-Abschnitt „Das Format" davor ist entfallen,
-die Galerie „Eindrücke" ebenso — ihre tragfähigen Motive stecken in der Bildstrecke „Ein Tag und
-eine Nacht". Bildplätze von 17 auf 9, Seitenhöhe von 12.275 px auf 9.719 px.
+Inhaltlich sind es statt neun jetzt sieben Abschnitte: Hero, Format, Strecke, Stunden, Anmelden,
+Fragen, Schluss. Die Kernregel stand an sieben Stellen und steht jetzt an einer, in den vier
+Regelkarten. Der Prosa-Abschnitt „Das Format" davor ist entfallen, die Galerie „Eindrücke"
+ebenso — ihre tragfähigen Motive stecken in der Bildstrecke „Ein Tag und eine Nacht".
+Bildplätze von 17 auf 9, Seitenhöhe von 12.275 px auf 9.719 px.
+
+Der Stand ist gepusht, GitHub Pages hat damit neu gebaut. Der Rest-Worktree aus dem ersten Bau
+und der bereits gemergte Branch dazu sind entfernt; das Repo hat jetzt nur noch `main`.
 
 ## Offen
 
 - **9 Bildplätze warten auf Fotos.** Die Seite läuft ohne sie und zeigt beschriftete Platzhalter.
-  Gesuchte Motive: `variant-06-tageslauf/media/BILDER-GESUCHT.md`.
+  Gesuchte Motive: `variant-06-tageslauf/media/BILDER-GESUCHT.md`. (Gabriel-Aufgabe, liegt im Hub.)
 - **Variante 04 zeigt eine kaputte Karte.** CARTO verlangt inzwischen einen API-Schlüssel und
   liefert sonst nur eine Hinweiskachel — mit Statuscode 200, der Fehler fällt also nicht auf.
   Variante 06 ist auf OpenStreetMap umgestellt, Variante 04 noch nicht (wartet auf Freigabe).
@@ -30,8 +34,9 @@ eine Nacht". Bildplätze von 17 auf 9, Seitenhöhe von 12.275 px auf 9.719 px.
   echte Datum der nächsten Auflage. Aus demselben Grund steht der Countdown weiterhin im
   Abschnitt „Anmelden" und nicht im Hero: Er würde dort als Erstes „Dieser Termin liegt zurück"
   melden.
-- **Prüfung am echten Gerät steht aus.** Verifiziert ist über einen emulierten Viewport und
-  Headless-Chrome, nicht auf Gabriels Handy.
+- **Blocker für eine belastbare Abnahme:** Geprüft ist über einen emulierten Viewport und
+  Headless-Chrome, nicht auf einem echten Gerät. Solange Gabriel die Seite nicht am Handy
+  gesehen hat, ist die Handy-Reparatur nicht abgenommen.
 
 ## Nächste Schritte (Claude)
 
@@ -45,13 +50,16 @@ eine Nacht". Bildplätze von 17 auf 9, Seitenhöhe von 12.275 px auf 9.719 px.
    Variante 06 (`tileLayer`-URL plus CSS-Filter nur auf `.leaflet-tile-pane`).
 4. Falls Variante 06 die gewählte Fassung wird: `.claude/pruefen.txt` anlegen, damit das
    Done-Gate im Projekt überhaupt greift.
+5. Falls Gabriel am Handy etwas auffällt: zuerst reproduzieren, nicht raten — die beiden
+   Mess-Fallen unten machen Fehlbefunde in diesem Projekt sehr wahrscheinlich.
 
 ## Aktuelle Stolperfallen
 
 - **Es gibt keine `.claude/pruefen.txt`.** Der Stop-Hook prüft in diesem Projekt also nichts.
   „Geprüft" ist hier immer eine eigene Aussage und gehört als solche benannt.
 - Die beiden Fallen zur Sichtprüfung (ausgeblendeter In-App-Browser, unfertige CSS-Übergänge in
-  Headless-Aufnahmen) stehen dauerhaft in der `CLAUDE.md`. Der Befehl für eine Vollseiten-Aufnahme:
+  Headless-Aufnahmen) stehen dauerhaft in der `CLAUDE.md`. Befehl für eine Vollseiten-Aufnahme,
+  nachdem `node scripts/serve.mjs 4178` läuft:
 
   ```
   & "C:\Program Files\Google\Chrome\Application\chrome.exe" --headless=new --disable-gpu --hide-scrollbars --window-size=1440,9800 --virtual-time-budget=40000 --screenshot="ausgabe.png" "http://localhost:4178/variant-06-tageslauf/"
