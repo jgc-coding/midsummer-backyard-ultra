@@ -5,6 +5,35 @@ Versionierung nach [SemVer](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.3.0] — 2026-09-08
+### Geändert
+- **Termin auf die 3. Auflage umgestellt: Samstag, 19.06.2027, 06:00 Uhr.** Betrifft alle sechs
+  Varianten und die Galerie-Startseite: Meta-Angaben, sichtbare Datumszeilen, die Auflagen-Nummer
+  und die fünf eigenständigen `nextStart()`-Funktionen der Varianten 01–05.
+- **Hero von Variante 06 neu aufgebaut,** in der Anlage an fora.so orientiert: alles mittig
+  (Marker, Überschrift, Untertitel), ein einzelner Knopf mit einem leisen zweiten Weg darunter,
+  darunter das Panel, das der Hero unten hart abschneidet. Überschrift etwas leichter und kleiner,
+  damit sie zentriert nicht erschlägt. Hero-Höhe von 1290 px auf 1140 px.
+- **Hero-Himmel ist jetzt ein Sonnenaufgang in CI-Farben.** Die Lichtreise beginnt nicht mehr in
+  der Nacht, sondern um 06:00 Uhr beim Start und läuft über Tag und Nacht zum zweiten
+  Sonnenaufgang. Der Rest der Seite bleibt dunkel; warm ist nur der Einstieg.
+- **Bergketten sind Dunst statt Scherenschnitt.** Obere Kante per Maske in den Himmel
+  ausgeblendet, Weichzeichner gegen die harte Linie, nach hinten hin blasser. Feste Angaben —
+  bewegt wird weiterhin nur `transform`.
+- Ausrüstungsliste ist aus dem Anmelde-Abschnitt in die Fragen gewandert, mit dem ausdrücklichen
+  Hinweis, dass sie ein Vorschlag und nicht vollständig ist. Der Anmelde-Abschnitt zeigt dadurch
+  Countdown und Anmelde-Karte nebeneinander statt einer halb leeren Reihe.
+
+### Behoben
+- **Schreibvorgänge standen in `render()` vor den Messungen** — dieselbe Falle wie beim
+  `:root`-Schreiben, nur eine Ebene höher. Vier `getBoundingClientRect()` kosten gemessen
+  0,05 ms, dieselben vier nach einem Schreibvorgang 6,5 ms. Messungen stehen jetzt ganz oben.
+- Der Übergang von der Nacht zum zweiten Sonnenaufgang lief durch Grau, weil Blau und Orange
+  Gegenfarben sind und ihre Mischung durch die Mitte geht. Eine Zwischenstufe „erstes Licht"
+  führt ihn jetzt über ein warmes Rot.
+- Der Himmel im Hero-Panel überstrahlte nach der Umstellung die Überschrift; seine Deckkraft ist
+  von 0,58 auf 0,33 zurückgenommen.
+
 ## [1.2.0] — 2026-09-08
 ### Geändert
 - Variante 06 inhaltlich neu geordnet: von neun Abschnitten auf sieben. Der Prosa-Abschnitt

@@ -1,56 +1,47 @@
 # Weitermachen
 
-Stand: 08.09.2026 · Version 1.2.0 · Tag `v1.2.0` · `main` = `96ac4af`, gepusht und live
+Stand: 08.09.2026 · Version 1.3.0 · Termin auf die 3. Auflage umgestellt, Hero neu gebaut
 
 ## Stand
 
-Variante 06 „Tageslauf" wurde auf zwei Rückmeldungen hin überarbeitet: Auf dem Handy wirkten die
-Effekte kaum, und der Inhalt war doppelt erzählt.
+Drei Rückmeldungen von Gabriel sind umgesetzt.
 
-Auf dem Handy waren drei der vier Kerneffekte hart abgeschaltet und der vierte lief in einem
-Achtel der Auflösung — übrig blieben Einblendungen. Jetzt laufen dieselben Effekte auf beiden
-Geräten, auf schmalen Bildschirmen nur mit kleinerem Ausschlag (zweite Rate `data-rate-s`).
-Der Kartenstapel klebt und dimmt auch am Handy; seine Karten sind so hoch wie ihr Text und auf
-78 % der Fensterhöhe gedeckelt. Der Bergketten-Drift im Schluss ist gestrichen.
+**Termin.** Die 3. Auflage startet am Samstag, 19.06.2027 um 06:00 Uhr. Das steckt jetzt in allen
+sechs Varianten und der Galerie-Startseite. Der Countdown in Variante 06 läuft wieder.
 
-Inhaltlich sind es statt neun jetzt sieben Abschnitte: Hero, Format, Strecke, Stunden, Anmelden,
-Fragen, Schluss. Die Kernregel stand an sieben Stellen und steht jetzt an einer, in den vier
-Regelkarten. Der Prosa-Abschnitt „Das Format" davor ist entfallen, die Galerie „Eindrücke"
-ebenso — ihre tragfähigen Motive stecken in der Bildstrecke „Ein Tag und eine Nacht".
-Bildplätze von 17 auf 9, Seitenhöhe von 12.275 px auf 9.719 px.
+**Hero.** Neu aufgebaut, in der Anlage an fora.so: alles mittig, ein Knopf, darunter ein leiser
+zweiter Weg, dann das Panel, das der Hero unten hart abschneidet. Der Himmel ist ein
+Sonnenaufgang in CI-Farben — die Lichtreise beginnt nicht mehr in der Nacht, sondern um 06:00 Uhr
+beim Start. Der Rest der Seite bleibt dunkel. Die Bergketten sind Dunst statt Scherenschnitt:
+obere Kante per Maske ausgeblendet, Weichzeichner, nach hinten hin blasser. Fora selbst löst das
+mit zwei großen Fotos — das war nicht übernehmbar, der Effekt ist mit eigenen Mitteln nachgebaut.
 
-Der Stand ist gepusht, GitHub Pages hat damit neu gebaut. Der Rest-Worktree aus dem ersten Bau
-und der bereits gemergte Branch dazu sind entfernt; das Repo hat jetzt nur noch `main`.
+**Ausrüstungsliste.** Steckt jetzt als Antwort in den Fragen, mit dem Hinweis, dass sie ein
+Vorschlag und nicht vollständig ist. Der Anmelde-Abschnitt zeigt dadurch Countdown und
+Anmelde-Karte nebeneinander statt einer halb leeren Reihe.
+
+Nebenbei gefunden und behoben: In `render()` standen Schreibvorgänge vor den Messungen — dieselbe
+Falle wie beim `:root`-Schreiben, nur eine Ebene höher. Steht jetzt als Regel in der `CLAUDE.md`.
 
 ## Offen
 
 - **9 Bildplätze warten auf Fotos.** Die Seite läuft ohne sie und zeigt beschriftete Platzhalter.
   Gesuchte Motive: `variant-06-tageslauf/media/BILDER-GESUCHT.md`. (Gabriel-Aufgabe, liegt im Hub.)
-- **Variante 04 zeigt eine kaputte Karte.** CARTO verlangt inzwischen einen API-Schlüssel und
-  liefert sonst nur eine Hinweiskachel — mit Statuscode 200, der Fehler fällt also nicht auf.
-  Variante 06 ist auf OpenStreetMap umgestellt, Variante 04 noch nicht (wartet auf Freigabe).
-- **Der Countdown steht auf null,** weil der 20.06.2026 vorbei ist. Der Termin liegt an genau
-  einer Stelle: Konstante `EVENT_START` in `variant-06-tageslauf/main.js:431`. Wartet auf das
-  echte Datum der nächsten Auflage. Aus demselben Grund steht der Countdown weiterhin im
-  Abschnitt „Anmelden" und nicht im Hero: Er würde dort als Erstes „Dieser Termin liegt zurück"
-  melden.
 - **Blocker für eine belastbare Abnahme:** Geprüft ist über einen emulierten Viewport und
-  Headless-Chrome, nicht auf einem echten Gerät. Solange Gabriel die Seite nicht am Handy
-  gesehen hat, ist die Handy-Reparatur nicht abgenommen.
+  Headless-Chrome, nicht auf einem echten Gerät.
+- **Der Bildtakt ist nicht gemessen.** Die Bergketten haben jetzt einen festen Weichzeichner.
+  Das sollte den Compositor nicht belasten, weil nur `transform` animiert wird — nachgewiesen ist
+  es nicht, weil `requestAnimationFrame` im ausgeblendeten Browser-Bereich nicht läuft. Falls das
+  Scrollen auf dem Handy ruckelt, ist der Weichzeichner der erste Verdächtige.
 
 ## Nächste Schritte (Claude)
 
 1. Sobald Fotos da sind: Dateien unter den in `BILDER-GESUCHT.md` genannten Namen nach
    `variant-06-tageslauf/media/` legen. Die Platzhalter verschwinden von selbst (Klasse
    `has-photo`). Danach Dateigrößen prüfen (Ziel unter 500 KB) und einmal durchscrollen.
-2. Sobald das echte Eventdatum feststeht: `EVENT_START` in `variant-06-tageslauf/main.js:431`
-   setzen. **Achtung:** In den Varianten 01 bis 05 steht das Datum als fester Text im HTML und
-   muss von Hand mitgezogen werden.
-3. Nach Freigabe: Variante 04 auf OpenStreetMap-Kacheln umstellen — dieselbe Änderung wie in
-   Variante 06 (`tileLayer`-URL plus CSS-Filter nur auf `.leaflet-tile-pane`).
-4. Falls Variante 06 die gewählte Fassung wird: `.claude/pruefen.txt` anlegen, damit das
+2. Falls Variante 06 die gewählte Fassung wird: `.claude/pruefen.txt` anlegen, damit das
    Done-Gate im Projekt überhaupt greift.
-5. Falls Gabriel am Handy etwas auffällt: zuerst reproduzieren, nicht raten — die beiden
+3. Falls Gabriel am Handy etwas auffällt: zuerst reproduzieren, nicht raten — die beiden
    Mess-Fallen unten machen Fehlbefunde in diesem Projekt sehr wahrscheinlich.
 
 ## Aktuelle Stolperfallen
@@ -62,11 +53,13 @@ und der bereits gemergte Branch dazu sind entfernt; das Repo hat jetzt nur noch 
   nachdem `node scripts/serve.mjs 4178` läuft:
 
   ```
-  & "C:\Program Files\Google\Chrome\Application\chrome.exe" --headless=new --disable-gpu --hide-scrollbars --window-size=1440,9800 --virtual-time-budget=40000 --screenshot="ausgabe.png" "http://localhost:4178/variant-06-tageslauf/"
+  & "C:\Program Files\Google\Chrome\Application\chrome.exe" --headless=new --disable-gpu --hide-scrollbars --window-size=1440,9600 --virtual-time-budget=40000 --screenshot="ausgabe.png" "http://localhost:4178/variant-06-tageslauf/"
   ```
 
 - **Headless-Chrome macht Fenster nicht schmaler als etwa 500 px,** und die Aufnahme ist dann
   rechts beschnitten, obwohl das Layout stimmt. Mobil deshalb mit 500 px rendern und die
   Überbreite zusätzlich im Browser messen (`documentElement.scrollWidth - window.innerWidth`).
-- Chrome schreibt die Bilddatei erst nach dem Beenden. Ein `Get-ChildItem` direkt danach findet
-  nichts — den Prozess mit `Start-Process -Wait -NoNewWindow` abwarten.
+- Chrome schreibt die Bilddatei erst nach dem Beenden — den Prozess mit
+  `Start-Process -Wait -NoNewWindow` abwarten.
+- Die 404-Meldungen im Browser-Log sind die fehlenden Fotos, eine je Platzhalter. Erwartetes
+  Verhalten, kein Fehler.

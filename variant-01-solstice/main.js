@@ -248,12 +248,12 @@ async function initRoute() {
    5) Countdown bis zum nächsten Start
    ============================================================ */
 function initCountdown() {
-  // Nächstes Vorkommen von 20. Juni, 06:00 (lokal). Rollt automatisch ins Folgejahr.
+  // Nächstes Vorkommen von 19. Juni, 06:00 (lokal). Rollt automatisch ins Folgejahr.
   function nextStart() {
     const now = new Date();
-    let year = 2026;
-    let t = new Date(year, 5, 20, 6, 0, 0);
-    while (t.getTime() < now.getTime()) { year += 1; t = new Date(year, 5, 20, 6, 0, 0); }
+    let year = 2027;
+    let t = new Date(year, 5, 19, 6, 0, 0);
+    while (t.getTime() < now.getTime()) { year += 1; t = new Date(year, 5, 19, 6, 0, 0); }
     return t;
   }
   const target = nextStart();

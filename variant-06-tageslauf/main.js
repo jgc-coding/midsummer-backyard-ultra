@@ -21,13 +21,16 @@
      des Rennens. Reihenfolge = Rennverlauf, t = Scroll-Fortschritt 0..1.
      ====================================================================== */
   var SKY = [
-    { t: 0.00, ground: '#07080f', ground2: '#0c0d16', glow: '#5f7cc0', a: '#04050b', b: '#182240' }, /* Nacht vor dem Start */
-    { t: 0.13, ground: '#0d0a10', ground2: '#141019', glow: '#b8632f', a: '#0a0710', b: '#4a2418' }, /* Dämmerung */
-    { t: 0.26, ground: '#100c0a', ground2: '#171110', glow: '#e5722a', a: '#100a0a', b: '#8a3d16' }, /* Sonnenaufgang, Start */
-    { t: 0.44, ground: '#120e08', ground2: '#1a1410', glow: '#f2a03a', a: '#141009', b: '#a8641d' }, /* Vormittag */
-    { t: 0.56, ground: '#131009', ground2: '#1c1710', glow: '#f7c24b', a: '#171208', b: '#c08a2a' }, /* Mittag */
-    { t: 0.72, ground: '#100b07', ground2: '#181009', glow: '#e5722a', a: '#120a06', b: '#7d3413' }, /* Abend */
-    { t: 0.86, ground: '#07080f', ground2: '#0c0d16', glow: '#4a6aa8', a: '#04050b', b: '#141c34' }, /* Nacht */
+    { t: 0.00, ground: '#0d0906', ground2: '#151009', glow: '#e5722a', a: '#0b0508', b: '#a24a15' }, /* Sonnenaufgang, Start 06:00 */
+    { t: 0.16, ground: '#110c07', ground2: '#191309', glow: '#f2a03a', a: '#120a07', b: '#b8651b' }, /* Vormittag */
+    { t: 0.34, ground: '#131009', ground2: '#1c1710', glow: '#f7c24b', a: '#171208', b: '#c08a2a' }, /* Mittag */
+    { t: 0.52, ground: '#100b07', ground2: '#181009', glow: '#e5722a', a: '#120a06', b: '#8a3d16' }, /* Abend */
+    { t: 0.68, ground: '#0b0810', ground2: '#111019', glow: '#b8632f', a: '#0a0710', b: '#4a2418' }, /* Dämmerung */
+    { t: 0.84, ground: '#07080f', ground2: '#0c0d16', glow: '#4a6aa8', a: '#04050b', b: '#141c34' }, /* Nacht */
+    /* Zwischenstufe, damit Blau nicht direkt nach Orange laeuft: die Mischung
+       zweier Gegenfarben geht sonst durch Grau, und der zweite Morgen faengt
+       mit einem schmutzigen Ton an. Ueber ein erstes Rot bleibt er warm. */
+    { t: 0.93, ground: '#0a080d', ground2: '#120f15', glow: '#9a5a6a', a: '#07060c', b: '#4a2430' }, /* erstes Licht */
     { t: 1.00, ground: '#0f0b0b', ground2: '#171112', glow: '#f2a03a', a: '#0d0809', b: '#93481c' }  /* Sonnenaufgang, Tag 2 */
   ];
 
@@ -133,20 +136,26 @@
      Der einzige Schreibvorgang pro Frame
      ====================================================================== */
   function render(y) {
-    if (nav) nav.classList.toggle('is-scrolled', y > 40);
     var p = clamp(y / docH, 0, 1);
+    var vw = window.innerWidth;
+    var narrow = vw < 980;
+
+    /* --- Lesephase, und zwar als ALLERERSTES. Jeder Schreibvorgang macht die
+           Stilangaben ungültig; eine Messung danach erzwingt eine komplette
+           Neuberechnung. Gemessen kostet 0,05 ms, gemessen nach einem
+           Schreibvorgang 6,5 ms — derselbe Fehler wie beim :root-Schreiben,
+           nur eine Ebene höher. Deshalb steht hier oben nichts Schreibendes. --- */
+    var deckRects = (!REDUCED && decksNear && decks.length)
+      ? decks.map(function (el) { return el.getBoundingClientRect(); })
+      : null;
+
+    /* --- Schreibphase --- */
+    if (nav) nav.classList.toggle('is-scrolled', y > 40);
     if (bar) bar.style.transform = 'scaleX(' + p.toFixed(4) + ')';
-    if (head) head.style.transform = 'translateX(' + (p * window.innerWidth).toFixed(1) + 'px)';
+    if (head) head.style.transform = 'translateX(' + (p * vw).toFixed(1) + 'px)';
     if (progress) progress.classList.toggle('is-on', y > 8);
     if (REDUCED) { applySky(p); return; }
 
-    var narrow = isNarrow();
-
-    /* --- Lesephase: erst alle Messungen, dann alle Schreibvorgänge. So legt
-           der Browser das Bild pro Frame nur einmal neu aus. --- */
-    var deckRects = (decksNear && decks.length) ? decks.map(function (el) { return el.getBoundingClientRect(); }) : null;
-
-    /* --- Schreibphase --- */
     if (hero && y < heroH + 300) {
       for (var i = 0; i < layers.length; i++) {
         var rate = narrow ? layers[i].rateS : layers[i].rate;
@@ -334,7 +343,7 @@
         var y = (b.y + Math.cos(t * b.s * 1.3 + b.ph) * b.ay + Math.cos(t * b.s * 0.53) * 0.05) * h;
         var rad = b.r * Math.max(w, h);
         var g = ctx.createRadialGradient(x, y, 0, x, y, rad);
-        g.addColorStop(0, 'rgba(' + b.c[0] + ',' + b.c[1] + ',' + b.c[2] + ',0.58)');
+        g.addColorStop(0, 'rgba(' + b.c[0] + ',' + b.c[1] + ',' + b.c[2] + ',0.33)');
         g.addColorStop(1, 'rgba(' + b.c[0] + ',' + b.c[1] + ',' + b.c[2] + ',0)');
         ctx.fillStyle = g;
         ctx.fillRect(0, 0, w, h);
@@ -428,7 +437,7 @@
   /* ======================================================================
      Der Termin — eine Quelle für Countdown und alle Datumsangaben
      ====================================================================== */
-  var EVENT_START = new Date(2026, 5, 20, 6, 0, 0); /* Sa, 20.06.2026, 06:00 */
+  var EVENT_START = new Date(2027, 5, 19, 6, 0, 0); /* Sa, 19.06.2027, 06:00 */
 
   function initEventDate() {
     var long = new Intl.DateTimeFormat('de-DE', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).format(EVENT_START);

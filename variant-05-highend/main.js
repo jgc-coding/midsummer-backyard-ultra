@@ -177,7 +177,7 @@ function initNav() {
 }
 
 function initCountdown() {
-  function nextStart() { const now = new Date(); let y = 2026, t = new Date(y, 5, 20, 6, 0, 0); while (t < now) { y++; t = new Date(y, 5, 20, 6, 0, 0); } return t; }
+  function nextStart() { const now = new Date(); let y = 2027, t = new Date(y, 5, 19, 6, 0, 0); while (t < now) { y++; t = new Date(y, 5, 19, 6, 0, 0); } return t; }
   const target = nextStart();
   document.getElementById('cdTarget').textContent = new Intl.DateTimeFormat('de-DE', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).format(target) + ', 06:00 Uhr';
   const els = ['cdD', 'cdH', 'cdM', 'cdS'].map((id) => document.getElementById(id));

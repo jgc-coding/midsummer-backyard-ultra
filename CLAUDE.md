@@ -27,8 +27,16 @@ Freiburg. Statische Sites, Hosting über GitHub Pages.
   Tokens in `assets/ci.css`; jede Variante spiegelt sie in eigenen CSS-Custom-Properties.
 - Version in `VERSION` (Single Source) + sichtbar im Footer jeder Seite.
 
+## Entscheidungen
+- **Variante 04 wird nicht mehr angefasst** (Gabriel, 08.09.2026). Sie bleibt als Fassung stehen,
+  bekommt aber keine Korrekturen mehr — auch nicht die Kartenumstellung. Nicht erneut vorschlagen.
+- Variante 06 ist die weiterentwickelte Fassung; Arbeit an der Seite findet dort statt.
+
 ## Event-Fakten (in den Seiten verwendet)
-- 2. Auflage: Sa **20.06.2026, 06:00 Uhr**. Strecke: Dreisam, Hirzbergsteg ↔ Schlosssteg Ebnet.
+- 3. Auflage: Sa **19.06.2027, 06:00 Uhr**. Strecke: Dreisam, Hirzbergsteg ↔ Schlosssteg Ebnet.
+  Der Termin steht in Variante 06 an genau einer Stelle (`EVENT_START` in `main.js`), in den
+  Varianten 01–05 dagegen als fester Text im HTML plus einer eigenen `nextStart()`-Funktion je
+  Variante — bei einer Terminänderung alle sieben Dateien durchgehen.
 - Backyard-Regel: 6,706 km „Yard" jede Stunde; wer eine Runde nicht schafft, ist raus →
   Last Runner Standing. Erfunden von Gary „Lazarus Lake" Cantrell (2011).
 - Anmeldung/CTA: `freiburg.run/event/midsummer-backyard-ultra/` + Instagram `@midsummerbackyard`.
@@ -63,6 +71,10 @@ Freiburg. Statische Sites, Hosting über GitHub Pages.
 - **Ein Schreibvorgang auf `:root` macht die Stilangaben des ganzen Dokuments ungültig.** Steht er
   in einer Scroll-Schleife vor `getBoundingClientRect()`, erzwingt jede Messung eine komplette
   Neuberechnung. Solche Schreibvorgänge ans Ende der Render-Funktion und in Stufen quantisieren.
+- **Das gilt für JEDEN Schreibvorgang, nicht nur den auf `:root`.** Auch ein `classList.toggle`
+  oder ein Inline-`transform` macht Messungen danach teuer. Gemessen in diesem Projekt: vier
+  `getBoundingClientRect()` kosten 0,05 ms — dieselben vier nach einem Schreibvorgang 6,5 ms.
+  In einer Render-Funktion deshalb ausnahmslos erst ALLE Messungen, dann alle Schreibvorgänge.
 - **Keine Sichtprüfung im In-App-Browser, solange sein Bereich ausgeblendet ist.** Die Seite hat
   dann null sichtbare Fläche, `IntersectionObserver` meldet nie eine Überschneidung, und damit
   bleibt jedes `.reveal` unsichtbar und jede Überschrift undurchsichtig — das sieht aus wie ein
