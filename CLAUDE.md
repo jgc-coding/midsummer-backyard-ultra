@@ -37,6 +37,11 @@ Freiburg. Statische Sites, Hosting über GitHub Pages.
 - **Nur relative Pfade** (Project-Pages liegen unter `/midsummer-backyard-ultra/` — führende `/` brechen Assets).
 - Datei-Edits über das Edit/Write-Tool (UTF-8 ohne BOM), nicht per PowerShell-Bulk-Replace (Umlaute!).
 - Jede Variante: `prefers-reduced-motion`-Fallback Pflicht; Mobile-Collapse je Section explizit.
+- **Effekte auf schmalen Bildschirmen kleiner machen, nicht abschalten.** Ein Breakpoint, der
+  Bewegung per `!mobile` ausknipst, lässt auf dem Handy nur Einblendungen übrig — und dort schaut
+  die Mehrheit. Kleinerer Ausschlag (zweite Rate, z. B. `data-rate-s`), geringere Auflösung oder
+  eine reine CSS-Lösung (`position: sticky`) statt Streichung. Nur wo ein Effekt am Finger
+  nachweislich hakt, darf er weichen.
 - Deutschsprachige UI.
 
 ## Stolperfallen
@@ -58,6 +63,17 @@ Freiburg. Statische Sites, Hosting über GitHub Pages.
 - **Ein Schreibvorgang auf `:root` macht die Stilangaben des ganzen Dokuments ungültig.** Steht er
   in einer Scroll-Schleife vor `getBoundingClientRect()`, erzwingt jede Messung eine komplette
   Neuberechnung. Solche Schreibvorgänge ans Ende der Render-Funktion und in Stufen quantisieren.
+- **Keine Sichtprüfung im In-App-Browser, solange sein Bereich ausgeblendet ist.** Die Seite hat
+  dann null sichtbare Fläche, `IntersectionObserver` meldet nie eine Überschneidung, und damit
+  bleibt jedes `.reveal` unsichtbar und jede Überschrift undurchsichtig — das sieht aus wie ein
+  kaputtes Aufblenden, ist aber nur die Messumgebung. DOM-Abfragen zu Größen und Überbreite
+  stimmen trotzdem, sobald per `resize_window` eine echte Viewport-Größe gesetzt ist.
+- **Headless-Chrome-Aufnahmen zeigen CSS-Übergänge nicht zu Ende gelaufen.** Ein längeres
+  `--virtual-time-budget` hilft nicht; die Animationsuhr hängt nicht daran. Zeichenweise
+  aufblendende Überschriften wirken darauf immer hinten abgeschnitten. Vor dem Melden eines
+  solchen „Fehlers" denselben Ausschnitt aus der letzten Version rendern (`git show HEAD:<datei>`
+  in einen Wegwerf-Ordner unter der Projektwurzel) — zeigt der Gegentest dasselbe, ist es das
+  Rendering und keine Regression.
 
 ## Veröffentlichung
 - Repo: `jgc-coding/midsummer-backyard-ultra` (public). Pages: Branch `main`, Root.

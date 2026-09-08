@@ -10,7 +10,10 @@
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var isMobile = function () { return window.innerWidth < 980; };
+  /* Schmale Bildschirme bekommen dieselben Bewegungen, nur mit kleinerem
+     Ausschlag. Abgeschaltet wird nichts — sonst bleibt auf dem Handy von der
+     Seite nur ein Einblenden übrig. */
+  var isNarrow = function () { return window.innerWidth < 980; };
   var clamp = function (v, a, b) { return Math.min(b, Math.max(a, v)); };
 
   /* ======================================================================
@@ -70,9 +73,12 @@
   }
   window.addEventListener('scroll', function () { if (!lenis) onScroll(window.scrollY); }, { passive: true });
 
+  /* Auf dem Handy scrollt der Browser selbst und meldet das häufiger als ein
+     Bild gezeichnet wird. Dort werden die Meldungen auf einen Frame gebündelt;
+     am Rechner führt Lenis den Takt bereits im Bildtakt. */
   var queued = null, rafId = 0;
   function onScroll(y) {
-    if (!isMobile()) { render(y); return; }
+    if (!isNarrow()) { render(y); return; }
     queued = y;
     if (!rafId) rafId = requestAnimationFrame(function () { rafId = 0; render(queued); });
   }
@@ -81,21 +87,24 @@
      Elemente einsammeln
      ====================================================================== */
   var hero = $('.hero');
-  var layers = $$('.hero .layer').map(function (el) { return { el: el, rate: parseFloat(el.dataset.rate || '0') }; });
+  /* rate = breiter Bildschirm, rateS = schmaler. Auf dem Handy ist der Hero
+     kürzer, deshalb muss der Ausschlag kleiner sein, sonst schieben sich die
+     Bergketten übereinander. */
+  var layers = $$('.hero .layer').map(function (el) {
+    return {
+      el: el,
+      rate: parseFloat(el.dataset.rate || '0'),
+      rateS: parseFloat(el.dataset.rateS || el.dataset.rate || '0')
+    };
+  });
   var panel = $('.hero__panel');
   var panelRate = panel ? parseFloat(panel.dataset.rate || '0.13') : 0;
   var nav = $('#nav');
   var progress = $('.progress');
   var bar = $('[data-progress]');
   var head = $('[data-progress-head]');
-  var intros = $$('[data-focus]');
   var decks = $$('[data-deck]');
   var stack = $('[data-stack]');
-
-  /* Sanftes Mitwandern der beiden Bergketten im Schluss-Abschnitt */
-  var drifts = $$('.cta .layer').map(function (el) {
-    return { el: el, rate: parseFloat(el.dataset.rate || '0'), near: true };
-  });
 
   var heroH = 0, docH = 1;
   function measure() {
@@ -113,14 +122,12 @@
   if ('ResizeObserver' in window) new ResizeObserver(measureSoon).observe(document.body);
 
   /* Rechenarbeit nur, solange der Abschnitt in der Nähe des Sichtfensters ist. */
-  var introNear = true, decksNear = true, ctaNear = true;
+  var decksNear = true;
   function observeNear(el, set, margin) {
     if (!el || !('IntersectionObserver' in window)) return;
     new IntersectionObserver(function (e) { set(e[0].isIntersecting); }, { rootMargin: margin || '100% 0px' }).observe(el);
   }
-  observeNear($('.intro'), function (n) { introNear = n; });
   observeNear(stack, function (n) { decksNear = n; if (stack) stack.classList.toggle('is-near', n); });
-  observeNear($('.cta'), function (n) { ctaNear = n; });
 
   /* ======================================================================
      Der einzige Schreibvorgang pro Frame
@@ -133,31 +140,20 @@
     if (progress) progress.classList.toggle('is-on', y > 8);
     if (REDUCED) { applySky(p); return; }
 
-    var mobile = isMobile();
-    var vh = window.innerHeight;
+    var narrow = isNarrow();
 
     /* --- Lesephase: erst alle Messungen, dann alle Schreibvorgänge. So legt
            der Browser das Bild pro Frame nur einmal neu aus. --- */
-    var introRects = introNear ? intros.map(function (el) { return el.getBoundingClientRect(); }) : null;
-    var deckRects = (decksNear && !mobile && decks.length) ? decks.map(function (el) { return el.getBoundingClientRect(); }) : null;
-    var driftRects = ctaNear ? drifts.map(function (d) { return d.el.parentElement.getBoundingClientRect(); }) : null;
+    var deckRects = (decksNear && decks.length) ? decks.map(function (el) { return el.getBoundingClientRect(); }) : null;
 
     /* --- Schreibphase --- */
-    if (hero && !mobile && y < heroH + 300) {
+    if (hero && y < heroH + 300) {
       for (var i = 0; i < layers.length; i++) {
-        layers[i].el.style.transform = 'translate(-50%, ' + (y * layers[i].rate).toFixed(1) + 'px)';
+        var rate = narrow ? layers[i].rateS : layers[i].rate;
+        layers[i].el.style.transform = 'translate(-50%, ' + (y * rate).toFixed(1) + 'px)';
       }
-      if (panel) panel.style.transform = 'translateY(' + (y * panelRate).toFixed(1) + 'px)';
-    }
-
-    /* Der Absatz, dessen Mitte der Bildschirmmitte am nächsten ist, wird hell. */
-    if (introRects) {
-      for (var j = 0; j < intros.length; j++) {
-        var r = introRects[j];
-        if (r.bottom < -200 || r.top > vh + 200) continue;
-        var dist = Math.abs(r.top + r.height / 2 - vh * 0.5) / (vh * 0.42);
-        intros[j].style.opacity = Math.max(0.34, 1 - Math.max(0, dist - 0.1) * 1.35).toFixed(3);
-      }
+      /* Das Panel steht auf dem Handy im Textfluss und darf dort nicht wandern. */
+      if (panel && !narrow) panel.style.transform = 'translateY(' + (y * panelRate).toFixed(1) + 'px)';
     }
 
     /* Die untere Karte tritt zurück, während die nächste darüberklettert. */
@@ -169,15 +165,6 @@
         var pr = clamp((cur.bottom - next.top) / cur.height, 0, 1);
         el.style.transform = 'scale(' + (1 - pr * 0.05).toFixed(4) + ')';
         el.style.setProperty('--dim', (pr * 0.62).toFixed(3));
-      }
-    }
-
-    if (driftRects && !mobile) {
-      for (var m = 0; m < drifts.length; m++) {
-        var dr = driftRects[m];
-        if (dr.bottom < -vh || dr.top > vh * 2) continue;
-        var center = dr.top + dr.height / 2 - vh / 2;
-        drifts[m].el.style.transform = 'translate(-50%, ' + (-center * drifts[m].rate).toFixed(1) + 'px)';
       }
     }
 
@@ -276,7 +263,9 @@
     var w = 0, h = 0;
     function size() {
       var r = canvas.getBoundingClientRect();
-      var div = isMobile() ? 8 : 2;
+      /* Der Himmel ist ein weiches Farbfeld, deshalb genügt ein Bruchteil der
+         Auflösung. Ein Achtel war zu wenig — auf dem Handy sah man den Raster. */
+      var div = isNarrow() ? 3 : 2;
       w = canvas.width = Math.max(2, Math.round(r.width / div));
       h = canvas.height = Math.max(2, Math.round(r.height / div));
     }
@@ -330,12 +319,10 @@
       }
     }).catch(function () { /* ohne Route bleibt der Himmel allein — das ist in Ordnung */ });
 
-    var last = 0, frameId = 0, running = false, near = true;
+    var frameId = 0, running = false, near = true;
     function frame(t) {
       frameId = 0;
       if (!running || document.hidden) return;
-      if (isMobile() && t - last < 32) { frameId = requestAnimationFrame(frame); return; }
-      last = t;
 
       ctx.globalCompositeOperation = 'source-over';
       ctx.fillStyle = '#06070d';
@@ -360,7 +347,7 @@
       }
       frameId = requestAnimationFrame(frame);
     }
-    function start() { if (running || document.hidden) return; running = true; last = 0; frameId = requestAnimationFrame(frame); }
+    function start() { if (running || document.hidden) return; running = true; frameId = requestAnimationFrame(frame); }
     function stop() { running = false; if (frameId) cancelAnimationFrame(frameId); frameId = 0; }
 
     if (REDUCED) { running = true; frame(9000); stop(); }
@@ -381,7 +368,7 @@
 
     var CAPTIONS = [
       'Alle stehen zusammen im Startbereich. Die erste Runde fühlt sich an wie ein Spaziergang — und genau das ist die Falle.',
-      'Die neunte Runde beginnt. Dreiundfünfzig Kilometer sind gelaufen, die Sonne steht über dem Dreisamtal. Jetzt zeigt sich, wer zu schnell angefangen hat.',
+      'Die neunte Runde beginnt, dreiundfünfzig Kilometer sind gelaufen. Zwischen zwei Runden bleiben ein paar Minuten für Essen, Trinken und trockene Socken. Im Camp zeigt sich jetzt, wer zu schnell angefangen hat.',
       'Stirnlampen am Fluss. Derselbe Weg wie am Morgen und trotzdem ein anderer. Geschlafen wird zwischen den Runden, in Minuten.',
       'Vierundzwanzig Runden, 160,9 Kilometer. Wer jetzt noch läuft, läuft nicht mehr gegen die Uhr, sondern gegen die letzte andere Person auf der Strecke.'
     ];
@@ -411,16 +398,6 @@
     }
     window.__show = show;
   }
-
-  /* ======================================================================
-     Fragen: zwei Sätze
-     ====================================================================== */
-  $$('[data-faqtab]').forEach(function (b) {
-    b.addEventListener('click', function () {
-      $$('[data-faqtab]').forEach(function (x) { x.classList.toggle('is-active', x === b); });
-      $$('[data-faqset]').forEach(function (s) { s.classList.toggle('is-active', s.dataset.faqset === b.dataset.faqtab); });
-    });
-  });
 
   /* ======================================================================
      Menü auf dem Handy

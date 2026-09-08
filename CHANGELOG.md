@@ -5,6 +5,34 @@ Versionierung nach [SemVer](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.2.0] — 2026-09-08
+### Geändert
+- Variante 06 inhaltlich neu geordnet: von neun Abschnitten auf sieben. Der Prosa-Abschnitt
+  „Das Format" ist entfallen — er erklärte dieselbe Regel wie die vier Regelkarten direkt
+  darunter; sein Kerngedanke (Cantrell-Zitat) steckt jetzt in Regel 4. Die Galerie „Eindrücke"
+  ist entfallen, ihre tragfähigen Motive sind in die Bildstrecke „Ein Tag und eine Nacht"
+  gewandert. Neue Reihenfolge: Hero → Format → Strecke → Stunden → Anmelden → Fragen → Schluss.
+- Die Kernregel wurde an sieben Stellen erklärt, jetzt noch an einer. FAQ von acht auf fünf
+  Fragen gekürzt (die drei gestrichenen beantworteten Regel 3 und die Ausrüstungsliste erneut);
+  die zwei FAQ-Reiter entfallen damit ebenfalls.
+- Bildplätze von 17 auf 9 reduziert, `media/BILDER-GESUCHT.md` entsprechend neu geschrieben.
+  Die beiden Steg-Fotos sind entfallen; die Karte benennt beide Wendepunkte ohnehin, ihre Namen
+  stehen jetzt zusätzlich in den Streckenfakten.
+- Seitenhöhe dadurch von 12.275 px auf 9.719 px (1440 px breit gemessen).
+
+### Behoben
+- **Auf dem Handy waren drei der vier Kerneffekte hart abgeschaltet** (Hero-Parallax,
+  klebender Kartenstapel, Bergketten-Drift im Schluss), der vierte lief in einem Achtel der
+  Auflösung. Übrig blieben Einblendungen. Jetzt laufen dieselben Effekte auf beiden Geräten,
+  auf schmalen Bildschirmen mit kleinerem Ausschlag (`data-rate-s`) statt abgeschaltet.
+  Der Himmel im Hero-Panel rendert in einem Drittel statt einem Achtel der Auflösung, die
+  30-Bilder-Drosselung ist entfallen.
+- Kartenstapel auf dem Handy: Karten kleben und dimmen jetzt auch dort. Ihre Höhe folgt dem
+  Text und ist auf 78 % der Fensterhöhe gedeckelt — kleben kann nur, was ins Fenster passt.
+
+### Entfernt
+- Bergketten-Drift im Schluss-Abschnitt (kleinste Wirkung, eigene Mess-Schleife pro Bild).
+
 ## [1.1.0] — 2026-09-05
 ### Hinzugefügt
 - Variante 06 „Tageslauf": durchgehende Scroll-Erzählung. Der Seitengrund wandert beim Scrollen

@@ -30,10 +30,10 @@
     </a>
     <nav class="nav__links" aria-label="Seitenbereiche">
       <a href="#format">Format</a>
-      <a href="#stunden">Stunden</a>
-      <a href="#regeln">Regeln</a>
       <a href="#strecke">Strecke</a>
-      <a href="#eindruecke">Eindrücke</a>
+      <a href="#stunden">Stunden</a>
+      <a href="#anmelden">Anmelden</a>
+      <a href="#fragen">Fragen</a>
     </nav>
     <div class="nav__end">
       <a class="btn btn--sm" href="https://freiburg.run/event/midsummer-backyard-ultra/" target="_blank" rel="noopener">Anmelden</a>
@@ -45,11 +45,9 @@
 
   <div class="sheet" data-sheet>
     <a href="#format">Format</a>
-    <a href="#stunden">Stunden</a>
-    <a href="#regeln">Regeln</a>
     <a href="#strecke">Strecke</a>
+    <a href="#stunden">Stunden</a>
     <a href="#anmelden">Anmelden</a>
-    <a href="#eindruecke">Eindrücke</a>
     <a href="#fragen">Fragen</a>
   </div>
 
@@ -64,10 +62,10 @@
         <img src="media/hero-daemmerung.jpg" alt="" data-optional />
       </div>
 
-      <svg class="layer layer--far" data-rate="0.32" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true">
+      <svg class="layer layer--far" data-rate="0.32" data-rate-s="0.14" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true">
         <path d="M0,300 L0,196 C90,190 132,150 208,138 C272,128 316,166 386,158 C452,150 486,104 566,96 C642,88 686,140 760,146 C826,152 872,116 946,110 C1024,104 1064,152 1140,158 C1210,164 1258,134 1336,128 C1386,124 1414,140 1440,146 L1440,300 Z" />
       </svg>
-      <svg class="layer layer--mid" data-rate="0.18" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true">
+      <svg class="layer layer--mid" data-rate="0.18" data-rate-s="0.08" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true">
         <path d="M0,300 L0,232 C74,228 112,198 190,192 C258,186 300,214 372,220 C440,226 484,190 560,184 C632,178 674,212 748,218 C818,224 862,192 936,188 C1010,184 1054,216 1128,220 C1196,224 1240,198 1316,194 C1372,191 1408,204 1440,208 L1440,300 Z" />
       </svg>
 
@@ -80,7 +78,7 @@
         <p class="hero__lead reveal" data-delay="200">Midsummer Backyard Ultra Freiburg. Jede volle Stunde dieselbe 6,706-km-Runde an der Dreisam — bis nur noch eine Person läuft.</p>
         <div class="hero__cta reveal" data-delay="290">
           <a class="btn btn--light" href="https://freiburg.run/event/midsummer-backyard-ultra/" target="_blank" rel="noopener">Zur Anmeldung</a>
-          <a class="btn btn--ghost" href="#format">Was ist das?</a>
+          <a class="btn btn--ghost" href="#format">Wie das Rennen läuft</a>
         </div>
       </div>
 
@@ -102,23 +100,108 @@
         </div>
       </div>
 
-      <svg class="layer layer--front" data-rate="0.04" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true">
+      <svg class="layer layer--front" data-rate="0.04" data-rate-s="0.02" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true">
         <path d="M0,300 L0,262 C96,258 140,244 224,246 C300,248 344,266 424,268 C500,270 546,252 630,252 C712,252 758,270 840,272 C918,274 964,256 1046,256 C1124,256 1170,272 1252,272 C1326,272 1376,262 1440,260 L1440,300 Z" />
       </svg>
       <div class="hero__floor" aria-hidden="true"></div>
     </section>
 
-    <!-- ========================= FORMAT (Lese-Fokus) ========================= -->
-    <section class="intro" id="format">
-      <div class="intro__inner">
-        <p class="chip reveal"><span class="chip__dot"></span>Das Format</p>
-        <p class="intro__p" data-focus>Ein Backyard Ultra hat kein Ziel im üblichen Sinn. Es gibt eine Runde von 6,706 Kilometern und eine Regel: Zur vollen Stunde startet sie neu, für alle gleichzeitig.</p>
-        <p class="intro__p" data-focus>Wer die Runde innerhalb der Stunde schafft, steht eine Stunde später wieder am Start. Wer sie nicht schafft, ist raus. Keine Zeitwertung, keine Platzierung, keine Taktik über eine feste Distanz — es gibt immer nur die nächste Stunde.</p>
-        <p class="intro__p" data-focus>Das Rennen endet, wenn eine einzige Person eine Runde allein beginnt und beendet. Gary Cantrell, der das Format 2011 unter dem Namen Lazarus Lake erfunden hat, sagt es unverblümt: Am Ende verlieren alle bis auf einen.</p>
+    <!-- ========================= DAS FORMAT — die vier Regeln ========================= -->
+    <section class="rules" id="format">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="chip"><span class="chip__dot"></span>Das Format</p>
+            <h2 class="h2" data-type><span class="h2__a">Vier Regeln.</span><span class="h2__b">Mehr braucht es nicht.</span></h2>
+          </div>
+          <p class="section-head__p">Ein Backyard Ultra kommt mit weniger Regeln aus als fast jeder andere Wettkampf. Diese vier sind alles, was du wissen musst.</p>
+        </div>
+
+        <div class="stack" data-stack>
+          <article class="deck" data-deck>
+            <div class="deck__copy">
+              <p class="deck__label"><span class="chip__dot"></span>Regel 1 · Der Yard</p>
+              <h3 class="deck__title" data-type>6,706 Kilometer, immer dieselben.</h3>
+              <p class="deck__p">Die Runde führt an der Dreisam entlang, vom Hirzbergsteg bis zum Schlosssteg in Ebnet und wieder zurück. Sie heißt „Yard", und sie ändert sich nie.</p>
+              <p class="deck__foot"><span class="cross"></span>Nach zwölf Runden sind das gut 80 Kilometer.</p>
+            </div>
+            <div class="deck__media">
+              <div class="shot" data-shot="regel-yard.jpg · Läufer an der Dreisam">
+                <img src="media/regel-yard.jpg" alt="Eine Läuferin auf dem Uferweg an der Dreisam." data-optional />
+              </div>
+            </div>
+          </article>
+
+          <article class="deck deck--flip" data-deck>
+            <div class="deck__copy">
+              <p class="deck__label"><span class="chip__dot"></span>Regel 2 · Die volle Stunde</p>
+              <h3 class="deck__title" data-type>Der Start wartet auf niemanden.</h3>
+              <p class="deck__p">Um 06:00 Uhr geht es los. Danach beginnt jede weitere Runde exakt zur vollen Stunde — für alle gleichzeitig und unabhängig davon, wie früh du zurück warst.</p>
+              <p class="deck__foot"><span class="cross"></span>Wer 48 Minuten läuft, hat zwölf Minuten Pause.</p>
+            </div>
+            <div class="deck__media">
+              <div class="shot" data-shot="regel-stunde.jpg · Warten auf den Start">
+                <img src="media/regel-stunde.jpg" alt="Läuferinnen und Läufer warten im Startbereich auf das Startsignal." data-optional />
+              </div>
+            </div>
+          </article>
+
+          <article class="deck" data-deck>
+            <div class="deck__copy">
+              <p class="deck__label"><span class="chip__dot"></span>Regel 3 · Das Aus</p>
+              <h3 class="deck__title" data-type>Nicht geschafft heißt raus.</h3>
+              <p class="deck__p">Wer nach sechzig Minuten nicht zurück und startbereit ist, ist aus dem Rennen. Ohne Diskussion, ohne Nachfrist, ohne Ersatzwertung. Es gibt keine Zeitwertung und keine Platzierung — es gibt immer nur die nächste Stunde.</p>
+              <p class="deck__foot"><span class="cross"></span>Es gibt keine zweite Chance — aber auch keine Schande.</p>
+            </div>
+            <div class="deck__media">
+              <div class="shot" data-shot="regel-aus.jpg · Nach dem Ausscheiden">
+                <img src="media/regel-aus.jpg" alt="Eine erschöpfte Person sitzt nach dem Ausscheiden am Streckenrand." data-optional />
+              </div>
+            </div>
+          </article>
+
+          <article class="deck deck--flip" data-deck>
+            <div class="deck__copy">
+              <p class="deck__label"><span class="chip__dot"></span>Regel 4 · Das Ende</p>
+              <h3 class="deck__title" data-type>Eine Person gewinnt. Alle anderen nicht.</h3>
+              <p class="deck__p">Das Rennen ist vorbei, wenn nur noch eine Person eine Runde beginnt und sie in der Stunde beendet. Gary Cantrell, der das Format 2011 unter dem Namen Lazarus Lake erfunden hat, sagt es unverblümt: Am Ende verlieren alle bis auf einen.</p>
+              <p class="deck__foot"><span class="cross"></span>Alle anderen stehen im Ergebnis als DNF.</p>
+            </div>
+            <div class="deck__media">
+              <div class="shot" data-shot="regel-sieger.jpg · Die letzte Runde">
+                <img src="media/regel-sieger.jpg" alt="Die letzte verbliebene Person läuft allein auf der Strecke." data-optional />
+              </div>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
-    <!-- ========================= DIE STUNDEN ========================= -->
+    <!-- ========================= DIE STRECKE ========================= -->
+    <section class="route" id="strecke">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="chip"><span class="chip__dot"></span>Die Strecke</p>
+            <h2 class="h2" data-type><span class="h2__a">Immer am Wasser,</span><span class="h2__b">immer dieselbe Runde.</span></h2>
+          </div>
+          <p class="section-head__p">Die Linie unten ist keine Illustration. Sie stammt aus einer echten GPS-Aufzeichnung des Rennens.</p>
+        </div>
+
+        <div class="route__frame reveal">
+          <div class="route__map" id="map" role="region" aria-label="Karte der Rennstrecke an der Dreisam"></div>
+          <p class="route__alt">Textalternative: Die Runde folgt dem Uferweg der Dreisam von Freiburg aus nach Osten. Wendepunkte sind der Hirzbergsteg im Westen und der Schlosssteg in Ebnet im Osten. Eine Runde misst 6,706 Kilometer.</p>
+        </div>
+
+        <div class="route__facts reveal">
+          <div><b>6,706 km</b><span>eine Runde</span></div>
+          <div><b>160,9 km</b><span>nach 24 Runden</span></div>
+          <div><b>2</b><span>Wendepunkte: Hirzbergsteg im Westen, Schlosssteg Ebnet im Osten</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= EIN TAG UND EINE NACHT ========================= -->
     <section class="hours" id="stunden">
       <div class="container">
         <div class="section-head reveal">
@@ -143,8 +226,8 @@
             </div>
           </div>
           <div class="slide" data-slide>
-            <div class="shot" data-shot="stunde-14.jpg · Mittagshitze auf dem Dreisamweg">
-              <img src="media/stunde-14.jpg" alt="Einzelne Läufer in der Mittagshitze auf dem Weg an der Dreisam." data-optional />
+            <div class="shot" data-shot="stunde-14.jpg · Camp und Verpflegung zwischen zwei Runden">
+              <img src="media/stunde-14.jpg" alt="Das Camp mit Stühlen und Verpflegungstisch zwischen zwei Runden." data-optional />
             </div>
           </div>
           <div class="slide" data-slide>
@@ -165,117 +248,6 @@
             <button class="round" data-prev aria-label="Vorheriger Moment">&larr;</button>
             <button class="round" data-next aria-label="Nächster Moment">&rarr;</button>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========================= DIE VIER REGELN ========================= -->
-    <section class="rules" id="regeln">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <p class="chip"><span class="chip__dot"></span>Das Regelwerk</p>
-            <h2 class="h2" data-type><span class="h2__a">Vier Regeln.</span><span class="h2__b">Mehr braucht es nicht.</span></h2>
-          </div>
-          <p class="section-head__p">Ein Backyard Ultra kommt mit weniger Regeln aus als fast jeder andere Wettkampf. Diese vier musst du kennen.</p>
-        </div>
-
-        <div class="stack" data-stack>
-          <article class="deck" data-deck>
-            <div class="deck__copy">
-              <p class="deck__label"><span class="chip__dot"></span>Regel 1 · Der Yard</p>
-              <h3 class="deck__title" data-type>6,706 Kilometer, immer dieselben.</h3>
-              <p class="deck__p">Die Runde führt an der Dreisam entlang, vom Hirzbergsteg bis zum Schlosssteg in Ebnet und wieder zurück. Sie heißt „Yard", und sie ändert sich nie.</p>
-              <p class="deck__foot"><span class="cross"></span>Nach zwölf Runden sind das gut 80 Kilometer.</p>
-            </div>
-            <div class="deck__media">
-              <div class="shot" data-shot="regel-yard.jpg · Läufer an der Dreisam">
-                <img src="media/regel-yard.jpg" alt="Eine Läuferin auf dem Uferweg an der Dreisam." data-optional />
-              </div>
-            </div>
-          </article>
-
-          <article class="deck deck--flip" data-deck>
-            <div class="deck__copy">
-              <p class="deck__label"><span class="chip__dot"></span>Regel 2 · Die volle Stunde</p>
-              <h3 class="deck__title" data-type>Der Start wartet auf niemanden.</h3>
-              <p class="deck__p">Um 06:00 Uhr geht es los. Danach beginnt jede weitere Runde exakt zur vollen Stunde — unabhängig davon, wie früh du zurück warst.</p>
-              <p class="deck__foot"><span class="cross"></span>Wer 48 Minuten läuft, hat zwölf Minuten Pause.</p>
-            </div>
-            <div class="deck__media">
-              <div class="shot" data-shot="regel-stunde.jpg · Warten auf den Start">
-                <img src="media/regel-stunde.jpg" alt="Läuferinnen und Läufer warten im Startbereich auf das Startsignal." data-optional />
-              </div>
-            </div>
-          </article>
-
-          <article class="deck" data-deck>
-            <div class="deck__copy">
-              <p class="deck__label"><span class="chip__dot"></span>Regel 3 · Das Aus</p>
-              <h3 class="deck__title" data-type>Nicht geschafft heißt raus.</h3>
-              <p class="deck__p">Wer nach sechzig Minuten nicht zurück und startbereit ist, ist aus dem Rennen. Ohne Diskussion, ohne Nachfrist, ohne Ersatzwertung.</p>
-              <p class="deck__foot"><span class="cross"></span>Es gibt keine zweite Chance — aber auch keine Schande.</p>
-            </div>
-            <div class="deck__media">
-              <div class="shot" data-shot="regel-aus.jpg · Nach dem Ausscheiden">
-                <img src="media/regel-aus.jpg" alt="Eine erschöpfte Person sitzt nach dem Ausscheiden am Streckenrand." data-optional />
-              </div>
-            </div>
-          </article>
-
-          <article class="deck deck--flip" data-deck>
-            <div class="deck__copy">
-              <p class="deck__label"><span class="chip__dot"></span>Regel 4 · Das Ende</p>
-              <h3 class="deck__title" data-type>Eine Person gewinnt. Alle anderen nicht.</h3>
-              <p class="deck__p">Das Rennen ist vorbei, wenn nur noch eine Person eine Runde beginnt und sie in der Stunde beendet. Diese Person ist der Last Runner Standing.</p>
-              <p class="deck__foot"><span class="cross"></span>Alle anderen stehen im Ergebnis als DNF.</p>
-            </div>
-            <div class="deck__media">
-              <div class="shot" data-shot="regel-sieger.jpg · Die letzte Runde">
-                <img src="media/regel-sieger.jpg" alt="Die letzte verbliebene Person läuft allein auf der Strecke." data-optional />
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========================= DIE STRECKE ========================= -->
-    <section class="route" id="strecke">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <p class="chip"><span class="chip__dot"></span>Die Strecke</p>
-            <h2 class="h2" data-type><span class="h2__a">6,706 Kilometer</span><span class="h2__b">an der Dreisam.</span></h2>
-          </div>
-          <p class="section-head__p">Die Linie unten ist keine Illustration. Sie stammt aus einer echten GPS-Aufzeichnung des Rennens.</p>
-        </div>
-
-        <div class="route__frame reveal">
-          <div class="route__map" id="map" role="region" aria-label="Karte der Rennstrecke an der Dreisam"></div>
-          <p class="route__alt">Textalternative: Die Runde folgt dem Uferweg der Dreisam von Freiburg aus nach Osten. Wendepunkte sind der Hirzbergsteg im Westen und der Schlosssteg in Ebnet im Osten. Eine Runde misst 6,706 Kilometer.</p>
-        </div>
-
-        <div class="route__facts reveal">
-          <div><b>6,706 km</b><span>eine Runde</span></div>
-          <div><b>160,9 km</b><span>nach 24 Runden</span></div>
-          <div><b>2</b><span>Wendepunkte</span></div>
-          <div><b>80,98 km</b><span>aufgezeichnete Vorlage</span></div>
-        </div>
-
-        <div class="route__stegs reveal">
-          <figure class="steg">
-            <div class="shot" data-shot="steg-hirzberg.jpg · Hirzbergsteg">
-              <img src="media/steg-hirzberg.jpg" alt="Der Hirzbergsteg über die Dreisam." data-optional />
-            </div>
-            <figcaption>Wendepunkt West · Hirzbergsteg</figcaption>
-          </figure>
-          <figure class="steg">
-            <div class="shot" data-shot="steg-ebnet.jpg · Schlosssteg Ebnet">
-              <img src="media/steg-ebnet.jpg" alt="Der Schlosssteg in Ebnet." data-optional />
-            </div>
-            <figcaption>Wendepunkt Ost · Schlosssteg Ebnet</figcaption>
-          </figure>
         </div>
       </div>
     </section>
@@ -324,28 +296,6 @@
       </div>
     </section>
 
-    <!-- ========================= EINDRÜCKE ========================= -->
-    <section class="gallery" id="eindruecke">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <p class="chip"><span class="chip__dot"></span>Erste Auflage</p>
-            <h2 class="h2" data-type><span class="h2__a">Was vom letzten Mal</span><span class="h2__b">geblieben ist.</span></h2>
-          </div>
-          <p class="section-head__p">Bilder aus dem Camp, von der Strecke und aus der Nacht.</p>
-        </div>
-
-        <div class="grid reveal">
-          <div class="shot grid__a" data-shot="eindruck-1.jpg · Das Camp"><img src="media/eindruck-1.jpg" alt="Das Camp mit Zelten und Stühlen neben der Strecke." data-optional /></div>
-          <div class="shot grid__b" data-shot="eindruck-2.jpg · Verpflegungstisch"><img src="media/eindruck-2.jpg" alt="Der Verpflegungstisch mit Getränken und Essen." data-optional /></div>
-          <div class="shot grid__c" data-shot="eindruck-3.jpg · Helferinnen und Helfer"><img src="media/eindruck-3.jpg" alt="Helferinnen und Helfer bei der Arbeit an der Verpflegung." data-optional /></div>
-          <div class="shot grid__d" data-shot="eindruck-4.jpg · Detail, Füße und Untergrund"><img src="media/eindruck-4.jpg" alt="Nahaufnahme von Laufschuhen auf dem Uferweg." data-optional /></div>
-          <div class="shot grid__e" data-shot="eindruck-5.jpg · Warten zwischen zwei Runden"><img src="media/eindruck-5.jpg" alt="Eine Gruppe wartet zwischen zwei Runden auf den nächsten Start." data-optional /></div>
-          <div class="shot grid__f" data-shot="eindruck-6.jpg · Stimmung am Streckenrand"><img src="media/eindruck-6.jpg" alt="Zuschauerinnen und Zuschauer am Streckenrand." data-optional /></div>
-        </div>
-      </div>
-    </section>
-
     <!-- ========================= FRAGEN ========================= -->
     <section class="faq" id="fragen">
       <div class="container">
@@ -357,23 +307,12 @@
           <p class="section-head__p">Wenn deine Frage hier fehlt, steht die Antwort meist in der Ausschreibung auf freiburg.run.</p>
         </div>
 
-        <div class="faq__tabs reveal">
-          <button class="tab is-active" data-faqtab="a">Allgemein</button>
-          <button class="tab" data-faqtab="b">Für Läuferinnen und Läufer</button>
-        </div>
-
-        <div class="faq__set is-active" data-faqset="a">
-          <details><summary>Was genau ist ein Backyard Ultra?</summary><p>Ein Laufformat, bei dem alle zur vollen Stunde dieselbe Runde von 6,706 Kilometern starten. Wer sie innerhalb der Stunde schafft, ist beim nächsten Start wieder dabei. Wer nicht, scheidet aus. Das geht so lange weiter, bis nur noch eine Person übrig ist.</p></details>
+        <div class="faq__list reveal">
           <details><summary>Wie lange dauert das Rennen?</summary><p>Das weiß vorher niemand — das ist der Kern des Formats. Es endet erst, wenn eine einzige Person eine Runde allein beendet. Bei größeren Backyard-Rennen sind das regelmäßig mehr als 24 Stunden.</p></details>
           <details><summary>Muss ich Ultra-Erfahrung haben?</summary><p>Für die ersten Runden nicht. Eine Runde von knapp sieben Kilometern in einer Stunde ist für viele machbar. Anspruchsvoll wird das Format erst durch die Wiederholung und die Nacht. Wer aussteigt, hat trotzdem eine echte Distanz gelaufen.</p></details>
-          <details><summary>Kann ich zuschauen?</summary><p>Ja. Der Startbereich ist der spannendste Ort, weil sich dort zur vollen Stunde zeigt, wer noch dabei ist. Genaue Angaben zu Ort und Zugang findest du in der Ausschreibung.</p></details>
-        </div>
-
-        <div class="faq__set" data-faqset="b">
           <details><summary>Was passiert zwischen zwei Runden?</summary><p>Alles, was in die Restzeit passt: essen, trinken, Schuhe wechseln, kurz liegen. Wer 48 Minuten für die Runde braucht, hat zwölf Minuten. Wer schneller läuft, kauft sich Pause — bezahlt sie aber mit Substanz.</p></details>
           <details><summary>Darf ich mich versorgen lassen?</summary><p>Eine eigene Versorgungsstelle im Camp ist bei Backyard-Rennen üblich, und Unterstützung dort ist normalerweise erlaubt. Was auf der Strecke selbst gilt, regelt die Ausschreibung — bitte dort nachlesen.</p></details>
-          <details><summary>Was zählt als Ausfall?</summary><p>Wer beim Startsignal nicht startbereit im Startbereich steht, ist raus. Auch dann, wenn nur wenige Sekunden fehlen. Das ist die einzige harte Grenze des Formats.</p></details>
-          <details><summary>Brauche ich eine Stirnlampe?</summary><p>Ja. Der Start ist um 06:00 Uhr, und wer lange dabei ist, läuft durch die Nacht. Plane Ersatzbatterien oder eine zweite Lampe ein.</p></details>
+          <details><summary>Kann ich zuschauen?</summary><p>Ja. Der Startbereich ist der spannendste Ort, weil sich dort zur vollen Stunde zeigt, wer noch dabei ist. Genaue Angaben zu Ort und Zugang findest du in der Ausschreibung.</p></details>
         </div>
       </div>
     </section>
@@ -388,12 +327,6 @@
           <a class="btn btn--light" href="https://freiburg.run/event/midsummer-backyard-ultra/" target="_blank" rel="noopener">Zur Anmeldung</a>
         </div>
       </div>
-      <svg class="layer layer--cta-mid" data-rate="0.10" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M0,300 L0,232 C74,228 112,198 190,192 C258,186 300,214 372,220 C440,226 484,190 560,184 C632,178 674,212 748,218 C818,224 862,192 936,188 C1010,184 1054,216 1128,220 C1196,224 1240,198 1316,194 C1372,191 1408,204 1440,208 L1440,300 Z" />
-      </svg>
-      <svg class="layer layer--cta-front" data-rate="0.03" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M0,300 L0,262 C96,258 140,244 224,246 C300,248 344,266 424,268 C500,270 546,252 630,252 C712,252 758,270 840,272 C918,274 964,256 1046,256 C1124,256 1170,272 1252,272 C1326,272 1376,262 1440,260 L1440,300 Z" />
-      </svg>
     </section>
 
   </main>
@@ -407,8 +340,8 @@
       <div class="footer__col">
         <h4>Event</h4>
         <a href="#format">Format</a>
-        <a href="#regeln">Regeln</a>
         <a href="#strecke">Strecke</a>
+        <a href="#stunden">Stunden</a>
         <a href="#fragen">Fragen</a>
       </div>
       <div class="footer__col">
