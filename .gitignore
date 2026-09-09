@@ -2,15 +2,15 @@
 node_modules/
 package-lock.json
 
-# Tooling & lokale Skills (nicht veröffentlichen)
-.claude/
+# Tooling & lokale Skills (nicht veröffentlichen) — nur die Prüfdatei des
+# Done-Gates gehört ins Repo. Absichtlich `.claude/*` statt `.claude/`:
+# unterhalb eines ignorierten ORDNERS kann git nichts wieder einschließen.
+.claude/*
+!.claude/pruefen.txt
 
 # Quell-Rohdaten (personenbezogene Garmin-Aufzeichnung — nicht veröffentlichen)
 Tracking Daten Backyard.fit
 Bildmaterial/
-
-# Erzeugte Artefakt-Fassung der Hero-Section (~1 MB data-URI, aus build.py)
-hero-lab/hero.artefakt.html
 
 # OS / Editor
 .DS_Store

@@ -1,0 +1,2 @@
+node --check main.js
+node -e "const v=require('fs').readFileSync('VERSION','utf8').trim(); if(!/^\d+\.\d+\.\d+$/.test(v)) { console.error('VERSION unlesbar: '+v); process.exit(1);} console.log('VERSION '+v+' ok')"

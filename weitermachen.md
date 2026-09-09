@@ -1,72 +1,64 @@
 # Weitermachen
 
-Stand: 08.09.2026 · Version 1.3.0 · Tag `v1.3.0` · alles gepusht, Seite live
+Stand: 09.09.2026 · Version 2.0.0 · Tags `v1.4.0` + `v2.0.0` · main gepusht, Seite live
 
 <!-- Hier steht bewusst keine Commit-Nummer: save-state schreibt diese Datei und committet sie
      danach, jede notierte Nummer waere also sofort eine zu alt. Der aktuelle Stand ist `git log`. -->
 
-
 ## Stand
 
-Drei Rückmeldungen von Gabriel sind umgesetzt.
+Großer Tag in drei Akten.
 
-**Termin.** Die 3. Auflage startet am Samstag, 19.06.2027 um 06:00 Uhr. Das steckt jetzt in allen
-sechs Varianten und der Galerie-Startseite. Der Countdown in Variante 06 läuft wieder.
+**Hero-Retrospektive.** Gabriels Befund (ChatGPT traf den gewünschten Layer-Effekt, meine
+Versuche nicht) ist aufgearbeitet: Kernfehler waren umgefärbtes Bildmaterial, Verankerung an der
+dunklen Restseite statt an der hellen Referenz und stundenlange Alleingänge ohne Gabriels Blick.
+Daraus wurden die drei Regeln im Abschnitt „Gestaltungsarbeit" der CLAUDE.md.
 
-**Hero.** Neu aufgebaut, in der Anlage an fora.so: alles mittig, ein Knopf, darunter ein leiser
-zweiter Weg, dann das Panel, das der Hero unten hart abschneidet. Der Himmel ist ein
-Sonnenaufgang in CI-Farben — die Lichtreise beginnt nicht mehr in der Nacht, sondern um 06:00 Uhr
-beim Start. Der Rest der Seite bleibt dunkel. Die Bergketten sind Dunst statt Scherenschnitt:
-obere Kante per Maske ausgeblendet, Weichzeichner, nach hinten hin blasser. Fora selbst löst das
-mit zwei großen Fotos — das war nicht übernehmbar, der Effekt ist mit eigenen Mitteln nachgebaut.
+**Neuer Hero mit Morph.** Der freigegebene ChatGPT-Hero (Ordner `Hero/` im Hauptprojekt) ist
+eingebaut — Bildmaterial pixelgenau übernommen, Stile ans Stilsystem der Seite angepasst, die
+Abdunklung unten läuft in die Grundfarbe der Lichtreise aus. Sonne und Schriftzug starten frei
+im Hero und morphen beim Scrollen in die Leiste (Andocken auf ~0,3 px verifiziert, am Anfang ist
+oben links bewusst nichts). Details im CHANGELOG unter 1.4.0.
 
-**Ausrüstungsliste.** Steckt jetzt als Antwort in den Fragen, mit dem Hinweis, dass sie ein
-Vorschlag und nicht vollständig ist. Der Anmelde-Abschnitt zeigt dadurch Countdown und
-Anmelde-Karte nebeneinander statt einer halb leeren Reihe.
+**Eine Fassung, v2.0.0.** Auf Gabriels Entscheidung ist „Tageslauf" die einzige Fassung und liegt
+im Projekt-Root. Varianten 01–05, Galerie, `hero-lab/`, `DESIGN.md` und nur dort genutzte Assets
+sind gelöscht; der Stand davor bleibt als Tag `v1.3.0`. Die Karten-Scrollfalle vom Handy ist
+behoben (Ein-Finger-Ziehen aus). `.claude/pruefen.txt` angelegt und per `.gitignore`-Ausnahme
+ins Repo geholt — das Done-Gate prüft jetzt wirklich.
 
-Nebenbei gefunden und behoben: In `render()` standen Schreibvorgänge vor den Messungen — dieselbe
-Falle wie beim `:root`-Schreiben, nur eine Ebene höher. Steht jetzt als Regel in der `CLAUDE.md`.
-
-Der Stand ist veröffentlicht. GitHub Pages hat nach etwa 30 Sekunden neu gebaut; live geprüft sind
-Version, Datum, Auflagen-Nummer, die Ausrüstungsliste in den Fragen und der zentrierte Hero.
+Live: `https://jgc-coding.github.io/midsummer-backyard-ultra/` — das ist ab jetzt der Weg für
+den Handy-Blick. Das private Artefakt (claude.ai/code/artifact/65fe4127-…) ist ein Zweitweg und
+wurde zuletzt mit dem 2.0.0-Stand aktualisiert.
 
 ## Offen
 
-- **9 Bildplätze warten auf Fotos.** Die Seite läuft ohne sie und zeigt beschriftete Platzhalter.
-  Gesuchte Motive: `variant-06-tageslauf/media/BILDER-GESUCHT.md`. (Gabriel-Aufgabe, liegt im Hub.)
-- **Blocker für eine belastbare Abnahme:** Geprüft ist über einen emulierten Viewport und
-  Headless-Chrome, nicht auf einem echten Gerät.
-- **Der Bildtakt ist nicht gemessen.** Die Bergketten haben jetzt einen festen Weichzeichner.
-  Das sollte den Compositor nicht belasten, weil nur `transform` animiert wird — nachgewiesen ist
-  es nicht, weil `requestAnimationFrame` im ausgeblendeten Browser-Bereich nicht läuft. Falls das
-  Scrollen auf dem Handy ruckelt, ist der Weichzeichner der erste Verdächtige.
+- **8 Bildplätze warten auf Fotos** (Gabriel-Aufgabe im Hub; Motive: `media/BILDER-GESUCHT.md`).
+- **Morph-Bildtakt auf echtem Gerät unbestätigt.** Rechnerisch und in Standbildern geprüft;
+  Gabriel testet am Handy (Hub-Aufgabe). Meldet er Ruckeln: zuerst reproduzieren (Mess-Fallen in
+  der CLAUDE.md!), Verdächtige wären das Inline-Transform pro Frame auf der Marke und der
+  SVG-Farbfilter des Schriftzugs.
 
 ## Nächste Schritte (Claude)
 
-1. Sobald Fotos da sind: Dateien unter den in `BILDER-GESUCHT.md` genannten Namen nach
-   `variant-06-tageslauf/media/` legen. Die Platzhalter verschwinden von selbst (Klasse
-   `has-photo`). Danach Dateigrößen prüfen (Ziel unter 500 KB) und einmal durchscrollen.
-2. Falls Variante 06 die gewählte Fassung wird: `.claude/pruefen.txt` anlegen, damit das
-   Done-Gate im Projekt überhaupt greift.
-3. Falls Gabriel am Handy etwas auffällt: zuerst reproduzieren, nicht raten — die beiden
-   Mess-Fallen unten machen Fehlbefunde in diesem Projekt sehr wahrscheinlich.
+1. Sobald Fotos da sind: unter den Namen aus `media/BILDER-GESUCHT.md` nach `media/` legen
+   (Platzhalter verschwinden von selbst), Dateigrößen unter 500 KB prüfen, einmal durchscrollen.
+2. Aufräumrest erledigen, sobald die alten Sitzungen geschlossen sind (Ordner sind aktuell von
+   deren Prozessen gesperrt; Inhalte sind vollständig gemergt, es geht nur noch um leere Hüllen):
+
+   ```
+   Remove-Item -Recurse -Force "C:\Projekte\Midsummer Backyard Website\.claude\worktrees\variante-6-fortsetzen-b2e736", "C:\Projekte\Midsummer Backyard Website\.claude\worktrees\hero-section-layer-effect-affb3e"
+   git -C "C:\Projekte\Midsummer Backyard Website" worktree remove ".claude/worktrees/hero-layer-effekt-203e0c"
+   git -C "C:\Projekte\Midsummer Backyard Website" branch -d claude/hero-layer-effekt-203e0c
+   git -C "C:\Projekte\Midsummer Backyard Website" worktree prune
+   ```
+
+3. Falls Gabriel vom Handy Ruckeln meldet: Diagnose nach dem Muster unter **Offen**, nicht raten.
 
 ## Aktuelle Stolperfallen
 
-- **Es gibt keine `.claude/pruefen.txt`.** Der Stop-Hook prüft in diesem Projekt also nichts.
-  „Geprüft" ist hier immer eine eigene Aussage und gehört als solche benannt.
-- Die beiden Fallen zur Sichtprüfung (ausgeblendeter In-App-Browser, unfertige CSS-Übergänge in
-  Headless-Aufnahmen) stehen dauerhaft in der `CLAUDE.md`. Befehl für eine Vollseiten-Aufnahme,
-  nachdem `node scripts/serve.mjs 4178` läuft:
-
-  ```
-  & "C:\Program Files\Google\Chrome\Application\chrome.exe" --headless=new --disable-gpu --hide-scrollbars --window-size=1440,9600 --virtual-time-budget=40000 --screenshot="ausgabe.png" "http://localhost:4178/variant-06-tageslauf/"
-  ```
-
-- **Headless-Chrome macht Fenster nicht schmaler als etwa 500 px,** und die Aufnahme ist dann
-  rechts beschnitten, obwohl das Layout stimmt. Mobil deshalb mit 500 px rendern und die
-  Überbreite zusätzlich im Browser messen (`documentElement.scrollWidth - window.innerWidth`).
-- Chrome schreibt die Bilddatei erst nach dem Beenden — den Prozess mit
-  `Start-Process -Wait -NoNewWindow` abwarten.
-- Die 404-Meldungen im Browser-Log sind die fehlenden Fotos, eine je Platzhalter. Erwartetes
-  Verhalten, kein Fehler.
+- **Zwei alte Worktree-Ordner liegen abgemeldet, aber unlöschbar auf der Platte** (Prozesssperre
+  noch offener Claude-Sitzungen) — Befehle dafür stehen oben in Schritt 2.
+- Die Hub-Karte dieses Projekts heißt **„Midsummer Backyard"** (nicht „…Website").
+- Headless-Aufnahmen nur noch mit den Diagnose-Parametern `?y=`/`?vh=` — Details und die
+  übrigen Mess-Fallen stehen dauerhaft in der CLAUDE.md.
+- Die 404-Meldungen im Browser-Log sind die 8 fehlenden Fotos, eine je Platzhalter. Erwartet.

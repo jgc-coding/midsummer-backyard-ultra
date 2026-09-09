@@ -16,6 +16,7 @@ Build-Schritt, Hosting über GitHub Pages.
 - `npm install` — installiert `fit-file-parser` (nur fürs Daten-Tooling).
 - `npm run parse-fit` — `Tracking Daten Backyard.fit` → `data/route-*`.
 - `npm run serve` / `node scripts/serve.mjs 4178` — lokaler Server auf Port 4178.
+- Done-Gate: `.claude/pruefen.txt` (JS-Syntax, VERSION-Format) — liegt per `.gitignore`-Ausnahme im Repo.
 - Verifikation: DOM-Abfragen über den In-App-Browser (vorher per `resize_window` eine echte
   Viewport-Größe setzen), Bilder über headless Chrome
   (`--headless=new --window-size=<b>,<h> --virtual-time-budget=40000 --screenshot=<datei> <url>`).
@@ -70,6 +71,8 @@ Build-Schritt, Hosting über GitHub Pages.
 - Three.js nur als `three.module.min.js` vendored — keine Addons (Bloom etc. selbst lösen, z. B. additives Blending + CSS-Glow).
 - Roh-`.fit` ist personenbezogen → `.gitignore`; nur abgeleitete GeoJSON veröffentlichen.
 - Leaflet braucht Kartenkacheln zur Laufzeit — Netzabhängigkeit, Fallback einplanen.
+- **Eingebettete Karten dürfen die Scroll-Geste nicht fangen:** Ein-Finger-Ziehen am Touch-Gerät
+  aus (`dragging: !L.Browser.mobile`), Mausrad-Zoom erst nach Klick (Gabriels Handy-Befund 09/2026).
 - **CARTO-Kacheln (`basemaps.cartocdn.com`) verlangen inzwischen einen API-Schlüssel** und liefern
   ohne ihn eine Hinweiskachel mit HTTP 200. Der Fehler ist also nicht am Statuscode erkennbar,
   sondern nur an der Dateigröße (~2 KB statt ~7 KB). Stattdessen `tile.openstreetmap.org`;
@@ -93,6 +96,11 @@ Build-Schritt, Hosting über GitHub Pages.
   bleibt jedes `.reveal` unsichtbar und jede Überschrift undurchsichtig — das sieht aus wie ein
   kaputtes Aufblenden, ist aber nur die Messumgebung. DOM-Abfragen zu Größen und Überbreite
   stimmen trotzdem, sobald per `resize_window` eine echte Viewport-Größe gesetzt ist.
+- **Headless-Aufnahmen dieser Seite brauchen die Diagnose-Parameter aus `main.js`:** `?vh=900`
+  für Vollseiten-Aufnahmen (der 100svh-Hero würde sonst so hoch wie das 9600er-Fenster und schöbe
+  die Seite aus dem Bild) und `?y=<px>` für Scroll-Zustände — echtes Scrollen erzeugt in
+  Aufnahmen ein schwarzes Band mit eingefrorenen fixen Elementen, der Parameter rendert den
+  Zustand darum, ohne zu scrollen.
 - **Headless-Chrome-Aufnahmen zeigen CSS-Übergänge nicht zu Ende gelaufen.** Ein längeres
   `--virtual-time-budget` hilft nicht; die Animationsuhr hängt nicht daran. Zeichenweise
   aufblendende Überschriften wirken darauf immer hinten abgeschnitten. Vor dem Melden eines
