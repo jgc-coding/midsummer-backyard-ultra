@@ -9,6 +9,9 @@ package-lock.json
 Tracking Daten Backyard.fit
 Bildmaterial/
 
+# Erzeugte Artefakt-Fassung der Hero-Section (~1 MB data-URI, aus build.py)
+hero-lab/hero.artefakt.html
+
 # OS / Editor
 .DS_Store
 Thumbs.db

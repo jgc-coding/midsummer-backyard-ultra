@@ -4,6 +4,18 @@ Alle nennenswerten Änderungen an diesem Projekt. Format lose nach [Keep a Chang
 Versionierung nach [SemVer](https://semver.org/).
 
 ## [Unreleased]
+### Hinzugefügt
+- **Hero-Section aus dem neuen Bildmaterial, mit Ebenen-Effekt nach dem Vorbild von fora.so**
+  (`hero-lab/`). Fünf freigestellte Bilder in einem Stapel: Baumkronen vorn, Dreisamtal in der
+  Mitte, Bergkette hinten, dazu Sonne und Schriftzug. Beim Scrollen läuft jede Ebene mit einer
+  eigenen Rate mit, am Zeiger verschieben sie sich zusätzlich seitlich. Umschalter für die beiden
+  Positionen des Logos im Stapel: zwischen Layer 2 und 3 (Standard) oder hinter Layer 3.
+  Noch **nicht** in einer der sechs Varianten eingebaut — die Seite steht für sich.
+- `assets/hero/*.webp` — die fürs Web aufbereiteten Bilder (zusammen 740 KB), erzeugt von
+  `scripts/hero-bilder.py` aus `Bildmaterial/`. Das Skript stellt den Schriftzug frei
+  (die Vorlage hat keinen Alphakanal, das Karomuster ist ins Bild gemalt) und backt die
+  Morgenlicht-Abstufung der drei Landschaftsebenen ein, damit zur Laufzeit kein `filter`
+  nötig ist.
 
 ## [1.3.0] — 2026-09-08
 ### Geändert
