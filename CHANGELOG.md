@@ -3,19 +3,40 @@
 Alle nennenswerten Änderungen an diesem Projekt. Format lose nach [Keep a Changelog](https://keepachangelog.com/),
 Versionierung nach [SemVer](https://semver.org/).
 
-## [Unreleased]
+## [1.4.0] — 2026-09-09
 ### Hinzugefügt
-- **Hero-Section aus dem neuen Bildmaterial, mit Ebenen-Effekt nach dem Vorbild von fora.so**
-  (`hero-lab/`). Fünf freigestellte Bilder in einem Stapel: Baumkronen vorn, Dreisamtal in der
-  Mitte, Bergkette hinten, dazu Sonne und Schriftzug. Beim Scrollen läuft jede Ebene mit einer
-  eigenen Rate mit, am Zeiger verschieben sie sich zusätzlich seitlich. Umschalter für die beiden
-  Positionen des Logos im Stapel: zwischen Layer 2 und 3 (Standard) oder hinter Layer 3.
-  Noch **nicht** in einer der sechs Varianten eingebaut — die Seite steht für sich.
-- `assets/hero/*.webp` — die fürs Web aufbereiteten Bilder (zusammen 740 KB), erzeugt von
-  `scripts/hero-bilder.py` aus `Bildmaterial/`. Das Skript stellt den Schriftzug frei
-  (die Vorlage hat keinen Alphakanal, das Karomuster ist ins Bild gemalt) und backt die
-  Morgenlicht-Abstufung der drei Landschaftsebenen ein, damit zur Laufzeit kein `filter`
-  nötig ist.
+- **Der freigegebene Hero (ChatGPT-Export aus `Hero/`) ist in Variante 06 eingebaut.** Heller
+  Morgen aus dem unveränderten Bildmaterial: Bergkette hinten, Sonne+Schriftzug davor, dann Tal
+  mit Fluss und Baumkronen vorn; Maus- und Scroll-Parallaxe je Ebene, die Sonne dreht in
+  110 s einmal durch. Schriften, Farben und Knöpfe kommen aus dem Stilsystem der Seite; die
+  Abdunklung unten läuft in die Grundfarbe der Lichtreise aus — der helle Start ist damit
+  erzählerisch der Sonnenaufgang um 06:00 Uhr, danach wandert die Seite wie bisher in die Nacht.
+- **Morph beim Scrollen:** Sonne und Schriftzug starten frei im Hero (oben links ist nichts) und
+  schrumpfen beim Scrollen in die Leiste; unterwegs blenden Datumzeile und Schriftzug aus, die
+  Sonnenscheibe vervollständigt sich und dockt pixelgenau als dauerhaftes Marken-Symbol neben dem
+  Schriftzug „Midsummer Backyard" an. Rückwärts läuft alles wieder auseinander. Bei reduzierter
+  Bewegung: kein Morph, Marke in der Leiste von Anfang an sichtbar.
+- Diagnose-Parameter `?y=<px>` (Scroll-Zustand ohne echtes Scrollen rendern) und `?vh=<px>`
+  (feste Hero-Höhe) für Headless-Aufnahmen — echtes Scrollen und `100svh` verfälschen sie sonst.
+- `hero-lab/` (Vorstufe vom Vormittag, eigenständige Hero-Seite mit A/B-Umschalter) bleibt als
+  Referenz liegen, ist aber durch den Einbau in Variante 06 überholt.
+
+### Geändert
+- **`scripts/hero-bilder.py` arbeitet jetzt originalgetreu:** nur verkleinern und als WebP
+  speichern, kein Umfärben, kein Beschnitt mehr (Regel „Geliefertes Bildmaterial ist Endzustand"
+  in der CLAUDE.md). Das Karomuster hinter dem Schriftzug entfernt zur Laufzeit ein SVG-Farbfilter
+  aus dem Export. `assets/hero/` entsprechend neu erzeugt (fünf Dateien, zusammen 1,3 MB),
+  neu dabei `schriftzug-sonne.webp`; das alte freigestellte `schriftzug.webp` nutzt nur noch
+  `hero-lab/`.
+- Navigation: feste Rasterspalten (die Knopf-Gruppe rutschte auf dem Handy in die Mittelspalte,
+  sobald die Links ausgeblendet waren) und ein Tagesmodus mit dunkelgrünen Zeichen über dem
+  hellen Hero-Himmel; die dunkle Leiste kommt erst nach dem Hero.
+
+### Entfernt
+- Alter v06-Hero (gezeichneter Sonnenaufgang, Dunst-Bergketten, Überschrift „Von Sonne zu
+  Sonne") samt Panel mit Blob-Himmel und GPS-Mini-Runde — Runde und Kennzahlen stehen weiterhin
+  im Strecken-Abschnitt mit der echten Karte. Der Hero-Bildplatz `hero-daemmerung.jpg` entfällt
+  (8 statt 9 gesuchte Fotos, `media/BILDER-GESUCHT.md` angepasst).
 
 ## [1.3.0] — 2026-09-08
 ### Geändert

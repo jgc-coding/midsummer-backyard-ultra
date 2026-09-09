@@ -6,8 +6,10 @@ im Seitenlayout — sie bleibt also jederzeit vollständig ansehbar.
 
 Format überall: JPG oder WebP, Farbraum sRGB, nach dem Export **unter 500 KB pro Datei**.
 
-Insgesamt sind es **9 Bilder**. Vorher waren es 17; die eigene Galerie „Eindrücke" und die beiden
-Steg-Bilder sind entfallen, ihre besten Motive stecken jetzt in `stunde-14.jpg`.
+Insgesamt sind es **8 Bilder**. Vorher waren es 17; die eigene Galerie „Eindrücke" und die beiden
+Steg-Bilder sind entfallen, ihre besten Motive stecken jetzt in `stunde-14.jpg`. Der Hero braucht
+seit dem Umbau auf das illustrierte Bildmaterial (September 2026) **kein Foto mehr** —
+`hero-daemmerung.jpg` ist gestrichen.
 
 ---
 
@@ -21,17 +23,7 @@ Diese drei tragen die Seite. In dieser Reihenfolge:
 
 ---
 
-## A · Hero-Himmel (1 Bild, optional)
-
-| Datei | Größe | Motiv |
-|---|---|---|
-| `hero-daemmerung.jpg` | 2400 × 1350 (16:9), quer | Das Dreisamtal Richtung Osten, kurz vor Sonnenaufgang. |
-
-Wichtig: **viel ruhiger Himmel im oberen Drittel**, der Horizont gehört ins untere Drittel. Über der
-oberen Bildhälfte liegt später die Überschrift, dort darf nichts Unruhiges sein. Wenn kein passendes
-Bild existiert, bleibt der gezeichnete Himmelverlauf stehen — der funktioniert auch allein.
-
-## B · Die vier Regeln (4 Bilder)
+## A · Die vier Regeln (4 Bilder)
 
 Format: **4:5 hochkant, 1400 × 1750**. Jedes Bild steht neben einer Regel, deshalb soll es die Regel
 zeigen und nicht nur schön sein.
@@ -43,7 +35,7 @@ zeigen und nicht nur schön sein.
 | `regel-aus.jpg` | Jemand sitzt am Rand, Schuhe aus, erschöpft. Ehrlich, nicht als Niederlage inszeniert. |
 | `regel-sieger.jpg` | Die letzte Person allein auf der Runde, oder der Zieleinlauf. |
 
-## C · Die Stunden (4 Bilder)
+## B · Die Stunden (4 Bilder)
 
 Format: **3:2 quer, 1800 × 1200**. Diese vier laufen im Karussell durch und erzählen den Tagesverlauf.
 

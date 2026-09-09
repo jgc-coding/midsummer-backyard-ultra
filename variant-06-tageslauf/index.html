@@ -13,6 +13,9 @@
   <link rel="stylesheet" href="../assets/fonts/fonts.css" />
   <link rel="stylesheet" href="../assets/vendor/leaflet/leaflet.css" />
   <link rel="stylesheet" href="style.css" />
+  <!-- Sonne und Schriftzug stecken in SVG-image-Verweisen und würden sonst spät entdeckt. -->
+  <link rel="preload" as="image" href="../assets/hero/schriftzug-sonne.webp" />
+  <link rel="preload" as="image" href="../assets/hero/sonne.webp" />
 </head>
 <body data-variant="06">
 
@@ -24,8 +27,14 @@
   </div>
 
   <header class="nav" id="nav">
-    <a class="nav__brand" href="#top">
-      <img src="../assets/logo.jpg" alt="" width="32" height="32" aria-hidden="true" />
+    <!-- Andock-Platz des Morphs: Beim Laden unsichtbar; die große Sonne aus dem
+         Hero schrumpft beim Scrollen exakt hierher und dieses Element übernimmt. -->
+    <a class="nav__brand" href="#top" data-navbrand>
+      <span class="nav__brand-slot" data-brand-slot aria-hidden="true">
+        <svg viewBox="0 0 1044 1044" aria-hidden="true">
+          <g class="sun-spin sun-spin--nav"><image href="../assets/hero/sonne.webp" width="1044" height="1044" /></g>
+        </svg>
+      </span>
       <span>Midsummer Backyard</span>
     </a>
     <nav class="nav__links" aria-label="Seitenbereiche">
@@ -54,56 +63,62 @@
   <main id="top">
 
     <!-- ========================= HERO ========================= -->
-    <section class="hero" id="hero">
+    <!-- Aufbau, Maße und Ebenen-Reihenfolge folgen dem freigegebenen Hero-Export
+         (Ordner Hero/, README dort): drei Landschaftsebenen aus dem Bildmaterial,
+         Sonne+Schriftzug zwischen Bergkette und Fluss. Die Bilder sind unverändert
+         (nur verkleinert) — siehe CLAUDE.md „Gestaltungsarbeit". -->
+    <section class="hero" id="hero" aria-labelledby="hero-title">
       <div class="hero__sky" aria-hidden="true"></div>
-      <div class="hero__sun" aria-hidden="true"></div>
 
-      <div class="shot shot--hero" data-shot="Hero-Himmel · Dreisamtal vor Sonnenaufgang" aria-hidden="true">
-        <img src="media/hero-daemmerung.jpg" alt="" data-optional />
+      <div class="hero__layer hero__layer--far" aria-hidden="true">
+        <img src="../assets/hero/layer3.webp" alt="" width="1920" height="640" fetchpriority="high" decoding="async" />
       </div>
 
-      <svg class="layer layer--far" data-rate="0.32" data-rate-s="0.14" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M0,300 L0,196 C90,190 132,150 208,138 C272,128 316,166 386,158 C452,150 486,104 566,96 C642,88 686,140 760,146 C826,152 872,116 946,110 C1024,104 1064,152 1140,158 C1210,164 1258,134 1336,128 C1386,124 1414,140 1440,146 L1440,300 Z" />
-      </svg>
-      <svg class="layer layer--mid" data-rate="0.18" data-rate-s="0.08" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M0,300 L0,232 C74,228 112,198 190,192 C258,186 300,214 372,220 C440,226 484,190 560,184 C632,178 674,212 748,218 C818,224 862,192 936,188 C1010,184 1054,216 1128,220 C1196,224 1240,198 1316,194 C1372,191 1408,204 1440,208 L1440,300 Z" />
-      </svg>
-
-      <div class="hero__content">
-        <p class="chip chip--solid reveal" data-delay="0"><span class="chip__dot"></span>3. Auflage · <span data-event-long>Samstag, 19. Juni 2027</span> · 06:00 Uhr</p>
-        <h1 class="hero__title reveal" data-delay="90">
-          <span class="line"><span>Von Sonne</span></span>
-          <span class="line"><span>zu Sonne.</span></span>
+      <div class="hero__brand" data-brand>
+        <p class="hero__date"><span data-event-short>19. Juni 2027</span> <span class="hero__date-dot">·</span> 3. Auflage</p>
+        <h1 class="hero__h1" id="hero-title">
+          <span class="sr-only">Midsummer Backyard Ultra Freiburg</span>
+          <!-- Der Schriftzug (schriftzug-sonne.webp) trägt ein eingemaltes Karomuster;
+               der Farbfilter rechnet es zur Laufzeit weg (Alpha aus 4R-4B-0.2). Die
+               starre Bild-Sonne blendet der obere Clip aus; an ihrer Stelle rotiert
+               die freigestellte Sonne als eigene Ebene. Nicht ohne Ersatz löschen. -->
+          <svg class="hero__lockup" viewBox="0 0 1774 887" aria-hidden="true" data-lockup>
+            <defs>
+              <filter id="wm-gray" color-interpolation-filters="sRGB">
+                <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  4 0 -4 0 -.2" />
+              </filter>
+              <clipPath id="wm-sun"><rect x="-200" y="-350" width="2174" height="800" data-sun-clip /></clipPath>
+              <clipPath id="wm-text"><rect y="450" width="1774" height="437" /></clipPath>
+            </defs>
+            <g clip-path="url(#wm-sun)">
+              <g class="sun-spin"><image href="../assets/hero/sonne.webp" x="365" y="-72" width="1044" height="1044" /></g>
+            </g>
+            <image data-lettering href="../assets/hero/schriftzug-sonne.webp" width="1774" height="887" filter="url(#wm-gray)" clip-path="url(#wm-text)" />
+          </svg>
         </h1>
-        <p class="hero__lead reveal" data-delay="200">Midsummer Backyard Ultra Freiburg. Jede volle Stunde dieselbe 6,706-km-Runde an der Dreisam — bis nur noch eine Person läuft.</p>
-        <div class="hero__cta reveal" data-delay="290">
-          <a class="btn btn--light" href="https://freiburg.run/event/midsummer-backyard-ultra/" target="_blank" rel="noopener">Zur Anmeldung</a>
-          <a class="btn btn--ghost" href="#format">Wie das Rennen läuft &darr;</a>
-        </div>
       </div>
 
-      <div class="hero__panel reveal" data-delay="420" data-rate="0.13">
-        <div class="panel">
-          <div class="panel__bar">
-            <span class="panel__dot"></span><span class="panel__dot"></span><span class="panel__dot"></span>
-            <p class="panel__label">Dreisam · Hirzbergsteg &rarr; Schlosssteg Ebnet · aus echten GPS-Daten</p>
-          </div>
-          <div class="panel__view">
-            <canvas class="panel__sky" data-sky aria-hidden="true"></canvas>
-            <svg class="panel__route" data-route viewBox="0 0 1000 400" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Schematische Darstellung der 6,706 Kilometer langen Runde an der Dreisam"></svg>
-            <div class="panel__hud">
-              <div><b data-lapkm>6,706</b><span>km je Runde</span></div>
-              <div><b>60:00</b><span>Zeitfenster</span></div>
-              <div><b>1</b><span>Sieger am Ende</span></div>
-            </div>
-          </div>
-        </div>
+      <div class="hero__layer hero__layer--river" aria-hidden="true">
+        <img src="../assets/hero/layer2.webp" alt="" width="1920" height="819" fetchpriority="high" decoding="async" />
+      </div>
+      <div class="hero__layer hero__layer--trees" aria-hidden="true">
+        <img src="../assets/hero/layer1.webp" alt="" width="1920" height="817" decoding="async" />
       </div>
 
-      <svg class="layer layer--front" data-rate="0.04" data-rate-s="0.02" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M0,300 L0,262 C96,258 140,244 224,246 C300,248 344,266 424,268 C500,270 546,252 630,252 C712,252 758,270 840,272 C918,274 964,256 1046,256 C1124,256 1170,272 1252,272 C1326,272 1376,262 1440,260 L1440,300 Z" />
-      </svg>
-      <div class="hero__floor" aria-hidden="true"></div>
+      <div class="hero__shade" aria-hidden="true"></div>
+
+      <div class="hero__copy">
+        <p class="hero__desc">Eine Runde. Jede Stunde. Bis nur noch eine Person läuft.</p>
+        <a class="btn btn--sun" href="https://freiburg.run/event/midsummer-backyard-ultra/" target="_blank" rel="noopener">
+          Steh mit uns am Start
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
+        </a>
+      </div>
+
+      <div class="hero__bottom">
+        <span>6,706 km · jede volle Stunde</span>
+        <span>An der Dreisam. Bis zuletzt.</span>
+      </div>
     </section>
 
     <!-- ========================= DAS FORMAT — die vier Regeln ========================= -->

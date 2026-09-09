@@ -90,18 +90,15 @@
      Elemente einsammeln
      ====================================================================== */
   var hero = $('.hero');
-  /* rate = breiter Bildschirm, rateS = schmaler. Auf dem Handy ist der Hero
-     kürzer, deshalb muss der Ausschlag kleiner sein, sonst schieben sich die
-     Bergketten übereinander. */
-  var layers = $$('.hero .layer').map(function (el) {
-    return {
-      el: el,
-      rate: parseFloat(el.dataset.rate || '0'),
-      rateS: parseFloat(el.dataset.rateS || el.dataset.rate || '0')
-    };
-  });
-  var panel = $('.hero__panel');
-  var panelRate = panel ? parseFloat(panel.dataset.rate || '0.13') : 0;
+  /* Hero-Ebenen laufen über drei CSS-Variablen (--mx/--my/--sy) am Hero selbst;
+     hier braucht es nur die Teile des Morphs: die Marke im Hero, ihr Ziel in
+     der Leiste und die SVG-Teile, die unterwegs aus- bzw. aufgeblendet werden. */
+  var brand = $('[data-brand]');
+  var h1El = $('.hero__h1');
+  var dateEl = $('.hero__date');
+  var lettering = $('[data-lettering]');
+  var sunClip = $('[data-sun-clip]');
+  var slotEl = $('[data-brand-slot]');
   var nav = $('#nav');
   var progress = $('.progress');
   var bar = $('[data-progress]');
@@ -110,9 +107,34 @@
   var stack = $('[data-stack]');
 
   var heroH = 0, docH = 1;
+  /* Morph-Geometrie: einmal je Layoutänderung vermessen, im Bildtakt nur noch
+     gerechnet. Alle Werte sind Layoutmaße (offset*), die von Transforms
+     unberührt bleiben — so darf measure() auch mitten im Morph laufen. */
+  var M = { on: false, sunX: 0, sunY: 0, homeX: 0, homeY: 0, slotX: 0, slotY: 0, endScale: 0.06, range: 1 };
   function measure() {
     heroH = hero ? hero.offsetHeight : 0;
     docH = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    if (hero && brand && h1El && slotEl && !REDUCED) {
+      var bw = brand.offsetWidth;
+      /* Sonnenmitte innerhalb der Marke: im SVG (1774 breit) liegt sie bei
+         x=887, y=450 — gerendert also bei bw/2 bzw. h1-Oberkante + bw·450/1774. */
+      M.sunX = bw / 2;
+      M.sunY = h1El.offsetTop + bw * (450 / 1774);
+      M.homeX = hero.offsetLeft + brand.offsetLeft;
+      M.homeY = hero.offsetTop + brand.offsetTop;
+      var slot = slotEl.getBoundingClientRect(); /* Leiste ist fixed → Viewport-stabil */
+      M.slotX = slot.left + slot.width / 2;
+      M.slotY = slot.top + slot.height / 2;
+      /* Am Ende soll die gerenderte Sonne (1044/1774 der Markenbreite) exakt
+         die Slotbreite haben. */
+      M.endScale = slot.width / (bw * (1044 / 1774));
+      M.range = Math.max(200, heroH * 0.58);
+      M.on = true;
+      brand.style.transformOrigin = M.sunX + 'px ' + M.sunY + 'px';
+      /* Nach einer Größenänderung sofort neu zeichnen, nicht erst beim
+         nächsten Scrollen (queueHero ist gehoisted und prüft M.on selbst). */
+      queueHero();
+    }
   }
   measure();
   window.addEventListener('resize', measure);
@@ -133,12 +155,95 @@
   observeNear(stack, function (n) { decksNear = n; if (stack) stack.classList.toggle('is-near', n); });
 
   /* ======================================================================
+     Hero-Bewegung und Morph.
+     Ein eigener Bildtakt neben render(): Er läuft nur, solange gescrollt wird,
+     die Maus über dem Hero nachschwingt oder der Hero in Reichweite ist, und
+     er liest NICHTS aus dem Layout — alles Nötige steht vermessen in M.
+     Der Weg der Marke: Ruhelage mit Parallaxe → beim Scrollen zur Sonnenmitte
+     hin verkleinert und in die Leiste gezogen; dort übernimmt .nav__brand.
+     ====================================================================== */
+  var lastY = 0;
+  var mxT = 0, myT = 0, mx = 0, my = 0; /* Maus: Ziel und geglättet, -1..1 */
+  var heroRafId = 0, docked = false;
+  var lastDateO = -1, lastLetterO = -1, lastClipH = -1;
+
+  function easeInOut(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+
+  function queueHero() {
+    if (!heroRafId && !REDUCED && M.on) heroRafId = requestAnimationFrame(heroFrame);
+  }
+
+  function heroFrame() {
+    heroRafId = 0;
+    /* Kein document.hidden-Wächter: versteckt pausiert der Browser den
+       Bildtakt selbst, und erzwungene Diagnose-Aufrufe sollen immer zeichnen. */
+    if (REDUCED || !M.on) return;
+    mx += (mxT - mx) * 0.075;
+    my += (myT - my) * 0.075;
+
+    var y = lastY;
+    var sy = clamp(y, 0, heroH);
+    var p = clamp((y - 40) / (M.range - 40), 0, 1);
+    var k = easeInOut(p);
+    /* Schmale Bildschirme: kleinerer Ausschlag, nicht aus (CLAUDE.md). */
+    var amp = isNarrow() ? 0.55 : 1;
+
+    /* Ebenen: drei Variablen am Hero, die Transforms rechnet das CSS. */
+    hero.style.setProperty('--mx', (mx * amp).toFixed(4));
+    hero.style.setProperty('--my', (my * amp).toFixed(4));
+    hero.style.setProperty('--sy', sy.toFixed(1));
+
+    /* Marke: Sonnenmitte in Ruhelage (mit Parallaxe) … */
+    var px = M.homeX + M.sunX + mx * -9 * amp;
+    var py = M.homeY + M.sunY - y + my * -5 * amp + sy * 0.23;
+    /* … und zum Andockpunkt hin gemischt. Origin liegt auf der Sonnenmitte,
+       darum beschreibt (cx, cy) direkt deren Bahn. */
+    var cx = px + (M.slotX - px) * k;
+    var cy = py + (M.slotY - py) * k;
+    var s = 1 + (M.endScale - 1) * k;
+    brand.style.transform = 'translate3d(' + (cx - (M.homeX + M.sunX)).toFixed(2) + 'px, '
+      + (cy - (M.homeY + M.sunY - y)).toFixed(2) + 'px, 0) scale(' + s.toFixed(5) + ')';
+
+    /* Unterwegs: Datumzeile früh ausblenden, Schriftzug spät; dafür öffnet
+       sich der Sonnen-Clip, bis die Scheibe komplett ist. Quantisiert, damit
+       nicht jeder Frame Attribute anfasst. */
+    var dateO = Math.round((1 - clamp(p / 0.22, 0, 1)) * 50) / 50;
+    if (dateEl && dateO !== lastDateO) { lastDateO = dateO; dateEl.style.opacity = dateO; }
+    var letterO = Math.round((1 - clamp((p - 0.62) / 0.26, 0, 1)) * 50) / 50;
+    if (lettering && letterO !== lastLetterO) { lastLetterO = letterO; lettering.style.opacity = letterO; }
+    var clipH = 800 + Math.round(90 * clamp((p - 0.6) / 0.35, 0, 1)) * 10;
+    if (sunClip && clipH !== lastClipH) { lastClipH = clipH; sunClip.setAttribute('height', clipH); }
+
+    /* Angedockt: die Marke der Leiste übernimmt, pixelgleich an der Stelle. */
+    var d = p >= 0.999;
+    if (d !== docked) {
+      docked = d;
+      if (nav) nav.classList.toggle('is-docked', d);
+      brand.style.visibility = d ? 'hidden' : '';
+    }
+
+    /* Weiterlaufen, bis die Maus nachgeschwungen ist; Scrollen stößt über
+       render() neu an. */
+    if (Math.abs(mxT - mx) + Math.abs(myT - my) > 0.001) queueHero();
+  }
+
+  if (hero && !REDUCED) {
+    document.body.classList.add('has-morph');
+    hero.addEventListener('pointermove', function (e) {
+      if (e.pointerType && e.pointerType !== 'mouse') return;
+      mxT = clamp((e.clientX / Math.max(1, window.innerWidth)) * 2 - 1, -1, 1);
+      myT = clamp(((e.clientY + lastY) / Math.max(1, heroH)) * 2 - 1, -1, 1);
+      queueHero();
+    });
+    hero.addEventListener('pointerleave', function () { mxT = 0; myT = 0; queueHero(); });
+  }
+
+  /* ======================================================================
      Der einzige Schreibvorgang pro Frame
      ====================================================================== */
   function render(y) {
     var p = clamp(y / docH, 0, 1);
     var vw = window.innerWidth;
-    var narrow = vw < 980;
 
     /* --- Lesephase, und zwar als ALLERERSTES. Jeder Schreibvorgang macht die
            Stilangaben ungültig; eine Messung danach erzwingt eine komplette
@@ -150,20 +255,21 @@
       : null;
 
     /* --- Schreibphase --- */
-    if (nav) nav.classList.toggle('is-scrolled', y > 40);
+    lastY = y;
+    if (nav) {
+      /* Über dem hellen Hero: Tagesmodus ohne dunklen Grund. Erst wenn der
+         Hero durchgescrollt ist, kommt die gewohnte dunkle Leiste zurück. */
+      nav.classList.toggle('nav--day', y < heroH - 70);
+      nav.classList.toggle('is-scrolled', y >= heroH - 70);
+    }
     if (bar) bar.style.transform = 'scaleX(' + p.toFixed(4) + ')';
     if (head) head.style.transform = 'translateX(' + (p * vw).toFixed(1) + 'px)';
     if (progress) progress.classList.toggle('is-on', y > 8);
     if (REDUCED) { applySky(p); return; }
 
-    if (hero && y < heroH + 300) {
-      for (var i = 0; i < layers.length; i++) {
-        var rate = narrow ? layers[i].rateS : layers[i].rate;
-        layers[i].el.style.transform = 'translate(-50%, ' + (y * rate).toFixed(1) + 'px)';
-      }
-      /* Das Panel steht auf dem Handy im Textfluss und darf dort nicht wandern. */
-      if (panel && !narrow) panel.style.transform = 'translateY(' + (y * panelRate).toFixed(1) + 'px)';
-    }
+    /* Hero-Ebenen und Morph laufen im eigenen Bildtakt; jedes Scrollen stößt
+       ihn an, solange der Hero in Reichweite ist. */
+    if (hero && y < heroH + 400) queueHero();
 
     /* Die untere Karte tritt zurück, während die nächste darüberklettert. */
     if (deckRects) {
@@ -252,119 +358,6 @@
     img.addEventListener('load', ok);
     img.addEventListener('error', fail);
   });
-
-  /* ======================================================================
-     Hero-Panel: lebender Himmel plus die echte GPS-Runde
-     ====================================================================== */
-  function initPanel() {
-    var canvas = $('[data-sky]');
-    var svg = $('[data-route]');
-    if (!canvas || !svg) return;
-
-    var ctx = canvas.getContext('2d');
-    var blobs = [
-      { x: 0.22, y: 0.72, r: 0.62, c: [229, 114, 42], s: 0.00068, ph: 0.0, ax: 0.30, ay: 0.16 },
-      { x: 0.52, y: 0.86, r: 0.54, c: [247, 194, 75], s: 0.00055, ph: 2.1, ax: 0.26, ay: 0.14 },
-      { x: 0.80, y: 0.74, r: 0.58, c: [242, 160, 58], s: 0.00047, ph: 4.0, ax: 0.28, ay: 0.18 },
-      { x: 0.34, y: 0.24, r: 0.60, c: [40, 52, 92], s: 0.00061, ph: 1.2, ax: 0.24, ay: 0.20 },
-      { x: 0.72, y: 0.16, r: 0.52, c: [26, 30, 58], s: 0.00052, ph: 3.1, ax: 0.22, ay: 0.18 }
-    ];
-    var w = 0, h = 0;
-    function size() {
-      var r = canvas.getBoundingClientRect();
-      /* Der Himmel ist ein weiches Farbfeld, deshalb genügt ein Bruchteil der
-         Auflösung. Ein Achtel war zu wenig — auf dem Handy sah man den Raster. */
-      var div = isNarrow() ? 3 : 2;
-      w = canvas.width = Math.max(2, Math.round(r.width / div));
-      h = canvas.height = Math.max(2, Math.round(r.height / div));
-    }
-    size();
-    window.addEventListener('resize', size);
-
-    /* Die Runde aus den echten GPS-Daten in den SVG-Rahmen einpassen. */
-    var runner = null, pathLen = 0, routePath = null;
-    fetch('../data/route-lap.json').then(function (r) { return r.json(); }).then(function (d) {
-      var pts = d.points;
-      if (!pts || !pts.length) return;
-      var minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
-      pts.forEach(function (p) {
-        if (p[0] < minX) minX = p[0]; if (p[0] > maxX) maxX = p[0];
-        if (p[1] < minY) minY = p[1]; if (p[1] > maxY) maxY = p[1];
-      });
-      var W = 1000, H = 400, PAD = 58;
-      var spanX = maxX - minX || 1, spanY = maxY - minY || 1;
-      var s = Math.min((W - 2 * PAD) / spanX, (H - 2 * PAD) / spanY);
-      var ox = (W - spanX * s) / 2 - minX * s;
-      var oy = (H - spanY * s) / 2 + maxY * s; /* Y wird gespiegelt: in den Daten zeigt Y nach oben */
-      var dstr = pts.map(function (p, i) {
-        return (i ? 'L' : 'M') + (ox + p[0] * s).toFixed(1) + ',' + (oy - p[1] * s).toFixed(1);
-      }).join(' ');
-
-      var NS = 'http://www.w3.org/2000/svg';
-      function make(tag, attrs) {
-        var n = document.createElementNS(NS, tag);
-        Object.keys(attrs).forEach(function (k) { n.setAttribute(k, attrs[k]); });
-        return n;
-      }
-      svg.appendChild(make('path', { d: dstr, class: 'route-glow' }));
-      routePath = make('path', { d: dstr, class: 'route-line' });
-      svg.appendChild(routePath);
-
-      /* Die beiden Wendepunkte sind die westlichste und die östlichste Stelle. */
-      var wi = 0, ei = 0;
-      pts.forEach(function (p, i) { if (p[0] < pts[wi][0]) wi = i; if (p[0] > pts[ei][0]) ei = i; });
-      [wi, ei].forEach(function (idx) {
-        svg.appendChild(make('circle', {
-          cx: (ox + pts[idx][0] * s).toFixed(1), cy: (oy - pts[idx][1] * s).toFixed(1),
-          r: 6, fill: '#f2a03a', stroke: '#1a1208', 'stroke-width': 2
-        }));
-      });
-
-      if (!REDUCED) {
-        runner = make('circle', { r: 7, fill: '#f4e9d3' });
-        runner.style.filter = 'drop-shadow(0 0 8px rgba(247,194,75,0.95))';
-        svg.appendChild(runner);
-        pathLen = routePath.getTotalLength();
-      }
-    }).catch(function () { /* ohne Route bleibt der Himmel allein — das ist in Ordnung */ });
-
-    var frameId = 0, running = false, near = true;
-    function frame(t) {
-      frameId = 0;
-      if (!running || document.hidden) return;
-
-      ctx.globalCompositeOperation = 'source-over';
-      ctx.fillStyle = '#06070d';
-      ctx.fillRect(0, 0, w, h);
-      ctx.globalCompositeOperation = 'lighter';
-      for (var i = 0; i < blobs.length; i++) {
-        var b = blobs[i];
-        var x = (b.x + Math.sin(t * b.s + b.ph) * b.ax + Math.sin(t * b.s * 0.37 + b.ph * 2) * 0.06) * w;
-        var y = (b.y + Math.cos(t * b.s * 1.3 + b.ph) * b.ay + Math.cos(t * b.s * 0.53) * 0.05) * h;
-        var rad = b.r * Math.max(w, h);
-        var g = ctx.createRadialGradient(x, y, 0, x, y, rad);
-        g.addColorStop(0, 'rgba(' + b.c[0] + ',' + b.c[1] + ',' + b.c[2] + ',0.33)');
-        g.addColorStop(1, 'rgba(' + b.c[0] + ',' + b.c[1] + ',' + b.c[2] + ',0)');
-        ctx.fillStyle = g;
-        ctx.fillRect(0, 0, w, h);
-      }
-
-      if (runner && pathLen) {
-        var pt = routePath.getPointAtLength((t * 0.045) % pathLen);
-        runner.setAttribute('cx', pt.x.toFixed(1));
-        runner.setAttribute('cy', pt.y.toFixed(1));
-      }
-      frameId = requestAnimationFrame(frame);
-    }
-    function start() { if (running || document.hidden) return; running = true; frameId = requestAnimationFrame(frame); }
-    function stop() { running = false; if (frameId) cancelAnimationFrame(frameId); frameId = 0; }
-
-    if (REDUCED) { running = true; frame(9000); stop(); }
-    else if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (e) { near = e[0].isIntersecting; if (near) start(); else stop(); }, { rootMargin: '300px 0px' }).observe(canvas);
-      document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else if (near) start(); });
-    } else start();
-  }
 
   /* ======================================================================
      Die Stunden: Tab-Karussell
@@ -533,7 +526,6 @@
   }
 
   /* ====================================================================== */
-  initPanel();
   initHours();
   initEventDate();
   initCountdown();
@@ -541,5 +533,23 @@
   initVersion();
   render(window.scrollY);
 
-  window.__tageslauf = { render: render, lenis: lenis, sky: applySky };
+  /* Diagnose (nur über URL-Parameter, ändert normalen Betrieb nicht):
+     ?y=<px>  rendert beim Laden den Zustand dieser Scroll-Position, ohne
+              wirklich zu scrollen (echtes Scrollen verfälscht Headless-
+              Aufnahmen: schwarzes Band, eingefrorene fixe Elemente).
+     ?vh=<px> gibt dem Hero eine feste Höhe. Nötig für Vollseiten-Aufnahmen
+              im hohen Fenster: dort wäre der 100svh-Hero sonst fensterhoch
+              und schöbe den Rest der Seite aus dem Bild. */
+  var dbgQ = new URLSearchParams(location.search);
+  var dbgY = parseFloat(dbgQ.get('y'));
+  var dbgVh = parseFloat(dbgQ.get('vh'));
+  if (dbgY > 0 || dbgVh > 0) window.addEventListener('load', function () {
+    if (dbgVh > 0 && hero) { hero.style.height = dbgVh + 'px'; measure(); }
+    render(dbgY > 0 ? dbgY : window.scrollY);
+    if (!REDUCED) heroFrame();
+  });
+
+  /* heroFrame und M sind fuer die Verifikation zugreifbar: ein Zustand laesst
+     sich damit auch ohne laufenden Bildtakt synchron erzwingen und nachmessen. */
+  window.__tageslauf = { render: render, lenis: lenis, sky: applySky, heroFrame: heroFrame, morph: M };
 })();
