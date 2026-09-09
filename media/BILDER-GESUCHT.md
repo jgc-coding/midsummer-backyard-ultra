@@ -1,4 +1,4 @@
-# Gesuchte Fotos — Variante 06 „Tageslauf"
+# Gesuchte Fotos — Landingpage „Tageslauf"
 
 Alle Dateien kommen **genau in diesen Ordner** und **genau unter diesen Namen**. Die Seite lädt sie
 automatisch. Solange eine Datei fehlt, zeigt die Seite an der Stelle einen beschrifteten Platzhalter

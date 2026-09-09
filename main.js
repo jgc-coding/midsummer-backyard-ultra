@@ -495,11 +495,11 @@
     /* Fallback, falls keine Kacheln kommen (kein Netz): wenigstens die Linie zeigen. */
     map.setView([47.98793, 7.88553], 14);
 
-    fetch('../data/route-full.geojson').then(function (r) { return r.json(); }).then(function (full) {
+    fetch('data/route-full.geojson').then(function (r) { return r.json(); }).then(function (full) {
       L.geoJSON(full, { style: { color: '#f4e9d3', weight: 2, opacity: 0.16 } }).addTo(map);
     }).catch(function () {});
 
-    fetch('../data/route-lap.geojson').then(function (r) { return r.json(); }).then(function (lap) {
+    fetch('data/route-lap.geojson').then(function (r) { return r.json(); }).then(function (lap) {
       var layer = L.geoJSON(lap, { style: { color: '#e5722a', weight: 5, opacity: 1, lineCap: 'round', lineJoin: 'round' } }).addTo(map);
       map.fitBounds(layer.getBounds(), { padding: [34, 34] });
 
@@ -524,7 +524,7 @@
   function initVersion() {
     var el = $('[data-ver]');
     if (!el) return;
-    fetch('../VERSION').then(function (r) { return r.ok ? r.text() : ''; })
+    fetch('VERSION').then(function (r) { return r.ok ? r.text() : ''; })
       .then(function (t) { if (t) el.textContent = 'v' + t.trim(); })
       .catch(function () {});
   }

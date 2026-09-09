@@ -1,9 +1,8 @@
 {
   "name": "midsummer-backyard-ultra",
-  "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "5 Award-Level Landingpage-Varianten für den Midsummer Backyard Ultra Freiburg",
+  "description": "Landingpage 'Tageslauf' für den Midsummer Backyard Ultra Freiburg (Seitenversion: Datei VERSION)",
   "scripts": {
     "parse-fit": "node scripts/fit-to-geojson.mjs \"Tracking Daten Backyard.fit\"",
     "serve": "node scripts/serve.mjs"

@@ -3,6 +3,27 @@
 Alle nennenswerten Änderungen an diesem Projekt. Format lose nach [Keep a Changelog](https://keepachangelog.com/),
 Versionierung nach [SemVer](https://semver.org/).
 
+## [2.0.0] — 2026-09-09
+### Geändert
+- **„Tageslauf" ist die einzige Fassung und liegt jetzt im Projekt-Root** (Gabriels Entscheidung,
+  09.09.2026). Die Seite ist damit direkt unter der Pages-Adresse erreichbar; alle internen Pfade
+  von `../…` auf Root-relativ umgestellt, Footer ohne Varianten-Verweis, `media/` samt
+  `BILDER-GESUCHT.md` in den Root gezogen.
+- `assets/` verschlankt: Schriften nur noch die drei genutzten Familien (Plus Jakarta Sans,
+  Inter Tight, JetBrains Mono), Vendor nur noch Lenis und Leaflet.
+- `.claude/pruefen.txt` angelegt — das Done-Gate prüft jetzt JS-Syntax und VERSION-Format.
+
+### Behoben
+- **Die Streckenkarte fing am Handy die Scroll-Geste** (ein Finger verschob die Karte statt die
+  Seite zu scrollen). Ein-Finger-Ziehen ist am Touch-Gerät jetzt aus; zoomen geht weiter mit zwei
+  Fingern und den +/−-Knöpfen, am Rechner nach Klick auch per Mausrad.
+
+### Entfernt
+- Varianten 01–05, Galerie-Startseite, `hero-lab/` (Vorstufe), `DESIGN.md` (beschrieb nur
+  Variante 04) und die nur dort genutzten Schriften und Bibliotheken (GSAP, ScrollTrigger,
+  Three.js, altes `schriftzug.webp`). Der letzte Stand mit allen sechs Varianten bleibt über den
+  Git-Tag `v1.3.0` abrufbar.
+
 ## [1.4.0] — 2026-09-09
 ### Hinzugefügt
 - **Der freigegebene Hero (ChatGPT-Export aus `Hero/`) ist in Variante 06 eingebaut.** Heller
