@@ -478,8 +478,12 @@
       return;
     }
     var L = window.L;
-    var map = L.map(el, { scrollWheelZoom: false, zoomAnimation: !REDUCED, fadeAnimation: !REDUCED, markerZoomAnimation: !REDUCED });
-    /* Kein Scroll-Diebstahl: erst nach Klick oder Fokus zoomt das Mausrad. */
+    /* Kein Scroll-Diebstahl — in beide Richtungen: Das Mausrad zoomt erst nach
+       Klick oder Fokus, und am Touch-Gerät ist das Ein-Finger-Ziehen der Karte
+       aus, damit der Daumen die SEITE weiterscrollt statt die Karte zu
+       verschieben (Gabriels Befund am Handy, 09.09.2026). Zoomen geht dort
+       weiter mit zwei Fingern oder den +/−-Knöpfen. */
+    var map = L.map(el, { scrollWheelZoom: false, dragging: !L.Browser.mobile, zoomAnimation: !REDUCED, fadeAnimation: !REDUCED, markerZoomAnimation: !REDUCED });
     map.on('focus click', function () { map.scrollWheelZoom.enable(); });
     map.on('mouseout blur', function () { map.scrollWheelZoom.disable(); });
 
