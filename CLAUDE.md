@@ -41,6 +41,18 @@ Freiburg. Statische Sites, Hosting über GitHub Pages.
   Last Runner Standing. Erfunden von Gary „Lazarus Lake" Cantrell (2011).
 - Anmeldung/CTA: `freiburg.run/event/midsummer-backyard-ultra/` + Instagram `@midsummerbackyard`.
 
+## Gestaltungsarbeit (Lehre aus der Hero-Retrospektive, 09/2026)
+- **Geliefertes Bildmaterial ist Endzustand, kein Rohstoff.** Pixelgenau übernehmen, nur
+  verlustfrei skalieren/komprimieren; jede Farb-, Licht- oder Zuschnitt-Änderung braucht vorher
+  Gabriels Ja. Der Ebenen-Look entsteht durch Anordnung und Bewegung, nicht durch Umfärben.
+- **Referenzseite: Stimmung vor Mechanik.** Vor dem Bauen die Referenz scrollend ansehen und den
+  Look in fünf Sätzen festhalten (Licht, Farben, was bewegt sich wie stark). Helligkeit und
+  Stimmung der Referenz wiegen schwerer als das dunkle Thema der restlichen Seite — Übergänge
+  löst ein Verlauf am Sectionsrand, nicht das Abdunkeln des Motivs.
+- **Richtungs-Gate:** Bei Geschmacksarbeit nach spätestens 45 Minuten ein statisches Standbild
+  liefern und die Richtung freigeben lassen; erst danach Bewegung und Feinbau. Abnahmeprüfung
+  vor jeder Abgabe: eigener Screenshot NEBEN der Referenz — gleiche Familie?
+
 ## Konventionen
 - **Nur relative Pfade** (Project-Pages liegen unter `/midsummer-backyard-ultra/` — führende `/` brechen Assets).
 - Datei-Edits über das Edit/Write-Tool (UTF-8 ohne BOM), nicht per PowerShell-Bulk-Replace (Umlaute!).
