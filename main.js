@@ -382,6 +382,11 @@
       e.preventDefault();
       if (lenis) lenis.scrollTo(target, { offset: -70, duration: 1.3 });
       else target.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth' });
+      /* Fokus mitnehmen: ohne ihn tabt die Tastatur nach dem Sprung in der
+         Leiste weiter, und der Skip-Link waere fuer seine Zielgruppe wirkungslos.
+         preventScroll, damit der Browser nicht am weichen Scrollen vorbei springt. */
+      if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+      target.focus({ preventScroll: true });
     });
   });
 

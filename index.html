@@ -8,7 +8,18 @@
   <meta name="theme-color" content="#0d0906" />
   <meta property="og:title" content="Midsummer Backyard Ultra Freiburg — Von Sonne zu Sonne" />
   <meta property="og:description" content="Jede volle Stunde dieselbe Runde an der Dreisam. Bis nur noch eine Person läuft. 19. Juni 2027." />
-  <meta property="og:image" content="assets/logo.jpg" />
+  <!-- Vorschau beim Teilen (Messenger, Social): Parser verlangen ABSOLUTE URLs — die
+       dokumentierte Ausnahme von der Nur-relativ-Regel. og-vorschau.jpg ist ein
+       1200x630-Standbild des Heros und traegt den Termin als Pixeltext: bei einem
+       Terminwechsel neu erzeugen (headless 1200x692, ?vh=692, oben 62px beschneiden). -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jgc-coding.github.io/midsummer-backyard-ultra/" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="og:image" content="https://jgc-coding.github.io/midsummer-backyard-ultra/assets/og-vorschau.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Illustrierter Sonnenaufgang über bewaldeten Hügeln, davor der Schriftzug Midsummer Backyard" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
   <link rel="stylesheet" href="assets/fonts/fonts.css" />
   <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css" />
@@ -141,7 +152,7 @@
             <div class="deck__media">
               <div class="shot" data-shot="regel-yard.jpg · Läufer an der Dreisam">
                 <!-- --focus: Ankerpunkt beim Beschneiden. Hier die Kappe des vorderen Läufers. -->
-                <img src="media/regel-yard.jpg" style="--focus: 50% 25%" alt="Drei Läufer hintereinander auf dem Uferweg an der Dreisam, Gegenlicht." data-optional />
+                <img src="media/regel-yard.jpg" style="--focus: 50% 25%" alt="Drei Läufer hintereinander auf dem Uferweg an der Dreisam, Gegenlicht." data-optional loading="lazy" decoding="async" />
               </div>
             </div>
           </article>
@@ -156,7 +167,7 @@
             <div class="deck__media">
               <div class="shot" data-shot="regel-stunde.jpg · Das Feld geht gemeinsam auf die Runde">
                 <!-- --focus: die Köpfe der Gruppe, die auf die Kamera zuläuft. -->
-                <img src="media/regel-stunde.jpg" style="--focus: 50% 32%" alt="Eine Gruppe von Läuferinnen und Läufern geht gemeinsam auf die Runde." data-optional />
+                <img src="media/regel-stunde.jpg" style="--focus: 50% 32%" alt="Eine Gruppe von Läuferinnen und Läufern geht gemeinsam auf die Runde." data-optional loading="lazy" decoding="async" />
               </div>
             </div>
           </article>
@@ -171,7 +182,7 @@
             <div class="deck__media">
               <div class="shot" data-shot="regel-aus.jpg · Der Weg ohne dich">
                 <!-- --focus: der Punkt, in dem der Weg verschwindet — ohne ihn bleibt nur Kies. -->
-                <img src="media/regel-aus.jpg" style="--focus: 50% 25%" alt="Der leere Uferweg an der Dreisam führt geradeaus in die Ferne." data-optional />
+                <img src="media/regel-aus.jpg" style="--focus: 50% 25%" alt="Der leere Uferweg an der Dreisam führt geradeaus in die Ferne." data-optional loading="lazy" decoding="async" />
               </div>
             </div>
           </article>
@@ -186,7 +197,7 @@
             <div class="deck__media">
               <div class="shot" data-shot="regel-sieger.jpg · Der Pokal für den Last Runner Standing">
                 <!-- --focus: Schale und Emblem des Pokals; hält zugleich den Vornamen auf der Karte außerhalb. -->
-                <img src="media/regel-sieger.jpg" style="--focus: 50% 35%" alt="Der Siegerpokal des Midsummer Backyard Ultra, graviert mit „Only survivor“." data-optional />
+                <img src="media/regel-sieger.jpg" style="--focus: 50% 35%" alt="Der Siegerpokal des Midsummer Backyard Ultra, graviert mit „Only survivor“." data-optional loading="lazy" decoding="async" />
               </div>
             </div>
           </article>
@@ -322,7 +333,7 @@
       <!-- Ohne „www": das Zertifikat der Seite gilt nur für jgc-lumen.de, die www-Fassung
            läuft in eine Sicherheitswarnung (geprüft 10.09.2026). -->
       <span>Website erstellt von <a href="https://jgc-lumen.de" target="_blank" rel="noopener">JGC Lumen</a></span>
-      <span data-ver>v2.1.1</span>
+      <span data-ver>v2.1.2</span>
     </div>
   </footer>
 

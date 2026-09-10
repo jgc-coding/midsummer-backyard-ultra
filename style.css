@@ -66,6 +66,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 ul { list-style: none; }
 
 :focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; border-radius: 4px; }
+/* Sprungziele (Sektionen) bekommen per Skript den Fokus, damit die Tastatur nach
+   Skip-Link und Anker-Klick im Inhalt weitertabt. Der 3px-Rahmen um eine ganze
+   Sektion waere nur Laerm — das Weitertabben selbst ist hier das Feedback. */
+[tabindex="-1"]:focus-visible { outline: none; }
 
 .container { width: min(var(--container), 100% - clamp(32px, 8vw, 120px)); margin-inline: auto; }
 
@@ -178,7 +182,9 @@ body.has-morph .nav.is-docked .nav__brand { visibility: visible; opacity: 1; }
 .h2__b { color: var(--fg-3); }
 
 .section-head { display: grid; grid-template-columns: 1fr 330px; gap: 40px; align-items: end; margin-bottom: 46px; }
-.section-head__p { font-size: 16px; line-height: 1.6; color: var(--fg-2); padding-bottom: 6px; }
+/* max-width: unterhalb von 980px wird der Kopf einspaltig, und ohne Deckel laeuft
+   der Absatz dort auf gemessene 97-124 Zeichen je Zeile (Richtwert: 75). */
+.section-head__p { font-size: 16px; line-height: 1.6; color: var(--fg-2); padding-bottom: 6px; max-width: 60ch; }
 
 .cross { display: inline-block; width: 9px; height: 9px; flex: none; position: relative; margin-right: 10px; }
 .cross::before, .cross::after { content: ''; position: absolute; background: var(--glow); }

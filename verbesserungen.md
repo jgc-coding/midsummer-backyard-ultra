@@ -22,17 +22,6 @@ Kleinbefunden unter `.impeccable/critique/2026-09-10T18-11-59Z__localhost.md`.
 
 ## Offen
 
-- [ ] **V1** (B) Skip-Link versetzt den Tastaturfokus nicht
-      Gefahr: Wer mit der Tastatur bedient, drückt „Direkt zum Inhalt", landet mit dem
-      nächsten Tab aber wieder in der Navigation — der Link ist für genau seine Zielgruppe wirkungslos.
-      Beleg: `main.js:378-386` (preventDefault ohne focus()-Aufruf) · Aufwand: S
-      Zusatzbeleg: Laufzeittest 2026-09-10 — Tab → Enter auf Skip-Link → nächstes Tab fokussiert
-      `.nav__brand` statt Inhalt; zusätzlich kein Scroll in der Messumgebung (rAF-Artefakt, am
-      Gerät scrollt es). Fix-Skizze: Ziel `tabindex="-1"` geben und nach dem Scrollen fokussieren.
-- [ ] **V2** (B) Social-Vorschau unvollständig (og:image relativ, og:url und twitter:card fehlen)
-      Gefahr: Beim Teilen der Seite in Messengern und Social Media erscheint kein Vorschaubild —
-      ausgerechnet für eine Event-Seite, die über Instagram beworben wird.
-      Beleg: `index.html:11` (og:image="assets/logo.jpg", relative URL; Parser verlangen absolute) · Aufwand: S
 - [ ] **V3** (B) Impressum und Datenschutzerklärung fehlen
       Gefahr: Deutsche Event-Seite ohne Anbieterkennzeichnung; die Karte lädt zudem
       OSM-Kacheln von einem Drittserver (IP-Übertragung). Abmahn-/Bußgeldrisiko.
@@ -40,17 +29,6 @@ Kleinbefunden unter `.impeccable/critique/2026-09-10T18-11-59Z__localhost.md`.
       Hinweis: keine Rechtsberatung — ob die Seite als geschäftsmäßig gilt, muss Gabriel
       einschätzen (Footer nennt sie „Konzept-Landingpage", bewirbt aber ein reales Event).
       Positiv: Fonts liegen lokal, kein Google-Fonts-Abfluss.
-- [ ] **V4** (C) Intro-Absätze der Sektionen ohne Breitendeckel
-      Gefahr: Unter 980 px läuft der Erklärtext über die volle Containerbreite — gemessen
-      97 Zeichen je Zeile bei 768 px, 124 bei 980 px (Richtwert: 75). Lange Zeilen lesen sich mühsam.
-      Beleg: `style.css:181` (.section-head__p ohne max-width) + `style.css:409` (einspaltig ab 980) · Aufwand: S
-- [ ] **V5** (C) Regel-Bilder laden ohne loading="lazy"
-      Gefahr: Alle vier Fotos (je bis 500 KB) laden sofort beim Seitenstart, obwohl sie unter
-      dem sichtbaren Bereich liegen — auf Mobilfunk zahlt jeder Besucher, auch wer nie hinscrollt.
-      Beleg: `index.html:144/159/174/189` (img ohne loading-Attribut); Netzwerkliste 2026-09-10:
-      alle vier im Initial-Load · Aufwand: S
-      Achtung bei Umsetzung: Wechselwirkung mit dem data-optional-Fallback (img.complete-Pfad in
-      `main.js:353-360`) prüfen.
 - [ ] **V6** (C) Karten-Routen-Fetches scheitern still
       Gefahr: Kommen die GeoJSON-Dateien nicht an, zeigt die Karte kommentarlos keine Route —
       niemand erfährt, dass etwas fehlt (Regel: nie still scheitern).
@@ -120,4 +98,10 @@ impeccable-Snapshot dieser Runde.
 
 ## Erledigt
 
-(noch nichts)
+- **V1** Skip-Link/Anker-Klicks versetzen den Tastaturfokus aufs Sprungziel — erledigt in v2.1.2
+- **V2** Social-Vorschau: absolute og-URLs, og:url/twitter:card, neues 1200×630-Vorschaubild
+  `assets/og-vorschau.jpg` (das alte og:image-Logo war mit 124×124 px unter dem Parser-Minimum;
+  Vorschaubild trägt den Termin als Pixeltext — bei Terminwechsel neu erzeugen, Anleitung im
+  index.html-Kommentar) — erledigt in v2.1.2
+- **V4** Intro-Absätze auf 60ch gedeckelt (vorher 97–124 Zeichen je Zeile bei 768–980 px) — erledigt in v2.1.2
+- **V5** Regel-Bilder mit loading="lazy" + decoding="async"; Platzhalter-Fallback geprüft — erledigt in v2.1.2

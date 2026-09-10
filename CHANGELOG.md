@@ -3,7 +3,27 @@
 Alle nennenswerten Änderungen an diesem Projekt. Format lose nach [Keep a Changelog](https://keepachangelog.com/),
 Versionierung nach [SemVer](https://semver.org/).
 
-## [2.1.1] — 2026-09-10
+## [2.1.2] — 2026-09-10
+### Behoben
+- **Der Skip-Link und die Anker-Navigation nehmen jetzt den Tastaturfokus mit.** Vorher scrollte
+  ein Klick nur; wer mit der Tastatur „Direkt zum Inhalt" wählte, landete mit dem nächsten Tab
+  trotzdem wieder in der Navigationsleiste. Sprungziele werden jetzt programmatisch fokussiert
+  (ohne Rahmen um die ganze Sektion — das Weitertabben im Inhalt ist das Feedback).
+- **Beim Teilen der Seite erscheint jetzt ein Vorschaubild.** Die Bild-Angabe war eine relative
+  URL, die Social-Media-Parser nicht auflösen; zudem war das Logo mit 124 × 124 px unter dem
+  Minimum der Dienste. Neu: `assets/og-vorschau.jpg`, ein 1200 × 630-Standbild des Heros, samt
+  `og:url`, `og:type`, `og:locale` und `twitter:card`. Das Bild trägt den Termin als Pixeltext —
+  bei einem Terminwechsel neu erzeugen (Anleitung im Kommentar in `index.html`).
+- **Die Intro-Absätze der Sektionen sind auf 60 Zeichen Breite gedeckelt.** Unter 980 px wird
+  der Sektionskopf einspaltig, und der Erklärtext lief auf gemessene 97 (768 px) bis
+  124 Zeichen (980 px) je Zeile — Richtwert ist 75.
+
+### Geändert
+- **Die vier Regel-Fotos laden erst, wenn man in ihre Nähe scrollt** (`loading="lazy"`).
+  Vorher lud jeder Besucher beim Start bis zu 2 MB Bilder, auch ohne je hinzuscrollen.
+  Der Platzhalter-Mechanismus bleibt: Bis ein Bild da ist, steht die beschriftete Fläche.
+
+
 ### Behoben
 - **Die Regel-Bilder zeigten je nach Bildschirmbreite einen anderen Ausschnitt, meist den
   falschen.** Alle vier Dateien sind 4:5 hochkant, der Bildplatz der Karte wechselte sein
