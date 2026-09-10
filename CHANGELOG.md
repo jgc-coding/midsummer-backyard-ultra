@@ -31,6 +31,11 @@ Versionierung nach [SemVer](https://semver.org/).
   Geprüft bei 375, 390, 768, 844 × 390, 980, 1440 × 700 und 1440 × 900: kein Textüberlauf, keine
   Konsolenfehler, `prefers-reduced-motion` unverändert vollständig lesbar.
 
+- **Der Footer-Link auf JGC Lumen führte in eine Sicherheitswarnung.** Er zeigte auf
+  `https://www.jgc-lumen.de`; das Zertifikat der Seite gilt aber nur für `jgc-lumen.de` ohne
+  „www" (`ERR_TLS_CERT_ALTNAME_INVALID`). Der Link steht jetzt ohne „www". Bei der Gelegenheit
+  alle externen Links der Seite geprüft — freiburg.run, Instagram und Strava sind in Ordnung.
+
 ## [2.1.0] — 2026-09-10
 ### Hinzugefügt
 - **Die vier Regel-Karten haben echte Bilder vom Rennen 2026.** Zwei stammen von Gabriel (Läufer
