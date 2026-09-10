@@ -43,7 +43,9 @@ Build-Schritt, Hosting über GitHub Pages.
 - 3. Auflage: Sa **19.06.2027, 06:00 Uhr**. Strecke: Dreisam, Hirzbergsteg ↔ Schlosssteg Ebnet.
   Der Termin steht an genau einer Stelle: `EVENT_START` in `main.js`; alle sichtbaren
   Datumsangaben und der Countdown leiten sich daraus ab (nur `<meta>`-Texte im `<head>`
-  nennen ihn zusätzlich als festen Text).
+  nennen ihn zusätzlich als festen Text). Bei einem Terminwechsel zusätzlich
+  `assets/og-vorschau.jpg` neu erzeugen — das Teilen-Vorschaubild trägt den Termin als
+  Pixeltext (Anleitung im Kommentar in `index.html`).
 - Backyard-Regel: 6,706 km „Yard" jede Stunde; wer eine Runde nicht schafft, ist raus →
   Last Runner Standing. Erfunden von Gary „Lazarus Lake" Cantrell (2011).
 - Anmeldung/CTA: `freiburg.run/event/midsummer-backyard-ultra/` + Instagram `@midsummerbackyard`.
@@ -115,6 +117,11 @@ Build-Schritt, Hosting über GitHub Pages.
   bleibt jedes `.reveal` unsichtbar und jede Überschrift undurchsichtig — das sieht aus wie ein
   kaputtes Aufblenden, ist aber nur die Messumgebung. DOM-Abfragen zu Größen und Überbreite
   stimmen trotzdem, sobald per `resize_window` eine echte Viewport-Größe gesetzt ist.
+  Zusätzlich drosselt Chrome dort `requestAnimationFrame` auf ~1 Frame je 500 ms (gemessen
+  10.09.2026): Lenis-`scrollTo` animiert nicht, `loading="lazy"`-Bilder laden nicht nach,
+  Screenshots zeigen schwarze Composited-Ebenen, simulierte Tastendrücke gehen verloren.
+  Verhalten dann synchron per JS prüfen (`element.click()` und im selben Skript messen) —
+  oder gleich headless.
 - **Headless-Aufnahmen dieser Seite brauchen die Diagnose-Parameter aus `main.js`:** `?vh=900`
   für Vollseiten-Aufnahmen (der 100svh-Hero würde sonst so hoch wie das 9600er-Fenster und schöbe
   die Seite aus dem Bild) und `?y=<px>` für Scroll-Zustände — echtes Scrollen erzeugt in

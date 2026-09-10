@@ -8,6 +8,10 @@ package-lock.json
 .claude/*
 !.claude/pruefen.txt
 
+# Critique-Gedächtnis von /improve (impeccable): interne Analyse-Notizen,
+# bleiben lokal — das Repo ist öffentlich. Auf Wunsch versionierbar.
+.impeccable/
+
 # Quell-Rohdaten (personenbezogene Garmin-Aufzeichnung — nicht veröffentlichen)
 Tracking Daten Backyard.fit
 Bildmaterial/
