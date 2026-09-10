@@ -110,6 +110,15 @@ Build-Schritt, Hosting über GitHub Pages.
   die Seite aus dem Bild) und `?y=<px>` für Scroll-Zustände — echtes Scrollen erzeugt in
   Aufnahmen ein schwarzes Band mit eingefrorenen fixen Elementen, der Parameter rendert den
   Zustand darum, ohne zu scrollen.
+- **`?y=` liefert KEIN Bild weiter unten.** Es rendert nur den Zustand (Lichtreise, Morph); der
+  sichtbare Ausschnitt bleibt der Seitenanfang. Für einen Abschnitt weiter unten eine
+  Vollseiten-Aufnahme machen (`?vh=900`, Fensterhöhe über die Seitenhöhe, etwa `1440,8000`) und
+  daraus mit `ffmpeg -vf crop=B:H:X:Y` ausschneiden. Die Y-Werte vorher im Browser holen:
+  `element.getBoundingClientRect().top + window.scrollY`.
+- **ffmpeg beim Sichten von Bildmaterial: drei Fallen.** Der hiesige Build kann kein
+  `-pattern_type glob` (Dateien vorher als `img%03d.jpg` durchnummerieren), `drawtext` scheitert
+  mangels Fontconfig, und eine Bildserie bricht beim ersten Größenwechsel ab — Kacheln also
+  einzeln auf ein Maß bringen, dann erst `tile=` anwenden.
 - **Headless-Chrome-Aufnahmen zeigen CSS-Übergänge nicht zu Ende gelaufen.** Ein längeres
   `--virtual-time-budget` hilft nicht; die Animationsuhr hängt nicht daran. Zeichenweise
   aufblendende Überschriften wirken darauf immer hinten abgeschnitten. Vor dem Melden eines

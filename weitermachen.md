@@ -1,68 +1,75 @@
 # Weitermachen
 
-Stand: 09.09.2026 · Version 2.0.0 · Tags `v1.4.0` + `v2.0.0` · main gepusht, Seite live
+Stand: 10.09.2026 · Version 2.1.0 · Tag `v2.1.0` · main gepusht, Seite live
 
 <!-- Hier steht bewusst keine Commit-Nummer: save-state schreibt diese Datei und committet sie
      danach, jede notierte Nummer waere also sofort eine zu alt. Der aktuelle Stand ist `git log`. -->
 
 ## Stand
 
-Großer Tag in drei Akten.
+Die Seite hat zum ersten Mal echte Bilder vom Rennen.
 
-**Hero-Retrospektive.** Gabriels Befund (ChatGPT traf den gewünschten Layer-Effekt, meine
-Versuche nicht) ist aufgearbeitet: Kernfehler waren umgefärbtes Bildmaterial, Verankerung an der
-dunklen Restseite statt an der hellen Referenz und stundenlange Alleingänge ohne Gabriels Blick.
-Daraus wurden die drei Regeln im Abschnitt „Gestaltungsarbeit" der CLAUDE.md.
+**Material gesichtet.** Gabriel lieferte den Ordner `C:\Users\chime\Desktop\Backyard Ultra 2026\`
+mit dem kompletten Material der 2. Auflage: siebzehn Handy-Videos vom Renntag, Einzelfotos,
+Streckenaufnahmen und zwei fertig geschnittene Filme. Der entscheidende Befund beim Sichten: das
+Material endet um 18:00 Uhr nach zwölf Runden, es gibt **keine einzige Nachtaufnahme**. Alles ist
+hochkant gefilmt.
 
-**Neuer Hero mit Morph.** Der freigegebene ChatGPT-Hero (Ordner `Hero/` im Hauptprojekt) ist
-eingebaut — Bildmaterial pixelgenau übernommen, Stile ans Stilsystem der Seite angepasst, die
-Abdunklung unten läuft in die Grundfarbe der Lichtreise aus. Sonne und Schriftzug starten frei
-im Hero und morphen beim Scrollen in die Leiste (Andocken auf ~0,3 px verifiziert, am Anfang ist
-oben links bewusst nichts). Details im CHANGELOG unter 1.4.0.
+**Sektion „Ein Tag und eine Nacht" entfernt.** Sie versprach vier Tageszeiten im Bild, für die
+Hälfte davon gab es kein Material. Statt die Lücke zu füllen, ist sie auf Gabriels Entscheidung
+weg — samt Tab-Karussell, Stilen und den Navigationspunkten „Stunden".
 
-**Eine Fassung, v2.0.0.** Auf Gabriels Entscheidung ist „Tageslauf" die einzige Fassung und liegt
-im Projekt-Root. Varianten 01–05, Galerie, `hero-lab/`, `DESIGN.md` und nur dort genutzte Assets
-sind gelöscht; der Stand davor bleibt als Tag `v1.3.0`. Die Karten-Scrollfalle vom Handy ist
-behoben (Ein-Finger-Ziehen aus). `.claude/pruefen.txt` angelegt und per `.gitignore`-Ausnahme
-ins Repo geholt — das Done-Gate prüft jetzt wirklich.
+**Vier Regel-Karten bebildert.** Zwei Bilder von Gabriel (Läufer auf dem Uferweg an der Dreisam
+bei Regel 1, Siegerpokal mit der Gravur „Only survivor" bei Regel 4), zwei aus dem Videomaterial
+gezogen (die Gruppe geht gemeinsam auf die Runde bei Regel 2, der leere Uferweg bei Regel 3 —
+der Weg, der ohne dich weitergeht). Vorgabe war: Gruppen statt Einzelpersonen, kein privates
+Camp. Herkunft und Rechtestand jeder Datei stehen in `media/BILDER.md`.
 
-Live: `https://jgc-coding.github.io/midsummer-backyard-ultra/` — das ist ab jetzt der Weg für
-den Handy-Blick. Das private Artefakt (claude.ai/code/artifact/65fe4127-…) ist ein Zweitweg und
-wurde zuletzt mit dem 2.0.0-Stand aktualisiert.
+**Footer** trägt jetzt „Website erstellt von JGC Lumen" mit Link auf `www.jgc-lumen.de`.
+
+Live: `https://jgc-coding.github.io/midsummer-backyard-ultra/` — der Weg für den Handy-Blick.
+Das private Artefakt (claude.ai/code/artifact/65fe4127-…) ist ein Zweitweg und steht noch auf
+dem 2.0.0-Stand.
 
 ## Offen
 
-- **Personenrechte für zwei Bilder ungeklärt.** Auf `regel-yard.jpg` und `regel-stunde.jpg` sind
-  fremde Teilnehmende erkennbar. Vor einer Veröffentlichung braucht es deren Einwilligung und das
-  Nutzungsrecht der aufnehmenden Person (Details: `media/BILDER.md`). Bis dahin bleibt v2.1.0 auf
-  dem Arbeitsbranch und geht nicht nach `main`.
 - **Morph-Bildtakt auf echtem Gerät unbestätigt.** Rechnerisch und in Standbildern geprüft;
   Gabriel testet am Handy (Hub-Aufgabe). Meldet er Ruckeln: zuerst reproduzieren (Mess-Fallen in
   der CLAUDE.md!), Verdächtige wären das Inline-Transform pro Frame auf der Marke und der
   SVG-Farbfilter des Schriftzugs.
+- **Bild für Regel 3 ist eine Deutung, keine Abbildung.** Der leere Uferweg steht für „Das Aus",
+  weil es im Material kein Bild von jemandem gibt, der aufhört — ohne Gabriels privates Camp zu
+  zeigen. Angebot zum Tausch steht; Gabriel hat sich dazu noch nicht geäußert.
 
 ## Nächste Schritte (Claude)
 
-1. Sobald Gabriel die Personenrechte geklärt hat: v2.1.0 nach `main` mergen, taggen, deployen.
-   Sagt er ab, die beiden betroffenen Bilder ersetzen oder auf Platzhalter zurücknehmen.
-2. Aufräumrest erledigen, sobald die alten Sitzungen geschlossen sind (Ordner sind aktuell von
-   deren Prozessen gesperrt; Inhalte sind vollständig gemergt, es geht nur noch um leere Hüllen):
+1. Wenn Gabriel vom Handy Ruckeln meldet: Diagnose nach dem Muster unter **Offen**, nicht raten.
+2. Letzten Worktree-Rest entfernen, sobald die Sitzung geschlossen ist, die ihn sperrt. Die
+   Git-Registrierung ist schon weg, es geht nur noch um den leeren Ordner:
 
    ```
-   Remove-Item -Recurse -Force "C:\Projekte\Midsummer Backyard Website\.claude\worktrees\variante-6-fortsetzen-b2e736", "C:\Projekte\Midsummer Backyard Website\.claude\worktrees\hero-section-layer-effect-affb3e"
-   git -C "C:\Projekte\Midsummer Backyard Website" worktree remove ".claude/worktrees/hero-layer-effekt-203e0c"
-   git -C "C:\Projekte\Midsummer Backyard Website" branch -d claude/hero-layer-effekt-203e0c
-   git -C "C:\Projekte\Midsummer Backyard Website" worktree prune
+   Remove-Item -Recurse -Force "C:\Projekte\Midsummer Backyard Website\.claude\worktrees\hero-layer-effekt-203e0c"
    ```
 
-3. Falls Gabriel vom Handy Ruckeln meldet: Diagnose nach dem Muster unter **Offen**, nicht raten.
+3. Diesen Worktree (`website-arbeit-b563f5`) samt Branch entfernen, sobald diese Sitzung zu ist —
+   der Stand ist vollständig in `main` und gepusht:
+
+   ```
+   git -C "C:\Projekte\Midsummer Backyard Website" worktree remove ".claude/worktrees/website-arbeit-b563f5"
+   git -C "C:\Projekte\Midsummer Backyard Website" branch -d claude/website-arbeit-b563f5
+   ```
 
 ## Aktuelle Stolperfallen
 
-- **Zwei alte Worktree-Ordner liegen abgemeldet, aber unlöschbar auf der Platte** (Prozesssperre
-  noch offener Claude-Sitzungen) — Befehle dafür stehen oben in Schritt 2.
+- **Die Bildrechte sind nicht geklärt, die Bilder sind trotzdem live.** Gabriel hat das am
+  10.09.2026 ausdrücklich entschieden und verantwortet es. Auf `regel-yard.jpg` und
+  `regel-stunde.jpg` sind fremde Teilnehmende erkennbar; die Einwilligung steht als Hub-Aufgabe.
+  Kommt eine Beschwerde, ist der schnellste Rückweg, die beiden Dateien zu löschen — die Seite
+  zeigt an ihrer Stelle automatisch wieder Platzhalter.
+- Ein alter Worktree-Ordner liegt abgemeldet, aber gesperrt auf der Platte — Befehl oben in
+  Schritt 2.
 - Die Hub-Karte dieses Projekts heißt **„Midsummer Backyard"** (nicht „…Website").
-- Headless-Aufnahmen nur noch mit den Diagnose-Parametern `?y=`/`?vh=` — Details und die
-  übrigen Mess-Fallen stehen dauerhaft in der CLAUDE.md.
-- Das Browser-Log ist seit v2.1.0 leer — alle vier Bildplätze sind belegt, es fehlt keine Datei
-  mehr. Tauchen wieder 404-Meldungen auf, fehlt tatsächlich etwas.
+- Das Rohmaterial des Rennens liegt außerhalb des Repos unter
+  `C:\Users\chime\Desktop\Backyard Ultra 2026\` und ist nicht versioniert.
+- Im Hauptbaum liegt ein unversionierter Ordner `Hero/` mit dem Bildmaterial des Heros. Nicht
+  löschen — die Hero-Ebenen stammen daraus.
