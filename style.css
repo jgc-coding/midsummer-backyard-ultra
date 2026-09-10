@@ -208,7 +208,15 @@ body.has-morph .nav.is-docked .nav__brand { visibility: visible; opacity: 1; }
   content: attr(data-shot); position: absolute; left: 16px; right: 16px; bottom: 15px;
   font-family: var(--m); font-size: 11px; line-height: 1.5; letter-spacing: 0.02em; color: var(--fg-3);
 }
-.shot img { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: cover; }
+/* Der Bildplatz ist mal hochformatig, mal ein flaches Band — was übrig bleibt,
+   entscheidet `--focus`: der Punkt des Bildes, der beim Beschneiden immer im
+   Fenster stehen bleibt. Ohne Angabe schneidet der Browser mittig, und genau
+   dort ist bei diesen Aufnahmen nichts Wichtiges. Werte je Bild im HTML,
+   begründet in media/BILDER.md. */
+.shot img {
+  position: relative; z-index: 1; width: 100%; height: 100%;
+  object-fit: cover; object-position: var(--focus, 50% 50%);
+}
 /* Sobald ein echtes Foto geladen ist, verschwindet die Beschriftung dahinter. */
 .shot.has-photo::after, .shot.has-photo::before { content: none; }
 
@@ -289,7 +297,13 @@ body.has-morph .nav.is-docked .nav__brand { visibility: visible; opacity: 1; }
 .stack { position: relative; margin-top: 10px; }
 .deck {
   position: sticky; top: 108px; display: grid; grid-template-columns: 1fr 1fr;
-  height: 580px; margin-bottom: 46px; border-radius: 26px; overflow: clip;
+  /* 580px, solange das Fenster hoch genug ist — kleben kann nur, was samt
+     Klebeabstand hineinpasst. Bei niedrigen Fenstern (Handy quer, kleiner
+     Laptop) wird die Karte flacher, aber nie unter 400px: darunter passte der
+     längste Text nicht mehr, und abgeschnittener Text ist schlimmer als eine
+     Karte, die ausnahmsweise nicht klebt. */
+  height: max(400px, min(580px, 100vh - 130px));
+  margin-bottom: 46px; border-radius: 26px; overflow: clip;
   background: var(--ground-2); border: 1px solid var(--line);
   box-shadow: 0 0 0 6px rgba(244, 233, 211, 0.02), 0 50px 110px -50px rgba(0, 0, 0, 0.95);
   transform-origin: 50% 0;
@@ -397,11 +411,30 @@ body.has-morph .nav.is-docked .nav__brand { visibility: visible; opacity: 1; }
   .route__facts { grid-template-columns: 1fr 1fr; }
   .route__facts > div:last-child { grid-column: 1 / -1; }
 
+  .footer__grid { grid-template-columns: 1fr 1fr; gap: 30px; }
+  .footer__brand { grid-column: 1 / -1; }
+}
+
+/* Regel-Karten: eigener Umbruch bei 760px, nicht bei 980px.
+   Einspaltig liegt das Bild in einem Band über dem Text, und je breiter der
+   Bildschirm, desto flacher wird dieses Band. Bei 980px wäre es 4,7:1 — von
+   einer 4:5-Aufnahme bliebe ein Streifen von 17 Prozent Höhe. Genau diese
+   Breite stellt Chrome am Handy ein, wenn man „Desktop-Website" wählt, und
+   deshalb sahen dort alle Bilder falsch aus. Zwischen 760 und 980 bleibt die
+   Karte darum zweispaltig; der Bildplatz ist dann hochformatig wie die
+   Aufnahmen selbst, und in der Höhe fehlt nichts (geprüft: der Text passt
+   auch in der schmalen Spalte ohne Überlauf). */
+@media (max-width: 760px) {
   /* Der Kartenstapel bleibt ein Stapel. Die Karte richtet sich nach ihrem
      Text (sonst klafft unter kurzen Absätzen ein Loch), bleibt aber nach oben
      gedeckelt — kleben kann nur, was niedriger ist als das Sichtfenster. */
   .deck {
-    top: 84px; grid-template-columns: 1fr; grid-template-rows: 190px auto;
+    top: 84px; grid-template-columns: 1fr;
+    /* Das Bildband wächst mit der Breite, weicht aber zurück, wenn der
+       Bildschirm niedrig ist: Die Karte muss unter 78vh bleiben, und der Text
+       braucht davon rund 345px. Lieber ein kleineres Bild als ein
+       abgeschnittener Absatz. */
+    grid-template-rows: max(150px, min(62vw, 78vh - 345px, 320px)) auto;
     height: auto; min-height: 430px; max-height: 78vh;
     margin-bottom: 26px; border-radius: 22px;
   }
@@ -411,9 +444,6 @@ body.has-morph .nav.is-docked .nav__brand { visibility: visible; opacity: 1; }
   .deck__title { margin-top: 14px; }
   .deck__p { margin-top: 14px; font-size: 15.5px; }
   .deck__foot { padding-top: 16px; font-size: 13.5px; }
-
-  .footer__grid { grid-template-columns: 1fr 1fr; gap: 30px; }
-  .footer__brand { grid-column: 1 / -1; }
 }
 
 /* Hero schmal: eigener Umbruch bei 700px, weil die Werte auf die Bildbreiten
@@ -445,7 +475,9 @@ body.has-morph .nav.is-docked .nav__brand { visibility: visible; opacity: 1; }
   .countdown__row { grid-template-columns: repeat(2, 1fr); gap: 22px 14px; }
   .route__facts { grid-template-columns: 1fr; }
   .faq details p, .faq__kit { padding-right: 8px; }
-  .deck { top: 76px; grid-template-rows: 165px auto; min-height: 400px; }
+  /* Die Bandhöhe bleibt die Formel von oben — hier nur der niedrigere
+     Klebepunkt und die kleinere Mindesthöhe. */
+  .deck { top: 76px; min-height: 400px; }
   .footer__bottom { flex-direction: column; gap: 8px; }
 }
 

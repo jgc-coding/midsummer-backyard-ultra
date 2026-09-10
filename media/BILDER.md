@@ -6,9 +6,27 @@ Layout, sie bleibt also auch dann vollständig ansehbar.
 
 Format überall: JPG, sRGB, 1400 × 1750 (4:5 hochkant), unter 500 KB pro Datei.
 
-Der Bildbereich einer Regel-Karte ist **auf dem Desktop annähernd quadratisch und auf dem Handy
-nur 190 px hoch**. Weil `object-fit: cover` mittig beschneidet, muss das Motiv im mittleren Band
-des Bildes sitzen — sonst bleiben auf dem Handy nur Beine oder Hintergrund übrig.
+## Zuschnitt — der Fokuspunkt entscheidet
+
+Der Bildbereich einer Regel-Karte hat kein festes Seitenverhältnis: auf dem Desktop ist er
+annähernd quadratisch, auf dem Handy ein Querband. Der Browser füllt ihn mit `object-fit: cover`
+und lässt den Überstand stehen — standardmäßig aus der Mitte heraus. Bei diesen Aufnahmen liegt
+das Wichtige aber im oberen Drittel, weshalb genau die Köpfe als Erstes wegfielen.
+
+Deshalb trägt **jedes Bild im HTML einen eigenen Ankerpunkt** als `style="--focus: 50% Y%"`
+(seit v2.1.1). Der Wert sagt, welcher Punkt der Bildhöhe beim Beschneiden im Fenster bleibt.
+
+| Datei | `--focus` | Anker |
+|---|---|---|
+| `regel-yard.jpg` | 50% 25% | Kappe des vorderen Läufers |
+| `regel-stunde.jpg` | 50% 32% | Köpfe der Gruppe |
+| `regel-aus.jpg` | 50% 25% | Punkt, in dem der Weg verschwindet |
+| `regel-sieger.jpg` | 50% 35% | Schale und Emblem des Pokals |
+
+Wer eine Datei austauscht, muss den Wert nachziehen. Vorgehen: das Bild in einem Fenster von
+etwa 2:1 ansehen und den Wert so wählen, dass das Motiv drin bleibt — das ist der härteste Fall
+(kleines Handy, dort sind rund 41 Prozent der Bildhöhe sichtbar). Ein zu 4:5 hochkantes Motiv
+bleibt trotzdem ein Kompromiss; ein von Haus aus querformatiges Bild sitzt überall besser.
 
 ---
 

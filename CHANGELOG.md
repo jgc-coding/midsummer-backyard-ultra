@@ -3,6 +3,34 @@
 Alle nennenswerten Änderungen an diesem Projekt. Format lose nach [Keep a Changelog](https://keepachangelog.com/),
 Versionierung nach [SemVer](https://semver.org/).
 
+## [2.1.1] — 2026-09-10
+### Behoben
+- **Die Regel-Bilder zeigten je nach Bildschirmbreite einen anderen Ausschnitt, meist den
+  falschen.** Alle vier Dateien sind 4:5 hochkant, der Bildplatz der Karte wechselte sein
+  Seitenverhältnis aber zwischen 0,78:1 und 4,66:1 — und `object-fit: cover` schneidet mittig,
+  wo bei diesen Aufnahmen nichts Wichtiges steht. Am Handy blieben 37 Prozent der Bildhöhe
+  übrig, in der Desktop-Ansicht am Handy nur 17 Prozent; die Köpfe fielen als Erstes weg.
+  Drei Änderungen, gemessen im Browser:
+  - Jedes Bild trägt jetzt einen **Fokuspunkt** (`--focus`), der beim Beschneiden im Fenster
+    bleibt: Kappe des Läufers, Köpfe der Gruppe, Fluchtpunkt des Weges, Schale des Pokals.
+    Werte und Begründung in `media/BILDER.md`.
+  - Das **Bildband der Handy-Ansicht** ist nicht mehr fix 165/190 px hoch, sondern wächst mit
+    der Breite und weicht zurück, wenn der Bildschirm niedrig ist — die Karte muss unter 78vh
+    bleiben, sonst klebt sie nicht mehr. Sichtbare Bildhöhe bei 390 px: 54 statt 37 Prozent.
+  - Der **Umbruch der Regel-Karten liegt bei 760 px statt 980 px**. Damit ist der Bereich
+    dazwischen wieder zweispaltig, der Bildplatz hochformatig, und in der Höhe fehlt nichts.
+    Genau 980 px stellt Chrome am Handy ein, wenn man „Desktop-Website" wählt.
+
+  Die Bilddateien selbst sind unverändert.
+
+- **Im Querformat schnitt die Regel-Karte Text ab.** Bei einem niedrigen Sichtfenster (Handy quer,
+  844 × 390) griff der Deckel von 78vh, der Inhalt brauchte aber mehr — der letzte Absatz war
+  weg. Die Kartenhöhe ist jetzt `max(400px, min(580px, 100vh - 130px))`: so hoch wie das Fenster
+  erlaubt, nie unter 400 px. Auf üblichen Bildschirmen bleibt es bei den bisherigen 580 px.
+
+  Geprüft bei 375, 390, 768, 844 × 390, 980, 1440 × 700 und 1440 × 900: kein Textüberlauf, keine
+  Konsolenfehler, `prefers-reduced-motion` unverändert vollständig lesbar.
+
 ## [2.1.0] — 2026-09-10
 ### Hinzugefügt
 - **Die vier Regel-Karten haben echte Bilder vom Rennen 2026.** Zwei stammen von Gabriel (Läufer

@@ -64,10 +64,11 @@ Build-Schritt, Hosting über GitHub Pages.
 - **Nur relative Pfade** (Project-Pages liegen unter `/midsummer-backyard-ultra/` — führende `/` brechen Assets).
 - Datei-Edits über das Edit/Write-Tool (UTF-8 ohne BOM), nicht per PowerShell-Bulk-Replace (Umlaute!).
 - `prefers-reduced-motion`-Fallback ist Pflicht; Mobile-Collapse je Section explizit.
-- **Bilder fürs Regel-Deck gehören ins mittlere Band.** Der Bildbereich einer Karte ist auf dem
-  Desktop annähernd quadratisch, auf dem Handy nur 190 px hoch; `object-fit: cover` beschneidet
-  mittig. Ein 4:5-Bild verliert am Handy also Kopf und Füße. Beim Zuschneiden das Motiv so legen,
-  dass es im mittleren Drittel steht, und beide Breiten prüfen — nicht nur die Desktop-Ansicht.
+- **Jedes Bild im Regel-Deck braucht einen Fokuspunkt.** Der Bildplatz einer Karte hat kein festes
+  Seitenverhältnis, `object-fit: cover` würde also je nach Bildschirmbreite einen anderen
+  Ausschnitt zeigen — mittig, und dort steht bei diesen Aufnahmen nichts Wichtiges. Darum trägt
+  jedes `<img>` ein `style="--focus: 50% Y%"`; Werte und Begründung in `media/BILDER.md`. Beim
+  Bildtausch den Wert nachziehen und im härtesten Fenster prüfen (etwa 2:1, kleines Handy).
 - **Effekte auf schmalen Bildschirmen kleiner machen, nicht abschalten.** Ein Breakpoint, der
   Bewegung per `!mobile` ausknipst, lässt auf dem Handy nur Einblendungen übrig — und dort schaut
   die Mehrheit. Kleinerer Ausschlag (zweite Rate, z. B. `data-rate-s`), geringere Auflösung oder
@@ -87,6 +88,10 @@ Build-Schritt, Hosting über GitHub Pages.
   sondern nur an der Dateigröße (~2 KB statt ~7 KB). Stattdessen `tile.openstreetmap.org`;
   für ein dunkles Layout nur die Kachelebene per CSS-Filter einfärben, damit Route, Marker und
   Quellenangabe unverändert lesbar bleiben.
+- **980 px ist eine echte Gerätebreite, kein Niemandsland.** Wählt man am Handy „Desktop-Website",
+  stellt Chrome genau diese Seitenbreite ein. Ein Umbruch bei `max-width: 980px` trifft damit den
+  ungünstigsten Punkt: das schmale Layout auf voller Tabletbreite. Layouts, deren Proportionen
+  von der Breite abhängen (Bildbänder!), dort nicht enden lassen — 760 px ist der sichere Ort.
 - **Bei scroll-getriebenen Seiten kein `backdrop-filter` auf mitlaufenden Leisten.** Zeichnet die
   Seite permanent neu, muss der Compositor den Hintergrund in jedem Frame erneut lesen; Chrome
   friert dann ein (nachgewiesen an Variante 06). Deckende Fläche statt Weichzeichner.
