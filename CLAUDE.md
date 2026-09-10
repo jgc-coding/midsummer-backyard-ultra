@@ -88,6 +88,11 @@ Build-Schritt, Hosting über GitHub Pages.
   sondern nur an der Dateigröße (~2 KB statt ~7 KB). Stattdessen `tile.openstreetmap.org`;
   für ein dunkles Layout nur die Kachelebene per CSS-Filter einfärben, damit Route, Marker und
   Quellenangabe unverändert lesbar bleiben.
+- **Externe Links im Browser gegenprüfen, nicht nur per Skript.** Strava antwortet einem
+  Prüfskript mit 403 (Bot-Sperre), obwohl der Link einwandfrei lädt; umgekehrt taucht ein
+  Zertifikatsfehler gar nicht als Statuscode auf, weil die Verbindung vorher abbricht
+  (`ERR_TLS_CERT_ALTNAME_INVALID` bei `www.jgc-lumen.de`, 10.09.2026). Die Seite verlinkt
+  freiburg.run, Instagram, Strava und jgc-lumen.de — vor einem Release alle vier ansehen.
 - **980 px ist eine echte Gerätebreite, kein Niemandsland.** Wählt man am Handy „Desktop-Website",
   stellt Chrome genau diese Seitenbreite ein. Ein Umbruch bei `max-width: 980px` trifft damit den
   ungünstigsten Punkt: das schmale Layout auf voller Tabletbreite. Layouts, deren Proportionen
