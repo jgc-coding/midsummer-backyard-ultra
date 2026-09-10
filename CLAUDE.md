@@ -33,6 +33,11 @@ Build-Schritt, Hosting über GitHub Pages.
 - **Es gibt nur noch eine Fassung** (Gabriel, 09.09.2026): die frühere Variante 06 „Tageslauf",
   seither im Projekt-Root. Die Varianten 01–05, die Galerie-Startseite und das `hero-lab/` sind
   gelöscht; der letzte Stand mit allen sechs Fassungen bleibt über den Git-Tag `v1.3.0` abrufbar.
+- **Keine Sektion „Ein Tag und eine Nacht"** (Gabriel, 10.09.2026). Das Bildmaterial der 2. Auflage
+  endet um 18:00 Uhr nach zwölf Runden; Nachtaufnahmen gibt es nicht. Die Seite erzählt die 24
+  Stunden deshalb nur im Text, nicht in Bildern. Bildplätze gibt es allein in der Regel-Sektion.
+- **Bildmaterial zeigt Gruppen, kein privates Camp** (Gabriel, 10.09.2026): keine Aufnahmen, auf
+  denen nur Gabriel oder seine Frau im eigenen Camp zu sehen sind.
 
 ## Event-Fakten (in den Seiten verwendet)
 - 3. Auflage: Sa **19.06.2027, 06:00 Uhr**. Strecke: Dreisam, Hirzbergsteg ↔ Schlosssteg Ebnet.
@@ -59,6 +64,10 @@ Build-Schritt, Hosting über GitHub Pages.
 - **Nur relative Pfade** (Project-Pages liegen unter `/midsummer-backyard-ultra/` — führende `/` brechen Assets).
 - Datei-Edits über das Edit/Write-Tool (UTF-8 ohne BOM), nicht per PowerShell-Bulk-Replace (Umlaute!).
 - `prefers-reduced-motion`-Fallback ist Pflicht; Mobile-Collapse je Section explizit.
+- **Bilder fürs Regel-Deck gehören ins mittlere Band.** Der Bildbereich einer Karte ist auf dem
+  Desktop annähernd quadratisch, auf dem Handy nur 190 px hoch; `object-fit: cover` beschneidet
+  mittig. Ein 4:5-Bild verliert am Handy also Kopf und Füße. Beim Zuschneiden das Motiv so legen,
+  dass es im mittleren Drittel steht, und beide Breiten prüfen — nicht nur die Desktop-Ansicht.
 - **Effekte auf schmalen Bildschirmen kleiner machen, nicht abschalten.** Ein Breakpoint, der
   Bewegung per `!mobile` ausknipst, lässt auf dem Handy nur Einblendungen übrig — und dort schaut
   die Mehrheit. Kleinerer Ausschlag (zweite Rate, z. B. `data-rate-s`), geringere Auflösung oder

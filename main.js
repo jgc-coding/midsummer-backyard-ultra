@@ -360,48 +360,6 @@
   });
 
   /* ======================================================================
-     Die Stunden: Tab-Karussell
-     ====================================================================== */
-  function initHours() {
-    var tabs = $$('[data-tab]');
-    var slides = $$('[data-slide]');
-    var caption = $('[data-caption]');
-    if (!tabs.length || !slides.length) return;
-
-    var CAPTIONS = [
-      'Alle stehen zusammen im Startbereich. Die erste Runde fühlt sich an wie ein Spaziergang — und genau das ist die Falle.',
-      'Die neunte Runde beginnt, dreiundfünfzig Kilometer sind gelaufen. Zwischen zwei Runden bleiben ein paar Minuten für Essen, Trinken und trockene Socken. Im Camp zeigt sich jetzt, wer zu schnell angefangen hat.',
-      'Stirnlampen am Fluss. Derselbe Weg wie am Morgen und trotzdem ein anderer. Geschlafen wird zwischen den Runden, in Minuten.',
-      'Vierundzwanzig Runden, 160,9 Kilometer. Wer jetzt noch läuft, läuft nicht mehr gegen die Uhr, sondern gegen die letzte andere Person auf der Strecke.'
-    ];
-    var active = 0, timer = null;
-
-    function show(i, byUser) {
-      active = (i + slides.length) % slides.length;
-      tabs.forEach(function (t, k) {
-        var on = k === active;
-        t.classList.toggle('is-active', on);
-        t.setAttribute('aria-selected', String(on));
-      });
-      slides.forEach(function (s, k) { s.classList.toggle('is-active', k === active); });
-      if (caption) caption.textContent = CAPTIONS[active];
-      if (byUser) restart();
-    }
-    function restart() { clearInterval(timer); if (!REDUCED) timer = setInterval(function () { show(active + 1); }, 5200); }
-
-    tabs.forEach(function (t) { t.addEventListener('click', function () { show(parseInt(t.dataset.tab, 10), true); }); });
-    var prev = $('[data-prev]'), next = $('[data-next]');
-    if (prev) prev.addEventListener('click', function () { show(active - 1, true); });
-    if (next) next.addEventListener('click', function () { show(active + 1, true); });
-
-    var stage = $('[data-stage]');
-    if (!REDUCED && 'IntersectionObserver' in window && stage) {
-      new IntersectionObserver(function (e) { if (e[0].isIntersecting) restart(); else clearInterval(timer); }, { rootMargin: '200px 0px' }).observe(stage);
-    }
-    window.__show = show;
-  }
-
-  /* ======================================================================
      Menü auf dem Handy
      ====================================================================== */
   var burger = $('[data-burger]'), sheet = $('[data-sheet]');
@@ -530,7 +488,6 @@
   }
 
   /* ====================================================================== */
-  initHours();
   initEventDate();
   initCountdown();
   initMap();

@@ -3,6 +3,26 @@
 Alle nennenswerten Änderungen an diesem Projekt. Format lose nach [Keep a Changelog](https://keepachangelog.com/),
 Versionierung nach [SemVer](https://semver.org/).
 
+## [2.1.0] — 2026-09-10
+### Hinzugefügt
+- **Die vier Regel-Karten haben echte Bilder vom Rennen 2026.** Zwei stammen von Gabriel (Läufer
+  auf dem Uferweg an der Dreisam, Siegerpokal mit der Gravur „Only survivor"), zwei sind
+  Standbilder aus dem Videomaterial (das Feld geht gemeinsam auf die Runde; der leere Uferweg für
+  „Das Aus"). Herkunft und Rechtestand jeder Datei stehen in `media/BILDER.md`.
+- Footer-Zeile „Website erstellt von JGC Lumen" mit Link auf `www.jgc-lumen.de`.
+
+### Geändert
+- **Die Sektion „Ein Tag und eine Nacht" ist entfernt** (Gabriels Entscheidung, 10.09.2026). Das
+  vorhandene Material endet um 18:00 Uhr nach zwölf Runden, es gibt keine einzige Nachtaufnahme —
+  ohne Bilder trug die Sektion nicht. Mit ihr entfielen das Tab-Karussell in `main.js`, die
+  zugehörigen Stile und die Navigationspunkte „Stunden" in Kopf- und Fußzeile.
+- `media/BILDER-GESUCHT.md` wurde zu `media/BILDER.md`: aus der Suchliste ist eine
+  Herkunfts- und Rechtedokumentation geworden.
+
+### Offen
+- Auf zwei Bildern sind fremde Teilnehmende erkennbar. Vor einer Veröffentlichung braucht es
+  deren Einwilligung und das Nutzungsrecht der aufnehmenden Person.
+
 ## [2.0.0] — 2026-09-09
 ### Geändert
 - **„Tageslauf" ist die einzige Fassung und liegt jetzt im Projekt-Root** (Gabriels Entscheidung,

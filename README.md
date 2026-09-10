@@ -23,8 +23,8 @@ Dann `http://localhost:4178/` öffnen. Diagnose-Parameter für Headless-Aufnahme
 
 ## Fotos
 
-An Stellen ohne Foto zeigt die Seite beschriftete Platzhalter. Welche Bilder gesucht werden,
-steht in [`media/BILDER-GESUCHT.md`](media/BILDER-GESUCHT.md).
+An Stellen ohne Foto zeigt die Seite beschriftete Platzhalter. Woher die vier Bilder stammen und
+wie es um ihre Rechte steht, dokumentiert [`media/BILDER.md`](media/BILDER.md).
 
 ## Daten
 

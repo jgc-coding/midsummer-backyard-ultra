@@ -283,27 +283,7 @@ body.has-morph .nav.is-docked .nav__brand { visibility: visible; opacity: 1; }
 /* ==========================================================================
    Abschnitte allgemein
    ========================================================================== */
-.hours, .rules, .route, .join, .faq { padding: clamp(72px, 10vw, 118px) 0; background: var(--ground); }
-
-/* ---------- Stunden: Tabs + Bühne ---------- */
-.tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; padding: 5px; border-radius: 999px; background: rgba(244, 233, 211, 0.05); border: 1px solid var(--line); }
-.tab {
-  height: 42px; border-radius: 999px; font-family: var(--m); font-size: 13px; color: var(--fg-3);
-  transition: background-color 300ms var(--ease), color 300ms var(--ease);
-}
-.tab:hover { color: var(--fg); }
-.tab.is-active { background: var(--cream); color: var(--ink); font-weight: 500; }
-
-.stage { position: relative; margin-top: 22px; height: clamp(280px, 42vw, 560px); border-radius: 20px; overflow: hidden; border: 1px solid var(--line); }
-.slide { position: absolute; inset: 0; opacity: 0; transition: opacity 700ms var(--ease); }
-.slide.is-active { opacity: 1; }
-.slide .shot { width: 100%; height: 100%; aspect-ratio: auto; border: 0; border-radius: 0; }
-
-.stage-bar { margin-top: 22px; display: flex; align-items: flex-start; justify-content: space-between; gap: 30px; }
-.stage-caption { max-width: 62ch; font-size: 16px; line-height: 1.6; color: var(--fg-2); }
-.stage-nav { display: flex; gap: 10px; flex: none; }
-.round { width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--line-2); color: var(--fg-2); transition: border-color 260ms var(--ease), color 260ms var(--ease); }
-.round:hover { border-color: var(--cream); color: var(--fg); }
+.rules, .route, .join, .faq { padding: clamp(72px, 10vw, 118px) 0; background: var(--ground); }
 
 /* ---------- Regeln: Kartenstapel ---------- */
 .stack { position: relative; margin-top: 10px; }
@@ -402,6 +382,9 @@ body.has-morph .nav.is-docked .nav__brand { visibility: visible; opacity: 1; }
 .footer__col a { display: block; padding: 6px 0; font-size: 14.5px; color: var(--fg-2); }
 .footer__col a:hover { color: var(--fg); }
 .footer__bottom { margin-top: 56px; padding-top: 22px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 20px; font-family: var(--m); font-size: 11.5px; color: var(--fg-4); }
+/* Der Urheber-Link erbt sonst die Fusszeilenfarbe und waere nicht als Link erkennbar. */
+.footer__bottom a { color: var(--fg-3); text-decoration: underline; text-decoration-color: var(--line-2); text-underline-offset: 3px; transition: color 260ms var(--ease); }
+.footer__bottom a:hover { color: var(--fg); text-decoration-color: currentColor; }
 
 /* ==========================================================================
    Mobil
@@ -429,7 +412,6 @@ body.has-morph .nav.is-docked .nav__brand { visibility: visible; opacity: 1; }
   .deck__p { margin-top: 14px; font-size: 15.5px; }
   .deck__foot { padding-top: 16px; font-size: 13.5px; }
 
-  .stage-bar { flex-direction: column; }
   .footer__grid { grid-template-columns: 1fr 1fr; gap: 30px; }
   .footer__brand { grid-column: 1 / -1; }
 }

@@ -32,7 +32,10 @@ wurde zuletzt mit dem 2.0.0-Stand aktualisiert.
 
 ## Offen
 
-- **8 Bildplätze warten auf Fotos** (Gabriel-Aufgabe im Hub; Motive: `media/BILDER-GESUCHT.md`).
+- **Personenrechte für zwei Bilder ungeklärt.** Auf `regel-yard.jpg` und `regel-stunde.jpg` sind
+  fremde Teilnehmende erkennbar. Vor einer Veröffentlichung braucht es deren Einwilligung und das
+  Nutzungsrecht der aufnehmenden Person (Details: `media/BILDER.md`). Bis dahin bleibt v2.1.0 auf
+  dem Arbeitsbranch und geht nicht nach `main`.
 - **Morph-Bildtakt auf echtem Gerät unbestätigt.** Rechnerisch und in Standbildern geprüft;
   Gabriel testet am Handy (Hub-Aufgabe). Meldet er Ruckeln: zuerst reproduzieren (Mess-Fallen in
   der CLAUDE.md!), Verdächtige wären das Inline-Transform pro Frame auf der Marke und der
@@ -40,8 +43,8 @@ wurde zuletzt mit dem 2.0.0-Stand aktualisiert.
 
 ## Nächste Schritte (Claude)
 
-1. Sobald Fotos da sind: unter den Namen aus `media/BILDER-GESUCHT.md` nach `media/` legen
-   (Platzhalter verschwinden von selbst), Dateigrößen unter 500 KB prüfen, einmal durchscrollen.
+1. Sobald Gabriel die Personenrechte geklärt hat: v2.1.0 nach `main` mergen, taggen, deployen.
+   Sagt er ab, die beiden betroffenen Bilder ersetzen oder auf Platzhalter zurücknehmen.
 2. Aufräumrest erledigen, sobald die alten Sitzungen geschlossen sind (Ordner sind aktuell von
    deren Prozessen gesperrt; Inhalte sind vollständig gemergt, es geht nur noch um leere Hüllen):
 
@@ -61,4 +64,5 @@ wurde zuletzt mit dem 2.0.0-Stand aktualisiert.
 - Die Hub-Karte dieses Projekts heißt **„Midsummer Backyard"** (nicht „…Website").
 - Headless-Aufnahmen nur noch mit den Diagnose-Parametern `?y=`/`?vh=` — Details und die
   übrigen Mess-Fallen stehen dauerhaft in der CLAUDE.md.
-- Die 404-Meldungen im Browser-Log sind die 8 fehlenden Fotos, eine je Platzhalter. Erwartet.
+- Das Browser-Log ist seit v2.1.0 leer — alle vier Bildplätze sind belegt, es fehlt keine Datei
+  mehr. Tauchen wieder 404-Meldungen auf, fehlt tatsächlich etwas.
