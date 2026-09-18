@@ -3,6 +3,22 @@
 Alle nennenswerten Änderungen an diesem Projekt. Format lose nach [Keep a Changelog](https://keepachangelog.com/),
 Versionierung nach [SemVer](https://semver.org/).
 
+## [2.2.0] — 2026-09-18
+### Hinzugefügt
+- **Vier neue Antworten im Fragen-Teil**, alle aus Gabriels Angaben zur 2. Auflage:
+  - **Kopfhörer sind erlaubt** — mit dem Hinweis, dass der Uferweg öffentlich bleibt und ein
+    freies Ohr für Radfahrer sinnvoll ist (als Rat formuliert, nicht als Vorschrift).
+  - **Begleitung auf der Strecke ist erlaubt, zu Fuß wie mit dem Fahrrad.**
+  - **Der Support darf nach jeder Runde für den Läufer stempeln.**
+  - Die Frage **„Kann ich zuschauen?"** bleibt als Abschluss stehen; die neuen Antworten sind
+    davor als Support-Block einsortiert (Versorgung → Begleitung → Stempel → Kopfhörer).
+
+### Geändert
+- **„Darf ich mich versorgen lassen?" beantwortet jetzt auch die Strecke.** Bisher stand dort
+  für alles außerhalb des Camps ein Verweis auf die Ausschreibung („bitte dort nachlesen").
+  Die Antwort ist Ja, im Camp wie unterwegs — die Frage heißt jetzt „Darf ich mich versorgen
+  lassen — auch unterwegs?".
+
 ## [2.1.2] — 2026-09-10
 ### Behoben
 - **Der Skip-Link und die Anker-Navigation nehmen jetzt den Tastaturfokus mit.** Vorher scrollte
