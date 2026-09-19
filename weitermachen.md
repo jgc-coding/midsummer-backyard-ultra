@@ -62,6 +62,27 @@ offenen Fragen im Hub.
    Remove-Item -Recurse -Force "C:\Projekte\Midsummer Backyard Website\.claude\worktrees\hero-layer-effekt-203e0c", "C:\Projekte\Midsummer Backyard Website\.claude\worktrees\website-arbeit-b563f5"
    ```
 
+## Was Gabriel selbst tun muss
+
+Am 19.09.2026 von der Hub-Tafel hierher gezogen. Die Tafel nimmt seither nur
+noch, was Gabriel selbst eintraegt oder ausdruecklich beauftragt. Wo oben im
+Text von der Hub-Karte oder einem Hub-Sammelpunkt die Rede ist, sind diese
+Punkte gemeint.
+
+- [ ] Einwilligung fuer die zwei Bilder mit erkennbaren Teilnehmenden einholen (seit 2026-09-10)
+  - regel-yard.jpg: drei Laeufer auf dem Uferweg
+  - regel-stunde.jpg: die Gruppe geht auf die Runde
+  - Nutzungsrecht der aufnehmenden Person mitklaeren
+- [ ] Live-Seite am Handy testen und Claude Bescheid geben (3 Punkte, 10.09.) (seit 2026-09-10)
+  - Sitzen die Fotos in den vier Regel-Karten jetzt richtig - auch in der Desktop-Ansicht?
+  - Laeuft der Sonnen-Morph beim Scrollen fluessig?
+  - Scrollt die Seite jetzt ueber die Streckenkarte hinweg?
+- [ ] Claude Rueckmeldung geben (4 Punkte) (seit 2026-09-10)
+  - Befunde V3 + V6-V10 freigeben oder ablehnen (verbesserungen.md)
+  - Ideen I1-I3: welche weiterdenken?
+  - Regel-3-Bild (leerer Uferweg): tauschen oder behalten?
+  - .impeccable-Ordner: lokal lassen oder ins Repo?
+
 ## Aktuelle Stolperfallen
 
 - **Die Bildrechte sind nicht geklärt, die Bilder sind trotzdem live.** Gabriel hat das am
