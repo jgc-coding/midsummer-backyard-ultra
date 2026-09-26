@@ -68,6 +68,8 @@ Kleinbefunden unter `.impeccable/critique/2026-09-10T18-11-59Z__localhost.md`.
       der Footer-Link-Fix `a951f7a` kam danach: Wer den Tag auscheckt, bekommt den kaputten
       Link, den der CHANGELOG unter 2.1.1 als behoben führt.
       Beleg: CLAUDE.md Kopf; `git rev-list -1 v2.1.1` = c69dcee, HEAD = a8be7ac · Aufwand: S
+      Erneut belegt (2026-09-26): v2.2.0 aus einer Cloud-Sitzung ließ den Footer-Fallback auf
+      v2.1.2 stehen und wurde nie getaggt (Tags enden bei v2.1.2); den Fallback hat v2.2.1 nachgezogen.
 - [ ] **V11** (C) Regel-Karten schneiden auf sehr kleinen Handys unten Text ab (gefunden 2026-09-26)
       Gefahr: Bei 320 × 568 (iPhone SE der ersten Generation, ebenso Handys mit vergrößerter
       Anzeige) fehlt in drei von vier Karten die Schlusszeile ganz oder halb — wer so ein Gerät

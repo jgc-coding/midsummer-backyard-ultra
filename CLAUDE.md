@@ -146,8 +146,17 @@ Build-Schritt, Hosting über GitHub Pages.
   aufblendende Überschriften wirken darauf immer hinten abgeschnitten. Vor dem Melden eines
   solchen „Fehlers" denselben Ausschnitt aus der letzten Version rendern (`git show HEAD:<datei>`
   in einen Wegwerf-Ordner unter der Projektwurzel) — zeigt der Gegentest dasselbe, ist es das
-  Rendering und keine Regression.
+  Rendering und keine Regression. Für reine Text- und Umbruchprüfung mit
+  `--force-prefers-reduced-motion` aufnehmen: dann stehen alle Überschriften vollständig da
+  (die Regel-Karten sind in diesem Modus aber statisch gestapelt, nicht gedeckelt).
+- **Text in den Regel-Karten hat eine Höchstmenge.** Die Kartenhöhe ist gedeckelt; zu viel Text
+  wird unten abgeschnitten, nicht umbrochen. Nach jeder Textänderung per DOM messen: freier
+  Platz = Oberkante `.deck__foot` minus Unterkante `.deck__p`, abgeschnitten = `.deck__foot`
+  ragt über `.deck` minus Innenabstand. Engste Fenster: 761×520, 844×390, 667×375, 320×568.
 
 ## Veröffentlichung
 - Repo: `jgc-coding/midsummer-backyard-ultra` (public). Pages: Branch `main`, Root.
 - Jede abgeschlossene Änderung: Version bumpen + CHANGELOG. Release als Git-Tag.
+- **Cloud-Sitzungen pushen direkt nach `origin/main`** (v2.2.0, 18.09.2026) — der lokale `main`
+  und der Sessionstart-Hook merken davon nichts. Vor der Arbeit `git fetch` und
+  `git log --oneline main..origin/main`; fehlt lokal etwas, zuerst hereinholen.
