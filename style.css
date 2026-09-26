@@ -16,6 +16,11 @@
   --sky-a:    #0b0508;
   --sky-b:    #a24a15;
 
+  /* Abgesetzte Abschnitte (Strecke, Fragen): gedecktes Orange, bleibt fest.
+     Gabriels Wahl aus drei Stärken (V14); kräftiger wirkt die Fläche am Handy
+     bildschirmfüllend rostig. */
+  --ground-warm: #2b170d;
+
   /* Marke (aus assets/ci.css) */
   --cream:      #f4e9d3;
   --orange:     #e5722a;
@@ -298,6 +303,14 @@ body.has-morph .nav.is-docked .nav__brand { visibility: visible; opacity: 1; }
    Abschnitte allgemein
    ========================================================================== */
 .rules, .route, .join, .faq { padding: clamp(72px, 10vw, 118px) 0; background: var(--ground); }
+/* Strecke und Fragen heben sich ab, damit man beim Scrollen sieht, wo ein Thema
+   endet. Die Ränder laufen weich in den Grund der Lichtreise aus — eine harte
+   Kante würde die Seite in Kästen zerlegen. */
+.route, .faq {
+  --warm-fade: clamp(80px, 11vw, 160px);
+  background: linear-gradient(180deg, var(--ground) 0, var(--ground-warm) var(--warm-fade),
+    var(--ground-warm) calc(100% - var(--warm-fade)), var(--ground) 100%);
+}
 
 /* ---------- Regeln: Kartenstapel ---------- */
 .stack { position: relative; margin-top: 10px; }

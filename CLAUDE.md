@@ -36,6 +36,9 @@ Build-Schritt, Hosting über GitHub Pages.
 - **Keine Sektion „Ein Tag und eine Nacht"** (Gabriel, 10.09.2026). Das Bildmaterial der 2. Auflage
   endet um 18:00 Uhr nach zwölf Runden; Nachtaufnahmen gibt es nicht. Die Seite erzählt die 24
   Stunden deshalb nur im Text, nicht in Bildern. Bildplätze gibt es allein in der Regel-Sektion.
+- **Strecke und Fragen liegen auf gedecktem Orange** (Gabriel, 26.09.2026): `--ground-warm`
+  `#2b170d`, bewusst die zarteste von drei gezeigten Stärken. Alle anderen Abschnitte bleiben
+  auf dem Grund der Lichtreise; der Wechsel zwischen dunklem und warmem Grund gliedert die Seite.
 - **Für Suchmaschinen gesperrt, bis die Veranstalter zusagen** (Gabriel, 26.09.2026): Die Seite
   ist ein Vorschlag an sie. Die Sperre ist allein das `noindex`-Meta in `index.html`; beim
   offiziellen Start entfernen. Keine robots.txt anlegen — bei Project Pages liegt sie nicht an

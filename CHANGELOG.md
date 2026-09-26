@@ -3,6 +3,24 @@
 Alle nennenswerten Änderungen an diesem Projekt. Format lose nach [Keep a Changelog](https://keepachangelog.com/),
 Versionierung nach [SemVer](https://semver.org/).
 
+## [2.3.0] — 2026-09-26
+### Geändert
+- **Strecke und Fragen heben sich in gedecktem Orange ab** (V14, Gabriels Befund). Bisher
+  waren alle Abschnitte gleich schwarz, und beim Scrollen war kaum zu sehen, wo ein Thema
+  endet. Die Lichtreise sollte das leisten, ihre Grundtöne liegen aber alle nahe Schwarz. Jetzt
+  liegen die beiden Abschnitte auf `--ground-warm` (`#2b170d`), Gabriels Wahl aus drei Stärken
+  (Standbild); die Ränder laufen über 80–160 px weich in den Grund der Lichtreise aus. Die
+  orange Anmelde-Karte dazwischen bleibt der hellste Punkt der Seite. Nebenschrift auf dem
+  neuen Grund: Kontrast rund 6:1.
+
+### Geprüft (Regressionscheck vor dem Minor-Sprung)
+- Headless: ganze Seite bei 1440 px normal und mit reduzierter Bewegung, bei 600 px mit
+  reduzierter Bewegung. Im Browser bei 1440 × 900 und 390 × 844: keine Konsolenfehler, alle
+  Anfragen 200, Karte mit 18 geladenen Kacheln, zwei Linien, drei Markern; Lichtreise schreibt
+  `--ground` weiter; Countdown läuft; Menü öffnet und schließt; Regel-Karten ohne
+  abgeschnittenen Text; keine Überbreite. Die vier externen Links laden im Browser.
+- Dabei gefunden, nicht behoben: V16 (Menü-Knopf meldet nach einem Link-Klick weiter „offen").
+
 ## [2.2.2] — 2026-09-26
 ### Behoben
 - **Der Schriftzug im Hero hat keinen grauen Rand mehr** (V13, Gabriels Befund). Die gelieferte

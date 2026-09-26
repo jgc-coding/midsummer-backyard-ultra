@@ -11,13 +11,13 @@ Kleinbefunden unter `.impeccable/critique/2026-09-10T18-11-59Z__localhost.md`.
 
 1. **Seite lädt vollständig** — erwartet: alle Assets relativ, keine Konsolen-/Netzwerkfehler · zuletzt: läuft (2026-09-26, alle Anfragen 200, Konsole leer)
 2. **Hero-Morph** — erwartet: Sonne+Schriftzug schrumpfen in die Leiste, docken pixelgenau an · zuletzt: läuft (2026-09-26; Zwischenzustände `?y=300`/`?y=430` headless gegen v2.2.1 verglichen, nur die Buchstabenränder unterscheiden sich)
-3. **Lichtreise** — erwartet: Seitengrund wandert beim Scrollen durch die Tagesfarben · zuletzt: läuft (2026-09-10, Farbinterpolation gemessen)
-4. **Regel-Deck** — erwartet: Karten kleben/stapeln, Bilder sitzen auf jeder Breite (Fokuspunkte), kein Text abgeschnitten · zuletzt: läuft, außer bei 320 × 568 (→ V11; Textplatz in 12 Fenstergrößen gemessen, 2026-09-26)
-5. **Streckenkarte** — erwartet: OSM-Kacheln + GPS-Route + 3 Marker, kein Scroll-Diebstahl · zuletzt: läuft (21/21 Kacheln, 2026-09-10)
-6. **Countdown + Datum** — erwartet: alle Datumsangaben aus EVENT_START, Countdown tickt korrekt · zuletzt: läuft (281 Tage exakt nachgerechnet, 2026-09-10)
-7. **Mobiles Menü** — erwartet: Burger öffnet Sheet, aria-expanded wechselt, Link schließt · zuletzt: läuft (390 px, 2026-09-10)
-8. **Version + Bild-Fallback** — erwartet: Footer-Version aus VERSION; fehlendes Bild zeigt beschrifteten Platzhalter · zuletzt: läuft (2026-09-10, Fallback nachgestellt)
-9. **Reduced Motion** — erwartet: alles sichtbar, nichts bewegt sich, Karten statisch gestapelt · zuletzt: läuft (headless mit --force-prefers-reduced-motion, 2026-09-10)
+3. **Lichtreise** — erwartet: Seitengrund wandert beim Scrollen durch die Tagesfarben · zuletzt: läuft (2026-09-26, `--ground` bei 0/50/85 % gemessen; Strecke und Fragen liegen seit v2.3.0 fest auf `--ground-warm` und laufen an den Rändern in diesen Grund aus)
+4. **Regel-Deck** — erwartet: Karten kleben/stapeln, Bilder sitzen auf jeder Breite (Fokuspunkte), kein Text abgeschnitten · zuletzt: läuft, außer bei 320 × 568 (→ V11; Textplatz in 12 Fenstergrößen gemessen, 2026-09-26; bei 390 × 844 erneut geprüft für v2.3.0)
+5. **Streckenkarte** — erwartet: OSM-Kacheln + GPS-Route + 3 Marker, kein Scroll-Diebstahl · zuletzt: läuft (2026-09-26: 18/18 Kacheln, 2 Linien, 3 Marker, 2 Beschriftungen)
+6. **Countdown + Datum** — erwartet: alle Datumsangaben aus EVENT_START, Countdown tickt korrekt · zuletzt: läuft (tickt, 2026-09-26; 281 Tage exakt nachgerechnet am 2026-09-10)
+7. **Mobiles Menü** — erwartet: Burger öffnet Sheet, aria-expanded wechselt, Link schließt · zuletzt: öffnet und schließt (390 px, 2026-09-26), aber aria-expanded bleibt nach Link-Klick auf „true" (→ V16)
+8. **Version + Bild-Fallback** — erwartet: Footer-Version aus VERSION; fehlendes Bild zeigt beschrifteten Platzhalter · zuletzt: Version läuft (v2.3.0, 2026-09-26); Fallback unverändert, zuletzt nachgestellt 2026-09-10
+9. **Reduced Motion** — erwartet: alles sichtbar, nichts bewegt sich, Karten statisch gestapelt · zuletzt: läuft (headless mit --force-prefers-reduced-motion, 1440 und 600 px, 2026-09-26)
 10. **Anker-Navigation (weiches Scrollen)** — erwartet: Klick auf Nav-Link scrollt zur Sektion · zuletzt: Code-Pfad korrekt, Sprung mit `immediate` belegt; die Animation ist in der Messumgebung nicht prüfbar (rAF-Drossel im ausgeblendeten Browser-Pane) — am echten Gerät bestätigen (deckt Gabriels Hub-Handy-Test mit ab)
 
 ## Offen
@@ -97,15 +97,13 @@ Kleinbefunden unter `.impeccable/critique/2026-09-10T18-11-59Z__localhost.md`.
       Empfehlung: Bis es eine Anmeldung für 2027 gibt, ehrlich schreiben („Die Anmeldung für 2027
       öffnet später, Neuigkeiten auf Instagram") und die Knöpfe auf Instagram lenken; sobald das
       Formular steht, direkt dorthin verlinken. War vor v2.2.1 genauso, wurde nicht schlechter.
-- [ ] **V14** (C) Alle Abschnitte sind gleich schwarz (Gabriels Befund, 2026-09-26)
-      Gefahr: Beim Scrollen merkt man kaum, wo ein Thema endet und das nächste beginnt. Die
-      Lichtreise sollte Stimmung tragen, ihre Grundtöne liegen aber alle zwischen `#07080f`
-      und `#131009` — praktisch schwarz, der Wechsel ist nicht zu sehen.
-      Beleg: `style.css:300` (alle vier Sektionen auf `var(--ground)`), `main.js:23-34` (SKY) ·
-      Aufwand: S
-      Richtung (Gabriel): Strecke und Fragen abheben, mit Tönen nah am Orange, aber nicht
-      knallig; weiche Übergänge am Sektionsrand. Erst ein Standbild zur Freigabe
-      (Richtungs-Gate), dann bauen.
+- [ ] **V16** (C) Menü-Knopf meldet nach einem Link-Klick weiter „offen" (gefunden 2026-09-26, Regressionscheck v2.3.0)
+      Gefahr: Wer mit Screenreader über das Handy-Menü springt, hört danach am Knopf „Menü
+      schließen, erweitert", obwohl das Menü zu ist — er weiß nicht, in welchem Zustand es ist.
+      Die Optik stimmt, nur die Ansage nicht.
+      Beleg: `main.js:372` entfernt beim Link-Klick nur `is-open`; `aria-expanded` und
+      `aria-label` des Knopfs bleiben stehen (DOM-Messung bei 390 × 844) · Aufwand: S
+      Empfehlung: dort dieselben zwei Attribute zurücksetzen wie beim Schließen per Knopf.
 
 ## Ideen
 
@@ -147,3 +145,5 @@ unerklärt, Geviertstriche im Fließtext) sind mit dem Text-Umbau in v2.2.1 erle
   freigestellt statt Laufzeit-Farbfilter, Teilen-Vorschaubild neu — erledigt in v2.2.2
 - **V15** Seite für Suchmaschinen gesperrt (`noindex`), bis die Veranstalter zusagen —
   erledigt in v2.2.2
+- **V14** Alle Abschnitte waren gleich schwarz: Strecke und Fragen liegen jetzt auf gedecktem
+  Orange (`--ground-warm`, zarteste von drei Stärken, per Standbild gewählt) — erledigt in v2.3.0
