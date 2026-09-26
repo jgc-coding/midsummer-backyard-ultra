@@ -36,6 +36,10 @@ Build-Schritt, Hosting über GitHub Pages.
 - **Keine Sektion „Ein Tag und eine Nacht"** (Gabriel, 10.09.2026). Das Bildmaterial der 2. Auflage
   endet um 18:00 Uhr nach zwölf Runden; Nachtaufnahmen gibt es nicht. Die Seite erzählt die 24
   Stunden deshalb nur im Text, nicht in Bildern. Bildplätze gibt es allein in der Regel-Sektion.
+- **Für Suchmaschinen gesperrt, bis die Veranstalter zusagen** (Gabriel, 26.09.2026): Die Seite
+  ist ein Vorschlag an sie. Die Sperre ist allein das `noindex`-Meta in `index.html`; beim
+  offiziellen Start entfernen. Keine robots.txt anlegen — bei Project Pages liegt sie nicht an
+  der Domain-Wurzel und wirkt nicht.
 - **Bildmaterial zeigt Gruppen, kein privates Camp** (Gabriel, 10.09.2026): keine Aufnahmen, auf
   denen nur Gabriel oder seine Frau im eigenen Camp zu sehen sind.
 
@@ -144,6 +148,13 @@ Build-Schritt, Hosting über GitHub Pages.
   `-pattern_type glob` (Dateien vorher als `img%03d.jpg` durchnummerieren), `drawtext` scheitert
   mangels Fontconfig, und eine Bildserie bricht beim ersten Größenwechsel ab — Kacheln also
   einzeln auf ein Maß bringen, dann erst `tile=` anwenden.
+- **Bilder mit eingemaltem Karomuster statt Transparenz** (so „exportieren" KI-Bildgeneratoren
+  gern): nie zur Laufzeit per Farbfilter freistellen. Die Kantenpixel sind halb Motiv, halb
+  Karo-Grau, und dieses Grau bleibt als Saum stehen (v2.2.2). Einmal offline freistellen und den
+  Rand in Motivfarbe setzen — auch unter den ganz durchsichtigen Pixeln, weil WebP Farbe nur in
+  halber Auflösung speichert und Nachbarn mischt. Vorbild: `schriftzug()` in
+  `scripts/hero-bilder.py`. Ob eine Datei echte Transparenz hat, zeigt erst der Alphakanal:
+  `Bildmaterial/Schriftzug.png` ist RGBA, aber überall voll deckend.
 - **Headless-Chrome-Aufnahmen zeigen CSS-Übergänge nicht zu Ende gelaufen.** Ein längeres
   `--virtual-time-budget` hilft nicht; die Animationsuhr hängt nicht daran. Zeichenweise
   aufblendende Überschriften wirken darauf immer hinten abgeschnitten. Vor dem Melden eines

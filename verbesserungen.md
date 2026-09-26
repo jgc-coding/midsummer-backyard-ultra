@@ -9,8 +9,8 @@ Kleinbefunden unter `.impeccable/critique/2026-09-10T18-11-59Z__localhost.md`.
 
 ## Kernfunktionen (Prüfliste — jede Runde erneut abfahren)
 
-1. **Seite lädt vollständig** — erwartet: alle Assets relativ, keine Konsolen-/Netzwerkfehler · zuletzt: läuft (2026-09-10)
-2. **Hero-Morph** — erwartet: Sonne+Schriftzug schrumpfen in die Leiste, docken pixelgenau an · zuletzt: läuft (2026-09-10; Endzustand headless belegt, Zwischenzustände per DOM)
+1. **Seite lädt vollständig** — erwartet: alle Assets relativ, keine Konsolen-/Netzwerkfehler · zuletzt: läuft (2026-09-26, alle Anfragen 200, Konsole leer)
+2. **Hero-Morph** — erwartet: Sonne+Schriftzug schrumpfen in die Leiste, docken pixelgenau an · zuletzt: läuft (2026-09-26; Zwischenzustände `?y=300`/`?y=430` headless gegen v2.2.1 verglichen, nur die Buchstabenränder unterscheiden sich)
 3. **Lichtreise** — erwartet: Seitengrund wandert beim Scrollen durch die Tagesfarben · zuletzt: läuft (2026-09-10, Farbinterpolation gemessen)
 4. **Regel-Deck** — erwartet: Karten kleben/stapeln, Bilder sitzen auf jeder Breite (Fokuspunkte), kein Text abgeschnitten · zuletzt: läuft, außer bei 320 × 568 (→ V11; Textplatz in 12 Fenstergrößen gemessen, 2026-09-26)
 5. **Streckenkarte** — erwartet: OSM-Kacheln + GPS-Route + 3 Marker, kein Scroll-Diebstahl · zuletzt: läuft (21/21 Kacheln, 2026-09-10)
@@ -61,6 +61,9 @@ Kleinbefunden unter `.impeccable/critique/2026-09-10T18-11-59Z__localhost.md`.
       backdrop-filter), `main.js:396` (data-event-long ohne HTML-Gegenstück),
       `style.css:392` (Footer-Grid mit 4 Spuren bei 3 Kindern — rechte Spalte bleibt leer,
       Stunden-Spalte wurde entfernt) · Aufwand: S
+      Seit v2.2.2 dazu: `assets/hero/schriftzug-sonne.webp` (333 KB) wird nicht mehr geladen,
+      der freigestellte `schriftzug.webp` ersetzt ihn. Löschen braucht Gabriels Ja; die Quelle
+      liegt ohnehin in `Bildmaterial/`.
 - [ ] **V10** (D) Prozess-Hygiene: Stufe fehlt, Versions-Spiegel unbewacht, Tag hinkt
       Gefahr: Ohne Prozess-Stufe in Zeile 1-3 der CLAUDE.md ist nicht entscheidbar, ob fehlende
       Dateien Absicht sind (globale Regel 12). Der Footer-Fallback `v2.1.1` in `index.html:325`
@@ -94,6 +97,15 @@ Kleinbefunden unter `.impeccable/critique/2026-09-10T18-11-59Z__localhost.md`.
       Empfehlung: Bis es eine Anmeldung für 2027 gibt, ehrlich schreiben („Die Anmeldung für 2027
       öffnet später, Neuigkeiten auf Instagram") und die Knöpfe auf Instagram lenken; sobald das
       Formular steht, direkt dorthin verlinken. War vor v2.2.1 genauso, wurde nicht schlechter.
+- [ ] **V14** (C) Alle Abschnitte sind gleich schwarz (Gabriels Befund, 2026-09-26)
+      Gefahr: Beim Scrollen merkt man kaum, wo ein Thema endet und das nächste beginnt. Die
+      Lichtreise sollte Stimmung tragen, ihre Grundtöne liegen aber alle zwischen `#07080f`
+      und `#131009` — praktisch schwarz, der Wechsel ist nicht zu sehen.
+      Beleg: `style.css:300` (alle vier Sektionen auf `var(--ground)`), `main.js:23-34` (SKY) ·
+      Aufwand: S
+      Richtung (Gabriel): Strecke und Fragen abheben, mit Tönen nah am Orange, aber nicht
+      knallig; weiche Übergänge am Sektionsrand. Erst ein Standbild zur Freigabe
+      (Richtungs-Gate), dann bauen.
 
 ## Ideen
 
@@ -131,3 +143,7 @@ unerklärt, Geviertstriche im Fließtext) sind mit dem Text-Umbau in v2.2.1 erle
   index.html-Kommentar) — erledigt in v2.1.2
 - **V4** Intro-Absätze auf 60ch gedeckelt (vorher 97–124 Zeichen je Zeile bei 768–980 px) — erledigt in v2.1.2
 - **V5** Regel-Bilder mit loading="lazy" + decoding="async"; Platzhalter-Fallback geprüft — erledigt in v2.1.2
+- **V13** Grauer, gestrichelter Rand um den Hero-Schriftzug: Schriftzug einmal sauber
+  freigestellt statt Laufzeit-Farbfilter, Teilen-Vorschaubild neu — erledigt in v2.2.2
+- **V15** Seite für Suchmaschinen gesperrt (`noindex`), bis die Veranstalter zusagen —
+  erledigt in v2.2.2

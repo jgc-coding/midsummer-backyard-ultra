@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Midsummer Backyard Ultra Freiburg — Von Sonne zu Sonne</title>
   <meta name="description" content="Midsummer Backyard Ultra Freiburg, Samstag 19. Juni 2027, 06:00 Uhr. Jede volle Stunde dieselbe 6,706-km-Runde an der Dreisam, bis nur noch eine Person läuft." />
+  <!-- Konzeptseite: Suchmaschinen sollen sie nicht aufnehmen, bis die Veranstalter
+       zugesagt haben (Gabriel, 26.09.2026). Beim offiziellen Start diese Zeile
+       entfernen. Eine robots.txt hilft hier nicht: Crawler lesen sie nur an der
+       Wurzel der Domain, die Seite liegt aber im Unterordner /midsummer-backyard-ultra/. -->
+  <meta name="robots" content="noindex" />
   <meta name="theme-color" content="#0d0906" />
   <meta property="og:title" content="Midsummer Backyard Ultra Freiburg — Von Sonne zu Sonne" />
   <meta property="og:description" content="Jede volle Stunde dieselbe Runde an der Dreisam. Bis nur noch eine Person läuft. 19. Juni 2027." />
@@ -25,7 +30,7 @@
   <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css" />
   <link rel="stylesheet" href="style.css" />
   <!-- Sonne und Schriftzug stecken in SVG-image-Verweisen und würden sonst spät entdeckt. -->
-  <link rel="preload" as="image" href="assets/hero/schriftzug-sonne.webp" />
+  <link rel="preload" as="image" href="assets/hero/schriftzug.webp" />
   <link rel="preload" as="image" href="assets/hero/sonne.webp" />
 </head>
 <body data-variant="06">
@@ -87,22 +92,19 @@
         <p class="hero__date"><span data-event-short>19. Juni 2027</span> <span class="hero__date-dot">·</span> 3. Auflage</p>
         <h1 class="hero__h1" id="hero-title">
           <span class="sr-only">Midsummer Backyard Ultra Freiburg</span>
-          <!-- Der Schriftzug (schriftzug-sonne.webp) trägt ein eingemaltes Karomuster;
-               der Farbfilter rechnet es zur Laufzeit weg (Alpha aus 4R-4B-0.2). Die
-               starre Bild-Sonne blendet der obere Clip aus; an ihrer Stelle rotiert
-               die freigestellte Sonne als eigene Ebene. Nicht ohne Ersatz löschen. -->
+          <!-- Der Schriftzug (schriftzug.webp) ist der untere Teil des gelieferten Bildes,
+               einmal freigestellt von scripts/hero-bilder.py: Die Quelle hatte statt
+               Transparenz ein eingemaltes Karomuster. Bis v2.2.1 entfernte es ein
+               SVG-Farbfilter zur Laufzeit, der um jeden Buchstaben einen grauen Saum
+               stehen ließ. Über y=450 zeigt der Sonnen-Clip die rotierende Sonne. -->
           <svg class="hero__lockup" viewBox="0 0 1774 887" aria-hidden="true" data-lockup>
             <defs>
-              <filter id="wm-gray" color-interpolation-filters="sRGB">
-                <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  4 0 -4 0 -.2" />
-              </filter>
               <clipPath id="wm-sun"><rect x="-200" y="-350" width="2174" height="800" data-sun-clip /></clipPath>
-              <clipPath id="wm-text"><rect y="450" width="1774" height="437" /></clipPath>
             </defs>
             <g clip-path="url(#wm-sun)">
               <g class="sun-spin"><image href="assets/hero/sonne.webp" x="365" y="-72" width="1044" height="1044" /></g>
             </g>
-            <image data-lettering href="assets/hero/schriftzug-sonne.webp" width="1774" height="887" filter="url(#wm-gray)" clip-path="url(#wm-text)" />
+            <image data-lettering href="assets/hero/schriftzug.webp" y="450" width="1774" height="437" />
           </svg>
         </h1>
       </div>
@@ -336,7 +338,7 @@
       <!-- Ohne „www": das Zertifikat der Seite gilt nur für jgc-lumen.de, die www-Fassung
            läuft in eine Sicherheitswarnung (geprüft 10.09.2026). -->
       <span>Website erstellt von <a href="https://jgc-lumen.de" target="_blank" rel="noopener">JGC Lumen</a></span>
-      <span data-ver>v2.2.1</span>
+      <span data-ver>v2.2.2</span>
     </div>
   </footer>
 

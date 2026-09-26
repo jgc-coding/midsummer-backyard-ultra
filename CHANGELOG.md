@@ -3,6 +3,28 @@
 Alle nennenswerten Änderungen an diesem Projekt. Format lose nach [Keep a Changelog](https://keepachangelog.com/),
 Versionierung nach [SemVer](https://semver.org/).
 
+## [2.2.2] — 2026-09-26
+### Behoben
+- **Der Schriftzug im Hero hat keinen grauen Rand mehr** (V13, Gabriels Befund). Die gelieferte
+  Datei hatte statt Transparenz ein eingemaltes Karomuster; ein SVG-Farbfilter rechnete es erst
+  im Browser weg und ließ um jeden Buchstaben einen grauen, gestrichelten Saum stehen — über den
+  dunklen Bergen und am Handy deutlich sichtbar. Jetzt stellt `scripts/hero-bilder.py` den
+  Schriftzug einmal frei: Die Buchstabenpixel kommen unverändert aus der Quelle, nur der
+  halbdurchsichtige Rand bekommt ihre Farbe statt des Karo-Graus. Die neue Datei
+  `assets/hero/schriftzug.webp` enthält nur noch den Schriftzug (ohne die starre Bild-Sonne,
+  die bisher ein Clip verdeckte) und wiegt 63 statt 333 KB. Filter und Text-Clip im SVG sind
+  weg, damit auch einer der beiden Verdächtigen für mögliches Ruckeln beim Scroll-Morph.
+  Headless geprüft: Position und Größe unverändert, Unterschiede nur an den Buchstabenrändern
+  (1440 px bei 1× und 2×, 600 px bei 3×, Morph-Zustände `?y=300` und `?y=430`).
+- **Das Teilen-Vorschaubild `assets/og-vorschau.jpg` ist neu erzeugt.** Es zeigte den Rand
+  ebenfalls und dazu noch den Hero-Satz von vor v2.2.1.
+
+### Geändert
+- **Suchmaschinen sollen die Seite nicht aufnehmen** (V15): `<meta name="robots"
+  content="noindex">`, weil sie ein Konzept ist und die Veranstalter noch nichts davon wissen.
+  Bei einer Zusage die Zeile wieder entfernen. Eine robots.txt gibt es bewusst nicht: Crawler
+  lesen sie nur an der Wurzel der Domain, bei GitHub Project Pages bliebe sie wirkungslos.
+
 ## [2.2.1] — 2026-09-26
 ### Geändert
 - **Die Seitentexte klingen nicht mehr nach KI.** 26 Stellen überarbeitet, von Gabriel einzeln
