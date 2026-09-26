@@ -3,6 +3,47 @@
 Alle nennenswerten Änderungen an diesem Projekt. Format lose nach [Keep a Changelog](https://keepachangelog.com/),
 Versionierung nach [SemVer](https://semver.org/).
 
+## [2.2.1] — 2026-09-26
+### Geändert
+- **Die Seitentexte klingen nicht mehr nach KI.** 26 Stellen überarbeitet, von Gabriel einzeln
+  freigegeben; Inhalt und Aufbau bleiben. Weg sind vor allem:
+  - die langen Gedankenstriche im Fließtext (vorher neun),
+  - abgehackte Dreier-Sätze („Eine Runde. Jede Stunde. …", „Ohne Diskussion, ohne Nachfrist,
+    ohne Ersatzwertung."),
+  - Sprüche mit eingebautem Gegensatz („keine zweite Chance — aber auch keine Schande",
+    „kauft sich Pause — bezahlt sie aber mit Substanz", „Die Linie ist keine Illustration"),
+  - Doppelungen: Das 48-Minuten-Beispiel stand in Regel 2 und bei den Fragen, Regel 4 sagte
+    dasselbe dreimal, fünf Antworten begannen mit „Ja." und wiederholten dann die Frage,
+  - Amtsdeutsch („ausdrücklich nicht vollständig", „Verbindlich sind …").
+- **Neue Überschrift der Regeln:** „So funktioniert ein Backyard Ultra." statt „Vier Regeln.
+  Mehr braucht es nicht."
+- Der Hinweis, dass die Angaben auf freiburg.run verbindlich sind, steht jetzt in der orangen
+  Anmelde-Karte („Im Zweifel gilt, was dort steht"); die Einleitung darüber wiederholte ihn nur.
+- Der Schlussblock ist 660 statt 620 px breit, damit „Steh am längsten Wochenende" bei voller
+  Schriftgröße in eine Zeile passt und die Überschrift zweizeilig bleibt wie alle anderen.
+
+### Behoben
+- **„Am längsten Tag des Jahres" stimmte nicht.** Die Sonnenwende 2027 ist am 21. Juni, das
+  Rennen am 19. Die Schluss-Überschrift sagt jetzt „am längsten Wochenende des Jahres" — das
+  Wochenende 19./20. Juni hat die längsten Tage aller Wochenenden 2027.
+- **„DNF" ist erklärt** („nicht ins Ziel gekommen"), wie PRODUCT.md es verlangt
+  (Kleinbefund aus /improve Runde 1).
+- **Das Zitat „Am Ende verlieren alle bis auf einen" ist raus.** Es war Cantrell ohne Beleg in
+  den Mund gelegt; Regel 4 nennt ihn jetzt nur als Erfinder des Formats.
+- **Regel 3 behauptet nicht mehr „keine Platzierung".** Das Ergebnis ordnet sehr wohl nach
+  Runden; Regel 4 sagt jetzt, dass selbst Platz zwei als DNF gewertet wird.
+- „am Startbereich" heißt jetzt „im Startbereich"; die Schlusszeichen bei „Yard" und
+  „Tageslauf" sind typografisch korrekt.
+- Der Versions-Fallback im Footer stand noch auf v2.1.2 — 2.2.0 hatte ihn nicht mitgezogen.
+
+Geprüft: Regel-Karten per DOM-Messung bei 1920 × 1080, 1440 × 900, 1440 × 700, 1280 × 600,
+980 × 800, 800 × 560, 761 × 520, 844 × 390, 760 × 900, 667 × 375, 390 × 844 und 375 × 667 — der
+Text passt überall und hat mehr Luft als vorher (etwa 761 × 520, Regel 4: vorher 15 px in den
+Innenabstand gerutscht, jetzt 16 px frei). Bei 320 × 568 schneidet die Karte weiterhin unten ab,
+aber weniger (Regel 4: 45 statt 96 px); das lag schon vorher vor, siehe V11. Sichtprüfung
+headless bei 1440 px mit geöffneten Fragen; Done-Gate grün, Tags ausgeglichen, keine
+Konsolenfehler.
+
 ## [2.2.0] — 2026-09-18
 ### Hinzugefügt
 - **Vier neue Antworten im Fragen-Teil**, alle aus Gabriels Angaben zur 2. Auflage:

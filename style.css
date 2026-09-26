@@ -389,7 +389,10 @@ body.has-morph .nav.is-docked .nav__brand { visibility: visible; opacity: 1; }
 .cta { position: relative; padding: clamp(110px, 15vw, 190px) 0 clamp(120px, 16vw, 200px); overflow: clip; background: linear-gradient(180deg, var(--ground) 0%, var(--ground-2) 100%); }
 .cta::before { content: ''; position: absolute; left: 50%; bottom: 40px; width: 1100px; height: 700px; transform: translateX(-50%); background: radial-gradient(closest-side, var(--glow), transparent 70%); opacity: 0.34; pointer-events: none; }
 .cta__inner { position: relative; z-index: 3; }
-.cta__copy { max-width: 620px; }
+/* 660 statt 620: „Steh am längsten Wochenende“ ist bei voller Schriftgröße (44px)
+   genau 620px breit und brach bei 620 in zwei Zeilen — die Überschrift hätte dann
+   drei statt der üblichen zwei Zeilen. Der Absatz bleibt über seine 46ch schmal. */
+.cta__copy { max-width: 660px; }
 .cta__copy p { margin-top: 24px; font-size: 17px; line-height: 1.62; color: var(--fg-2); max-width: 46ch; }
 .cta__copy .btn { margin-top: 38px; }
 

@@ -12,7 +12,7 @@ Kleinbefunden unter `.impeccable/critique/2026-09-10T18-11-59Z__localhost.md`.
 1. **Seite lädt vollständig** — erwartet: alle Assets relativ, keine Konsolen-/Netzwerkfehler · zuletzt: läuft (2026-09-10)
 2. **Hero-Morph** — erwartet: Sonne+Schriftzug schrumpfen in die Leiste, docken pixelgenau an · zuletzt: läuft (2026-09-10; Endzustand headless belegt, Zwischenzustände per DOM)
 3. **Lichtreise** — erwartet: Seitengrund wandert beim Scrollen durch die Tagesfarben · zuletzt: läuft (2026-09-10, Farbinterpolation gemessen)
-4. **Regel-Deck** — erwartet: Karten kleben/stapeln, Bilder sitzen auf jeder Breite (Fokuspunkte) · zuletzt: läuft (320/390/768/980/1440 gemessen, 2026-09-10)
+4. **Regel-Deck** — erwartet: Karten kleben/stapeln, Bilder sitzen auf jeder Breite (Fokuspunkte), kein Text abgeschnitten · zuletzt: läuft, außer bei 320 × 568 (→ V11; Textplatz in 12 Fenstergrößen gemessen, 2026-09-26)
 5. **Streckenkarte** — erwartet: OSM-Kacheln + GPS-Route + 3 Marker, kein Scroll-Diebstahl · zuletzt: läuft (21/21 Kacheln, 2026-09-10)
 6. **Countdown + Datum** — erwartet: alle Datumsangaben aus EVENT_START, Countdown tickt korrekt · zuletzt: läuft (281 Tage exakt nachgerechnet, 2026-09-10)
 7. **Mobiles Menü** — erwartet: Burger öffnet Sheet, aria-expanded wechselt, Link schließt · zuletzt: läuft (390 px, 2026-09-10)
@@ -68,6 +68,16 @@ Kleinbefunden unter `.impeccable/critique/2026-09-10T18-11-59Z__localhost.md`.
       der Footer-Link-Fix `a951f7a` kam danach: Wer den Tag auscheckt, bekommt den kaputten
       Link, den der CHANGELOG unter 2.1.1 als behoben führt.
       Beleg: CLAUDE.md Kopf; `git rev-list -1 v2.1.1` = c69dcee, HEAD = a8be7ac · Aufwand: S
+- [ ] **V11** (C) Regel-Karten schneiden auf sehr kleinen Handys unten Text ab (gefunden 2026-09-26)
+      Gefahr: Bei 320 × 568 (iPhone SE der ersten Generation, ebenso Handys mit vergrößerter
+      Anzeige) fehlt in drei von vier Karten die Schlusszeile ganz oder halb — wer so ein Gerät
+      hat, liest den Merksatz der Regel nicht. Lag schon vor v2.2.1 vor, dort sogar stärker.
+      Beleg: DOM-Messung v2.2.1: Schlusszeile ragt 20/−/20/45 px unter den Kartenrand (v2.2.0:
+      21/21/96/96); Ursache `style.css` 760er-Umbruch `.deck { max-height: 78vh }` = 443 px ·
+      Aufwand: S
+      Empfehlung: unter ~360 px Breite den Deckel aufheben — die Karte klebt dann nicht mehr,
+      zeigt aber den ganzen Text. Das deckt sich mit der Regel im `.deck`-Kommentar
+      („abgeschnittener Text ist schlimmer als eine Karte, die ausnahmsweise nicht klebt").
 
 ## Ideen
 
@@ -89,8 +99,8 @@ Bewusst nicht vorgeschlagen: eigene 404-Seite (Landingpage ohne interne Untersei
 Hell/Dunkel-Umschalter (die Lichtreise IST das Farbkonzept), englische Fassung (regionale
 Zielgruppe, laufender Pflegeaufwand), Instagram-Feed-Einbettung (DSGVO + Wartung).
 Kleinbefunde unterhalb der Deckel (fehlendes :active-Feedback der Buttons, Sheet ohne
-Übergang, „DNF" unerklärt, Geviertstrich statt Halbgeviertstrich) stehen im
-impeccable-Snapshot dieser Runde.
+Übergang) stehen im impeccable-Snapshot dieser Runde. Zwei weitere von dort („DNF"
+unerklärt, Geviertstriche im Fließtext) sind mit dem Text-Umbau in v2.2.1 erledigt.
 
 ## Abgelehnt
 

@@ -77,6 +77,11 @@ Build-Schritt, Hosting über GitHub Pages.
   eine reine CSS-Lösung (`position: sticky`) statt Streichung. Nur wo ein Effekt am Finger
   nachweislich hakt, darf er weichen.
 - Deutschsprachige UI.
+- **Seitentexte ohne KI-Klang** (Text-Umbau v2.2.1, von Gabriel freigegeben): keine Geviertstriche
+  (—) im Fließtext, keine abgehackten Dreier („Eine Runde. Jede Stunde. …"), keine
+  Gegensatz-Sprüche („keine X, aber auch keine Y"), Antworten wiederholen nicht die Frage und
+  beginnen nicht alle mit „Ja.", kein Amtsdeutsch. Konkret statt klug: Zahlen, Orte, Uhrzeiten.
+  Sachaussagen (Daten, Zitate, Regeln) vor dem Einbau prüfen.
 
 ## Stolperfallen
 - GitHub Pages = Unterordner-Pfad: alles relativ halten, auch in JS (`fetch('../data/...')`).
