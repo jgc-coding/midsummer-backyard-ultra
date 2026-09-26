@@ -16,6 +16,11 @@ package-lock.json
 Tracking Daten Backyard.fit
 Bildmaterial/
 
+# Hero-Export (Rohmaterial der Hero-Ebenen, liegt nur im Hauptordner). Mit führendem /
+# verankert: git ignoriert hier Groß/Klein (core.ignorecase), ein blankes `Hero/` träfe
+# sonst auch `assets/hero/` — und neue Hero-Dateien der Seite kämen still nicht ins Repo.
+/Hero/
+
 # OS / Editor
 .DS_Store
 Thumbs.db

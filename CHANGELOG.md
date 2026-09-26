@@ -21,6 +21,9 @@ Versionierung nach [SemVer](https://semver.org/).
   Anmelde-Karte („Im Zweifel gilt, was dort steht"); die Einleitung darüber wiederholte ihn nur.
 - Der Schlussblock ist 660 statt 620 px breit, damit „Steh am längsten Wochenende" bei voller
   Schriftgröße in eine Zeile passt und die Überschrift zweizeilig bleibt wie alle anderen.
+- `/Hero/` steht in der `.gitignore`: Der unversionierte Hero-Export im Hauptordner ließ
+  save-state das Mergen blockieren. Das Muster ist am Wurzelordner verankert, weil git unter
+  Windows Groß/Klein ignoriert und ein blankes `Hero/` sonst auch `assets/hero/` träfe.
 
 ### Behoben
 - **„Am längsten Tag des Jahres" stimmte nicht.** Die Sonnenwende 2027 ist am 21. Juni, das
