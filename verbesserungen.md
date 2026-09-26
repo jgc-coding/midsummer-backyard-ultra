@@ -80,6 +80,20 @@ Kleinbefunden unter `.impeccable/critique/2026-09-10T18-11-59Z__localhost.md`.
       Empfehlung: unter ~360 px Breite den Deckel aufheben — die Karte klebt dann nicht mehr,
       zeigt aber den ganzen Text. Das deckt sich mit der Regel im `.deck`-Kommentar
       („abgeschnittener Text ist schlimmer als eine Karte, die ausnahmsweise nicht klebt").
+- [ ] **V12** (B) Der Anmelde-Weg der Seite führt ins Leere (gefunden 2026-09-26, Link-Check vor v2.2.1)
+      Gefahr: Wer sich für 2027 anmelden will, landet über jeden Anmelde-Knopf bei einem
+      Kalendereintrag, der das Rennen als „Vergangenes Event" vom 20.06.2026 zeigt. Dazu schickt
+      die Seite Leser an vier Stellen zu Startgeld, Meldeschluss, Teilnahmebedingungen oder „der
+      Ausschreibung auf freiburg.run" — dort steht nichts davon.
+      Beleg: freiburg.run ist ein Veranstaltungskalender (Florian Pigorsch), kein Veranstalter-
+      Portal; der Eintrag verlinkt nur das Anmeldeformular 2026 (Google Forms), Instagram und
+      einen BZ-Artikel. Die Instagram-Bio nennt ebenfalls noch den 20.06.2026. Textstellen in
+      `index.html`: Anmelde-Karte („Im Zweifel gilt, was dort steht" aus v2.2.1 erbt das Problem),
+      Fragen-Einleitung, Mitbringen-Einleitung, Antwort „Kann ich zuschauen?"; dazu fünf Knöpfe
+      und Links auf freiburg.run · Aufwand: S für den Text, braucht aber Gabriels Fakten
+      Empfehlung: Bis es eine Anmeldung für 2027 gibt, ehrlich schreiben („Die Anmeldung für 2027
+      öffnet später, Neuigkeiten auf Instagram") und die Knöpfe auf Instagram lenken; sobald das
+      Formular steht, direkt dorthin verlinken. War vor v2.2.1 genauso, wurde nicht schlechter.
 
 ## Ideen
 

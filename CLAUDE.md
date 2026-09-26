@@ -49,6 +49,9 @@ Build-Schritt, Hosting über GitHub Pages.
 - Backyard-Regel: 6,706 km „Yard" jede Stunde; wer eine Runde nicht schafft, ist raus →
   Last Runner Standing. Erfunden von Gary „Lazarus Lake" Cantrell (2011).
 - Anmeldung/CTA: `freiburg.run/event/midsummer-backyard-ultra/` + Instagram `@midsummerbackyard`.
+  freiburg.run ist ein Veranstaltungskalender, kein Veranstalter-Portal: Der Eintrag verlinkt nur
+  das Anmeldeformular (2026: Google Forms). Startgeld, Meldeschluss und Teilnahmebedingungen
+  stehen dort nicht — Texte dürfen das nicht behaupten.
 
 ## Gestaltungsarbeit (Lehre aus der Hero-Retrospektive, 09/2026)
 - **Geliefertes Bildmaterial ist Endzustand, kein Rohstoff.** Pixelgenau übernehmen, nur
